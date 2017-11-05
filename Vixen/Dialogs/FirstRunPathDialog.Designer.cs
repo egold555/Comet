@@ -202,7 +202,7 @@ namespace VixenPlus.Dialogs
             this.FormBorderStyle = FormBorderStyle.Fixed3D;
             this.Name = "FirstRunPathDialog";
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.Text = "Welcome to Vixen+";
+            this.Text = "Welcome to Comet";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((ISupportInitialize)(this.pbIcon)).EndInit();

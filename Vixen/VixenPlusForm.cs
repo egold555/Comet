@@ -367,7 +367,7 @@ namespace VixenPlus {
 
                 var newFileIOHandler = FileIOHelper.GetHelperByName(filters[newFilterIndex * 2]);
 
-                // Since Vixen+ is native, it has the lowest filter index of any of the list
+                // Since Comet is native, it has the lowest filter index of any of the list
                 // Other file formats will be higher and thus may lose data or functionality when down versioning
                 // or cross sequence formatting.  In some cases it won't matter, in other it will be very important.
                 if (newFilterIndex > currentFilterIndex) {

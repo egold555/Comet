@@ -15,7 +15,7 @@ namespace SeqIOHelpers {
 
 
         public override string Name() {
-            return "Vixen+";
+            return "Comet";
         }
 
 

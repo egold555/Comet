@@ -551,7 +551,7 @@ namespace Nutcracker
             this.rbRoutine.Name = "rbRoutine";
             this.rbRoutine.Size = new Size(136, 17);
             this.rbRoutine.TabIndex = 0;
-            this.rbRoutine.Text = "Vixen+ Routine (.vir file)";
+            this.rbRoutine.Text = "Comet Routine (.vir file)";
             this.rbRoutine.UseVisualStyleBackColor = true;
             this.rbRoutine.CheckedChanged += new EventHandler(this.RenderToChanged);
             // 

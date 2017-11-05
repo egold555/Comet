@@ -282,7 +282,7 @@ namespace VixenPlus.Dialogs
             this.Name = "VixenPlusRoadie";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Vixen+ {Beta} - ";
+            this.Text = "Comet - ";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.VixenPlusRoadie_FormClosing);
             this.Resize += new System.EventHandler(this.frmProfileManager_Resize);
             this.gbProfiles.ResumeLayout(false);

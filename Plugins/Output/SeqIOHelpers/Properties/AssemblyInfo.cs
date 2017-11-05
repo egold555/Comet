@@ -4,14 +4,14 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion("0.3.333.83")]
-[assembly: AssemblyFileVersion("0.3.333.83")]
-[assembly: AssemblyCopyright("Copyleft 2013-2015")]
+[assembly: AssemblyVersion("1.0.0")]
+[assembly: AssemblyFileVersion("1.0.0")]
+[assembly: AssemblyCopyright("Copyleft 2017")]
 [assembly: AssemblyTrademark("No Trademarks Claimed or Implied")]
-[assembly: AssemblyProduct("VixenPlus")]
-[assembly: AssemblyCompany("Rosefish Enterprises")]
-[assembly: AssemblyDescription("Vixen+ Lighting Control")]
-[assembly: AssemblyTitle("VixenPlus")]
+[assembly: AssemblyProduct("Comet")]
+[assembly: AssemblyCompany("Golde Inc")]
+[assembly: AssemblyDescription("Comet Lighting Control")]
+[assembly: AssemblyTitle("Comet")]
 [assembly: AssemblyConfiguration("")]
 
 [assembly: RuntimeCompatibility(WrapNonExceptionThrows = true)]

@@ -6,9 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ## [1.0.0] - 11/4/2017
 ### Changed
  - Name from Vixen+ to Comet
-
-### Added
- - 
+ - Copy files to the correct directory
 
 ---------
 

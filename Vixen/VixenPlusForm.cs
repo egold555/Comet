@@ -58,7 +58,6 @@ namespace VixenPlus {
                 
                 InitializeComponent();
                 Icon = common.Resources.VixenPlus;
-                SetVendorData();
                 _registeredFileTypes = new Dictionary<string, IUIPlugIn>();
                 _preferences.PreferenceChange += PreferencesPreferenceChange;
                 Interfaces.Available["ISystem"] = this;
@@ -766,11 +765,6 @@ namespace VixenPlus {
             using (var soundDeviceDialog = new SoundDeviceDialog(_preferences)) {
                 soundDeviceDialog.ShowDialog();
             }
-        }
-
-
-        private void SetVendorData() {
-            Text = Vendor.ProductName + @" (" + Vendor.ModuleAuthoring + @")";
         }
 
 

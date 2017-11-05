@@ -27,7 +27,7 @@ namespace VixenPlus.Dialogs {
 
         public VixenPlusRoadie(IExecutable iExecutable = null, bool pluginsOnly = false) {
             InitializeComponent();
-            Text = Vendor.ProductName + " - " + Vendor.ModuleManager;
+            Text = Vendor.ProductName;
             Icon = Resources.VixenPlus;
             MinimumSize = Size;
 

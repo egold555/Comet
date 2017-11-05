@@ -1022,4 +1022,7 @@ Accept new channel count?</value>
   <data name="Contributors" xml:space="preserve">
     <value>For all contributors, please see:</value>
   </data>
+  <data name="CometSplash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CometSplash.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

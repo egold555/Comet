@@ -15,7 +15,7 @@ namespace VixenPlus {
         }
 
         public void FadeIn(Screen screen) {
-            BackgroundImage = Resources.VixenPlusSplash;
+            BackgroundImage = Resources.CometSplash;
 
             if (!Visible) {
                 Left = screen.Bounds.X + (screen.WorkingArea.Width - Width) /2;

@@ -10,9 +10,9 @@ namespace VixenPlusCommon {
         public const string All = "*";
         public const string SeqFileIO = "SeqIOHelpers";
         
-        public const string ModuleAuthoring = "Artisan";
+        //public const string ModuleAuthoring = "Artisan";
         //public const string ModulePreview = "Rehersal";
-        public const string ModuleManager = "Roadie";
+        //public const string ModuleManager = "Roadie";
         //public const string ModuleScheduler = "Conductor";
 
         public const string AppExtension = ".dll";

@@ -45,8 +45,7 @@ namespace VixenPlus.Dialogs {
                 "A channel is the smallest unit of control in an element. Pixels usually have 3 channels per pixel, light strings usually have 1.",
                 "Each channel gives you another level of control, sometimes you will want to edit each individually and other times as a group or RGB group.",
                 "For every channel you define in your sequence there will be a row defined in the event grid.",
-                "The profile editor (" + Vendor.ModuleManager +
-                ") allows you to manipulate your channels and groups easily. Doing it here is possible but not the desired method."
+                "The profile editor allows you to manipulate your channels and groups easily. Doing it here is possible but not the desired method."
             },
             {"Names for the channels defined earlier.", "For easier identification of a channel.", string.Empty, string.Empty}, {
                 Vendor.ProductName + " communicates with each controller using a plug in.",

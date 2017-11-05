@@ -172,7 +172,7 @@ namespace VixenPlus {
             this.tsmProfiles.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.manageToolStripMenuItem});
             this.tsmProfiles.Name = "tsmProfiles";
-            this.tsmProfiles.Size = new System.Drawing.Size(113, 22);
+            this.tsmProfiles.Size = new System.Drawing.Size(152, 22);
             this.tsmProfiles.Text = "Profiles";
             // 
             // manageToolStripMenuItem
@@ -226,14 +226,14 @@ namespace VixenPlus {
             // tileToolStripMenuItem
             // 
             this.tileToolStripMenuItem.Name = "tileToolStripMenuItem";
-            this.tileToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.tileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.tileToolStripMenuItem.Text = "Tile";
             this.tileToolStripMenuItem.Click += new System.EventHandler(this.tileToolStripMenuItem_Click);
             // 
             // cascadeToolStripMenuItem
             // 
             this.cascadeToolStripMenuItem.Name = "cascadeToolStripMenuItem";
-            this.cascadeToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.cascadeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cascadeToolStripMenuItem.Text = "Cascade";
             this.cascadeToolStripMenuItem.Click += new System.EventHandler(this.cascadeToolStripMenuItem_Click);
             // 

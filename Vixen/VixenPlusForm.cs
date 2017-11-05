@@ -47,15 +47,16 @@ namespace VixenPlus {
             Ensure(Paths.RoutinePath);
             Ensure(Paths.CurveLibraryPath);
             _preferences = Preference2.GetInstance();
-            PrepareUpdateSupportFiles();
+            //PrepareUpdateSupportFiles();
             using (var splash = new Splash()) {
                 var screen = Preference2.GetScreen(_preferences.GetString("PrimaryDisplay"));
                 splash.FadeIn(screen);
-                
+                /*
                 if (CheckForUpdates(screen, true)) {
                     Environment.Exit(0);
-                } 
-                
+                }
+                */
+
                 InitializeComponent();
                 Icon = common.Resources.VixenPlus;
                 _registeredFileTypes = new Dictionary<string, IUIPlugIn>();
@@ -81,10 +82,12 @@ namespace VixenPlus {
                 splash.FadeOut();
                 Left = screen.Bounds.Left;
                 Top = screen.Bounds.Top;
+
+                helpToolStripMenuItem.Visible = false; //No need for a help menu, miht add back if I publish to everyone
             }
         }
 
-
+        /* No need to check for updates, this is my version that I will update for me.
         private static void PrepareUpdateSupportFiles() {
             if (File.Exists(Vendor.UpdateSupport7zrProtected)) {
                 if (File.Exists(Vendor.UpdateSupport7zrReal)) {
@@ -121,6 +124,7 @@ namespace VixenPlus {
             }
             return result;
         }
+        */
 
 
 
@@ -261,9 +265,11 @@ namespace VixenPlus {
 
 
         private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e) {
+            /*
             if (CheckForUpdates(Preference2.GetScreen(_preferences.GetString("PrimaryDisplay")), false)) {
                 Close();
             }
+            */
         }
 
 
@@ -594,7 +600,7 @@ namespace VixenPlus {
             }
 
             if (!fileIOHandler.CanOpen()) {
-                MessageBox.Show(string.Format("Sorry, we can only export {0} files.", fileIOHandler.Name()), Vendor.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show(string.Format("Sorry, we can only import {0} files.", fileIOHandler.Name()), Vendor.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 return;   
             }
 

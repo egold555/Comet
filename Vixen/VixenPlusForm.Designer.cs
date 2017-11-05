@@ -38,7 +38,6 @@ namespace VixenPlus {
         private ToolStripStatusLabel toolStripStatusLabelMusic;
         private ToolStripMenuItem utilityToolStripMenuItem;
         private ToolStripMenuItem windowsToolStripMenuItem;
-        private ToolStripMenuItem iLikeLutefiskToolStripMenuItem;
 
 
         private void InitializeComponent() {
@@ -67,7 +66,6 @@ namespace VixenPlus {
             this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.iLikeLutefiskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
@@ -245,8 +243,7 @@ namespace VixenPlus {
             this.onlineSupportForumToolStripMenuItem,
             this.checkForUpdatesToolStripMenuItem,
             this.toolStripMenuItem3,
-            this.aboutToolStripMenuItem1,
-            this.iLikeLutefiskToolStripMenuItem});
+            this.aboutToolStripMenuItem1});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
@@ -276,13 +273,6 @@ namespace VixenPlus {
             this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(189, 22);
             this.aboutToolStripMenuItem1.Text = "About";
             this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // iLikeLutefiskToolStripMenuItem
-            // 
-            this.iLikeLutefiskToolStripMenuItem.Name = "iLikeLutefiskToolStripMenuItem";
-            this.iLikeLutefiskToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.iLikeLutefiskToolStripMenuItem.Text = "I Love Lutefisk!";
-            this.iLikeLutefiskToolStripMenuItem.Click += new System.EventHandler(this.iLikeLutefiskToolStripMenuItem_Click);
             // 
             // openFileDialog1
             // 

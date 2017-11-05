@@ -171,7 +171,7 @@ You have no channels to layout.</value>
   <data name="VixenPlusForm_Save" xml:space="preserve">
     <value>Save</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="VixenPlusSplash" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\VixenPlusSplash.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -491,29 +491,6 @@ The plugin's setup data may be invalid or inaccurate.</value>
   </data>
   <data name="TestedBy" xml:space="preserve">
     <value>Beta Tested By:</value>
-  </data>
-  <data name="DedicatedTo" xml:space="preserve">
-    <value>Dedicated To:</value>
-  </data>
-  <data name="MyFriends" xml:space="preserve">
-    <value>My friends at DIYChristmas.org</value>
-  </data>
-  <data name="ThankYou" xml:space="preserve">
-    <value>Thank you everyone!
-    </value>
-  </data>
-  <data name="Lutefisk" xml:space="preserve">
-    <value>
-
-
-
-
-
-
-
-
-
-Lutefisk for all!</value>
   </data>
   <data name="save_as" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SaveAs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -956,35 +933,7 @@ Do you want to overwrite it?</value>
 projects used:</value>
   </data>
   <data name="BetaTesters" xml:space="preserve">
-    <value>Phoenix
-Materdaddy
-Eagle
-Falcon
-Keith Tarpley
-gdyrdave
-ErnieHorning
-johnfish211
-mkozik1
-crazy_carpenter
-Rob Anderson
-budude
-Aurbo99
-teberle
-</value>
-  </data>
-  <data name="Buggos" xml:space="preserve">
-    <value>budude
-ErnieHorning
-Materdaddy
-flashpop
-</value>
-  </data>
-  <data name="TranslatedBy" xml:space="preserve">
-    <value>Translated By:</value>
-  </data>
-  <data name="Translators" xml:space="preserve">
-    <value>No One Yet!
-</value>
+    <value />
   </data>
   <data name="InsertChannel" xml:space="preserve">
     <value>Inserting a new channel cannot be undone
@@ -1066,5 +1015,11 @@ Accept new channel count?</value>
   </data>
   <data name="FormattedVersion" xml:space="preserve">
     <value>Version {0}</value>
+  </data>
+  <data name="Buggos" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Contributors" xml:space="preserve">
+    <value>For all contributors, please see:</value>
   </data>
 </root>

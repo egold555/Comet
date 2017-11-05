@@ -51,19 +51,12 @@ namespace VixenPlus.Dialogs {
 
         private void AboutDialog_MouseClick(object sender, EventArgs e) {
             var credits = new StringBuilder();
-            credits.AppendLine(Resources.InspiredBy).AppendLine("K.C. Oaks and Vixen 2.x\n");
-            credits.AppendLine(Resources.WrittenBy).AppendLine("John McAdams\nAKA Mac E Bo Bo\n");
-            credits.AppendLine("Other code contributed by:").AppendLine("Emmanuel Miranda\nRGB Mega Tree 3D Preview\n");
-            credits.AppendLine(Resources.TestedBy).AppendLine(Resources.BetaTesters);
-            credits.AppendLine(Resources.Exterminators).AppendLine(Resources.Buggos);
-            credits.AppendLine(Resources.TranslatedBy).AppendLine(Resources.Translators);
-            credits.AppendLine(Resources.DedicatedTo).AppendLine(Resources.MyFriends).AppendLine(Resources.ThankYou);
-            credits.AppendLine(Resources.OpenSource).AppendLine("FMOD Sound System by:\nFirelight Technologies\n");
-            credits.AppendLine("Nutcracker adapted from xLights\nwhich was written by:\nSean Meighan\nMatt Brown\n");
-            credits.AppendLine("J1Sys Plugin by: Joshual 1 Systems\nSee: J1Sys License.txt\n");
-            credits.AppendLine("7zip (7zr.exe) by Igor Pavlov\nSee: http://www.7-zip.org/license.txt \n");
-            credits.AppendLine("Cyotek Color Picker controls library\nSee: http://cyotek.com/blog/tag/colorpicker");
-            credits.AppendLine(Resources.Lutefisk);
+            credits.AppendLine(Resources.InspiredBy).AppendLine("Vixen+\n");
+            credits.AppendLine(Resources.WrittenBy).AppendLine("Eric & Peter Golde\n");
+            credits.AppendLine(Resources.TestedBy).AppendLine(Resources.BetaTesters + "\n");
+            credits.AppendLine(Resources.Exterminators).AppendLine(Resources.Buggos + "\n");
+            credits.AppendLine(Resources.OpenSource).AppendLine("http://github.com/egold555/Comet/ \n");
+            credits.AppendLine(Resources.Contributors).AppendLine("http://github.com/egold555/Comet/Contributors.md");
 
             // This is how we get the correct height of the credits regardless of how 
             // long they get, used this instead of Graphics.measureString to be lightweight.

@@ -9,3 +9,4 @@ Any ideas that I want to implement will be put in here too add at somepoint in t
   - Fix toolbar position not saving
   - Keybinds that I like
   - Double click pause buttons etc
+  - House Effects

@@ -667,6 +667,6 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>del "$(TargetDir)*.txt</PreBuildEvent>
-    <PostBuildEvent>copy $(SolutionDir)..\ForReleases\*.* $(TagetDir)</PostBuildEvent>
+    <PostBuildEvent>copy "$(SolutionDir)..\ForReleases\*.*" "$(TargetDir)"</PostBuildEvent>
   </PropertyGroup>
 </Project>

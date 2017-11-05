@@ -402,6 +402,7 @@ namespace VixenEditor{
             this.pumpkinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.blinkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveEffectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadEffectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.cbGroups = new System.Windows.Forms.ComboBox();
@@ -581,7 +582,6 @@ namespace VixenEditor{
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.positionTimer = new System.Windows.Forms.Timer(this.components);
-            this.loadEffectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -1322,15 +1322,16 @@ namespace VixenEditor{
             // rainbowFadeToolStripMenuItem
             // 
             this.rainbowFadeToolStripMenuItem.Name = "rainbowFadeToolStripMenuItem";
-            this.rainbowFadeToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.rainbowFadeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.rainbowFadeToolStripMenuItem.Text = "Rainbow Fade";
             this.rainbowFadeToolStripMenuItem.Click += new System.EventHandler(this.rainbowFadeToolStripMenuItem_Click);
             // 
             // randomColorToolStripMenuItem
             // 
             this.randomColorToolStripMenuItem.Name = "randomColorToolStripMenuItem";
-            this.randomColorToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.randomColorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.randomColorToolStripMenuItem.Text = "Random Color";
+            this.randomColorToolStripMenuItem.Click += new System.EventHandler(this.randomColorToolStripMenuItem_Click);
             // 
             // pollsToolStripMenuItem
             // 
@@ -1358,6 +1359,13 @@ namespace VixenEditor{
             this.saveEffectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveEffectToolStripMenuItem.Text = "Save Effect";
             this.saveEffectToolStripMenuItem.Click += new System.EventHandler(this.saveEffectToolStripMenuItem_Click);
+            // 
+            // loadEffectToolStripMenuItem
+            // 
+            this.loadEffectToolStripMenuItem.Name = "loadEffectToolStripMenuItem";
+            this.loadEffectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadEffectToolStripMenuItem.Text = "Load Effect...";
+            this.loadEffectToolStripMenuItem.Click += new System.EventHandler(this.loadEffectToolStripMenuItem_Click);
             // 
             // toolStripContainer1
             // 
@@ -3081,13 +3089,6 @@ namespace VixenEditor{
             // 
             this.positionTimer.Interval = 1;
             this.positionTimer.Tick += new System.EventHandler(this.positionTimer_Tick);
-            // 
-            // loadEffectToolStripMenuItem
-            // 
-            this.loadEffectToolStripMenuItem.Name = "loadEffectToolStripMenuItem";
-            this.loadEffectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.loadEffectToolStripMenuItem.Text = "Load Effect...";
-            this.loadEffectToolStripMenuItem.Click += new System.EventHandler(this.loadEffectToolStripMenuItem_Click);
             // 
             // StandardSequence
             // 

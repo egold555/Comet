@@ -5253,7 +5253,7 @@ namespace VixenEditor
 
         private void rainbowFadeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddUndoItem(_selectedCells, UndoOriginalBehavior.Overwrite, "Rainbow Fade");
+            AddUndoItem(_selectedCells, UndoOriginalBehavior.Overwrite, "RGB Rainbow Fade");
 
             int top = _selectedCells.Top;
             int bottom = _selectedCells.Bottom;
@@ -5281,6 +5281,39 @@ namespace VixenEditor
             _selectionRectangle.Width = 0;
             pictureBoxGrid.Invalidate(SelectionToRectangle());
             
+        }
+
+        Random random = new Random();
+        private void randomColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddUndoItem(_selectedCells, UndoOriginalBehavior.Overwrite, "Random RGB Color");
+
+            int top = _selectedCells.Top;
+            int bottom = _selectedCells.Bottom;
+            int right = _selectedCells.Right;
+            int left = _selectedCells.Left;
+
+            if (bottom - top != 3) {
+                MessageBox.Show("You need to select 3 rows exactly.");
+                return;
+            }
+            int redChannel = GetEventFromChannelNumber(top);
+            int greenChannel = GetEventFromChannelNumber(top + 1);
+            int blueChannel = GetEventFromChannelNumber(top + 2);
+            int width = right - left;
+
+            byte randomRed = (byte)random.Next(0, 256);
+            byte randomGreen = (byte)random.Next(0, 256);
+            byte randomBlue = (byte)random.Next(0, 256);
+
+            for (var column = left; column < right; column++) {
+                _sequence.EventValues[redChannel, column] = randomRed;
+                _sequence.EventValues[greenChannel, column] = randomGreen;
+                _sequence.EventValues[blueChannel, column] = randomBlue;
+            }
+
+            _selectionRectangle.Width = 0;
+            pictureBoxGrid.Invalidate(SelectionToRectangle());
         }
 
         private string HouseEffectsPath
@@ -5440,7 +5473,6 @@ namespace VixenEditor
             }
 
         }
-
     }
 
 

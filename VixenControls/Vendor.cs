@@ -5,8 +5,8 @@ namespace VixenPlusCommon {
         public const int MinimumEventPeriod = 10;
 
         public static readonly string ProductDescription = Resources.ProductDescription;
-        public const string ProductName = "Vixen+ {Beta}";
-        public const string ProductURL = "http://www.vixenplus.com/";
+        public const string ProductName = "Comet";
+        public const string ProductURL = "http://golde.org/";
         public const string All = "*";
         public const string SeqFileIO = "SeqIOHelpers";
         
@@ -29,9 +29,9 @@ namespace VixenPlusCommon {
         public const string TemplateExtension = ".vpt";
         public const string UpdateFileExtension = ".7z";
 
-        public const string SupportURL = "http://www.diychristmas.org/vb1/forumdisplay.php?19-VixenPlus";
+        public const string SupportURL = "http://supporturlgoeshere.com/";
 
-        public const string UpdateURL = "http://www.vixenplus.com/alpha/";
+        public const string UpdateURL = "http://updateurlgoeshere.com/";
         public const string UpdateFile = "version.php";
         public const string UpdateReleaseNote = "ReleaseNotes.txt";
         public const string UpdateFileURL = UpdateURL + "Release";

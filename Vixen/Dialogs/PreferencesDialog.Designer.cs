@@ -551,7 +551,7 @@ namespace VixenPlus.Dialogs {
             this.cbUpdateFrequency.Name = "cbUpdateFrequency";
             this.cbUpdateFrequency.Size = new System.Drawing.Size(117, 21);
             this.cbUpdateFrequency.TabIndex = 80;
-            this.toolTip.SetToolTip(this.cbUpdateFrequency, "How often will Vixen+ check for updates.");
+            this.toolTip.SetToolTip(this.cbUpdateFrequency, "How often will Comet check for updates.");
             // 
             // cbProfileErrors
             // 

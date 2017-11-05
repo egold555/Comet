@@ -91,7 +91,7 @@ namespace VixenPlus {
             // first get all matching extentions
             var candidates = PluginCache.Select(v => v.Value).Where(v => v.FileExtension() == s).OrderBy(v => v.PreferredOrder()).ToList();
 
-            // If there are not any, then return the native Vixen+ helper and hope for the best.
+            // If there are not any, then return the native Comet helper and hope for the best.
             if (!candidates.Any()) {
                 return GetNativeHelper();
             }

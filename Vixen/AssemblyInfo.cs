@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyVersion("0.3.333.83")]
 [assembly: AssemblyFileVersion("0.3.333.83")]
-[assembly: AssemblyCopyright("Copyleft 2013-2015")]
+[assembly: AssemblyCopyright("Copyleft 2017")]
 [assembly: AssemblyTrademark("No Trademarks Claimed or Implied")]
 [assembly: AssemblyProduct("VixenPlus")]
 [assembly: AssemblyCompany("Rosefish Enterprises")]

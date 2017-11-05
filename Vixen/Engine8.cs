@@ -59,6 +59,7 @@ namespace VixenPlus {
             ConstructUsing(mode, host, audioDeviceIndex);
         }
 
+        public bool HasAudioDevice { get { return _fmod != null; } }
 
         public float AudioSpeed { get; set; }
 
@@ -85,12 +86,16 @@ namespace VixenPlus {
                     _eventTimer.Dispose();
                     _eventTimer = null;
                 }
-                _fmod.Stop(_engineContext.SoundChannel);
-                _fmod.Shutdown();
+                if (_fmod != null) {
+                    _fmod.Stop(_engineContext.SoundChannel);
+                    _fmod.Shutdown();
+                }
             }
             if (_plugInRouter != null) {
                 try {
-                    _plugInRouter.Shutdown(_engineContext.RouterContext);
+                    if (_engineContext != null) {
+                        _plugInRouter.Shutdown(_engineContext.RouterContext);
+                    }
                 }
                 catch (Exception exception) {
                     MessageBox.Show(Resources.engineShutDownError + exception.Message, Vendor.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Hand);
@@ -164,7 +169,9 @@ namespace VixenPlus {
                 context.RouterContext = null;
             }
             if (context.SoundChannel != null) {
-                _fmod.ReleaseSound(context.SoundChannel);
+                if (_fmod != null) {
+                    _fmod.ReleaseSound(context.SoundChannel);
+                }
                 context.SoundChannel = null;
             }
             if (!context.Timekeeper.IsRunning) {
@@ -261,7 +268,9 @@ namespace VixenPlus {
                 context.LastIndex = -1;
                 context.SequenceTickLength = executableObject.Time;
                 context.StartOffset = 0;
-                context.SoundChannel = executableObject.Audio != null ? _fmod.LoadSound(Path.Combine(Paths.AudioPath, executableObject.Audio.FileName), context.SoundChannel) : _fmod.LoadSound(null);
+                if (_fmod != null) {
+                    context.SoundChannel = executableObject.Audio != null ? _fmod.LoadSound(Path.Combine(Paths.AudioPath, executableObject.Audio.FileName), context.SoundChannel) : _fmod.LoadSound(null);
+                }
                 context.CurrentSequence = executableObject;
                 context.MaxEvent = context.CurrentSequence.TotalEventPeriods;
                 context.LastPeriod = new byte[context.CurrentSequence.FullChannels.Count];
@@ -433,9 +442,11 @@ namespace VixenPlus {
             if (((Mode == EngineMode.Asynchronous) || (context.SoundChannel == null)) || (millisecondPosition == -1)) {
                 return;
             }
-            _fmod.Play(context.SoundChannel, true);
-            context.SoundChannel.Position = (uint) millisecondPosition;
-            context.SoundChannel.Frequency = AudioSpeed;
+            if (_fmod != null) {
+                _fmod.Play(context.SoundChannel, true);
+                context.SoundChannel.Position = (uint) millisecondPosition;
+                context.SoundChannel.Frequency = AudioSpeed;
+            }
         }
 
         private static byte[,] ReconfigureSourceData(EventSequence sequence) {
@@ -452,7 +463,9 @@ namespace VixenPlus {
 
 
         public void SetAudioDevice(int value) {
-            _fmod.DeviceIndex = value;
+            if (_fmod != null) {
+                _fmod.DeviceIndex = value;
+            }
         }
 
 
@@ -514,7 +527,9 @@ namespace VixenPlus {
             if (_eventTimer != null) {
                 _eventTimer.Stop();
             }
-            _fmod.Stop(_engineContext.SoundChannel);
+            if (_fmod != null) {
+                _fmod.Stop(_engineContext.SoundChannel);
+            }
             IsPaused = false;
             FinalizeEngineContext(_engineContext, shutdownPlugins);
         }
@@ -528,17 +543,19 @@ namespace VixenPlus {
                 ? (int) context.SoundChannel.Position : context.StartOffset + ((int) context.Timekeeper.ElapsedMilliseconds);
             var num = context.TickCount / context.CurrentSequence.EventPeriod;
             if ((context.TickCount >= context.SequenceTickLength) || (num >= context.MaxEvent)) {
-                _fmod.Stop(context.SoundChannel);
-                context.Timekeeper.Stop();
-                context.Timekeeper.Reset();
-                if (IsLooping) {
-                    LogAudio(_engineContext.CurrentSequence);
-                    StartContextAudio(_engineContext);
-                    context.Timekeeper.Start();
-                    OnSequenceChange();
-                }
-                else {
-                    Host.Invoke(new MethodInvoker(Stop));
+                if (_fmod != null) {
+                    _fmod.Stop(context.SoundChannel);
+                    context.Timekeeper.Stop();
+                    context.Timekeeper.Reset();
+                    if (IsLooping) {
+                        LogAudio(_engineContext.CurrentSequence);
+                        StartContextAudio(_engineContext);
+                        context.Timekeeper.Start();
+                        OnSequenceChange();
+                    }
+                    else {
+                        Host.Invoke(new MethodInvoker(Stop));
+                    }
                 }
             }
             else if (num != context.LastIndex) {

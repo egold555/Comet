@@ -90,7 +90,45 @@ namespace VixenPlus.Dialogs {
             comboBoxAudioDevice.Items.Add(Resources.UseApplicationDefaultAudio);
             comboBoxAudioDevice.Items.AddRange(fmod.GetSoundDeviceList());
             comboBoxAudioDevice.SelectedIndex = _eventSequence.AudioDeviceIndex + 1;
+
+            comboBoxHouseEffects.Items.Clear();//Remove existing house effects from list
+            populateHouseEffects("", HouseEffectsPath);
         }
+
+        private void populateHouseEffects(string prefix, string dir)
+        {
+            
+
+            if (!Directory.Exists(dir))
+                return;
+
+            foreach (string file in Directory.GetFiles(dir, "*.houseeffect"))
+            {
+                string name = Path.GetFileNameWithoutExtension(file);
+                Console.WriteLine(prefix + " > " + "Item: " + name);
+                comboBoxHouseEffects.Items.Add(prefix + " > " + name); //Add each house effects file
+                comboBoxHouseEffects.Update();
+                Console.WriteLine("Box: max=" + comboBoxHouseEffects.MaxDropDownItems + " amount=" + comboBoxHouseEffects.Items.Count);
+            }
+
+
+            foreach (string subDir in Directory.GetDirectories(dir))
+            {
+                string name = Path.GetFileName(subDir);
+                Console.WriteLine("Dir: " + name);
+                populateHouseEffects(name, subDir);
+            }
+        }
+
+        private string HouseEffectsPath
+        {
+            get
+            {
+                return Path.Combine(VixenPlusCommon.Paths.DataPath, "HouseEffects");
+            }
+        }
+
+
 
 
         private void AudioDialog_FormClosing(object sender, FormClosingEventArgs e) {
@@ -439,5 +477,6 @@ namespace VixenPlus.Dialogs {
         private delegate void ProgressBarVisibleDelegate(bool value);
 
         private delegate int TrackBarValueDelegate();
+
     }
 }

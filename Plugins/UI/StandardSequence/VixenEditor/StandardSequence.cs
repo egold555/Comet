@@ -5360,19 +5360,65 @@ namespace VixenEditor
         }
 
 
-        private void loadEffectToolStripMenuItem_Click(object sender, EventArgs e)
+        private void houseEffectsToolStrip_DropDownOpening(object sender, EventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.DefaultExt = ".houseeffect";
-            dialog.InitialDirectory = HouseEffectsPath;
-            dialog.Filter = "House Effect|*.houseeffect";
-            if (dialog.ShowDialog() != DialogResult.OK) {
-                return;
-            }
-            string path = dialog.FileName;
+            ToolStripItemCollection subItems = houseEffectstToolStrip.DropDownItems;
 
-            HouseEffect houseEffect = HouseEffect.Load(Path.Combine(HouseEffectsPath, path));
-            houseEffect.PlaceAt(this, _selectedCells.Top, _selectedCells.Left);
+            bool inBetweenLines = false;
+            int insertAfter = 0;
+            List<ToolStripItem> itemsToDelete = new List<ToolStripItem>();
+            for (int i = 0; i < subItems.Count; ++i) {
+                ToolStripItem item = subItems[i];
+                if (item.Name == "customEffectStart") {
+                    inBetweenLines = true;
+                    insertAfter = i;
+                    continue;
+                }
+                if (item.Name == "customEffectEnd") {
+                    inBetweenLines = false;
+                    continue;
+                }
+                if (inBetweenLines) {
+                    itemsToDelete.Add(item);
+                }
+            }
+            foreach(ToolStripMenuItem item in itemsToDelete) {
+                subItems.Remove(item);
+            }
+
+            InsertIntoToolStrip(subItems, insertAfter + 1, HouseEffectsPath);
+        }
+
+        private void InsertIntoToolStrip(ToolStripItemCollection items, int startIndex, string directory)
+        {
+            if (!Directory.Exists(directory))
+                return;
+
+            foreach (string file in Directory.GetFiles(directory, "*.houseeffect")) {
+                string name = Path.GetFileNameWithoutExtension(file);
+                ToolStripMenuItem menuItem = new ToolStripMenuItem();
+                menuItem.Text = name;
+                menuItem.Tag = file;
+                menuItem.Click += customEffectFromFile_Click;
+                items.Insert(startIndex, menuItem);
+                startIndex += 1;
+            }
+
+            foreach (string subDir in Directory.GetDirectories(directory)) {
+                ToolStripMenuItem menuItem = new ToolStripMenuItem();
+                string name = Path.GetFileName(subDir);
+                menuItem.Text = name;
+                InsertIntoToolStrip(menuItem.DropDownItems, 0, subDir);
+                items.Insert(startIndex, menuItem);
+                startIndex += 1;
+            }
+        }
+
+        private void customEffectFromFile_Click(object sender, EventArgs e)
+        {
+            string path = (string) ((ToolStripMenuItem)sender).Tag;
+            HouseEffect effect = HouseEffect.Load(path);
+            effect.PlaceAt(this, _selectedCells.Top, _selectedCells.Left);
         }
 
 #pragma warning disable 1690
@@ -5473,6 +5519,7 @@ namespace VixenEditor
             }
 
         }
+
     }
 
 

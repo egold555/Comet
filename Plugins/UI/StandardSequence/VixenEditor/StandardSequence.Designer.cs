@@ -393,16 +393,11 @@ namespace VixenEditor{
             this.chaseLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.normalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.paintFromClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.archesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.houseEffectstToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.rGBLightsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rainbowFadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.randomColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pollsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pumpkinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.blinkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveEffectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadEffectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.cbGroups = new System.Windows.Forms.ComboBox();
@@ -582,6 +577,8 @@ namespace VixenEditor{
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.positionTimer = new System.Windows.Forms.Timer(this.components);
+            this.customEffectStart = new System.Windows.Forms.ToolStripSeparator();
+            this.customEffectEnd = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -613,7 +610,7 @@ namespace VixenEditor{
             this.editToolStripMenuItem,
             this.viewToolStripMenuItem,
             this.effectsToolStripMenuItem,
-            this.toolStripMenuItem1});
+            this.houseEffectstToolStrip});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(976, 24);
@@ -1289,26 +1286,19 @@ namespace VixenEditor{
             this.paintFromClipboardToolStripMenuItem.Text = "Paint from Clipboard";
             this.paintFromClipboardToolStripMenuItem.Click += new System.EventHandler(this.paintFromClipboardToolStripMenuItem_Click);
             // 
-            // toolStripMenuItem1
+            // houseEffectstToolStrip
             // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.archesToolStripMenuItem,
+            this.houseEffectstToolStrip.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.rGBLightsToolStripMenuItem,
-            this.pollsToolStripMenuItem,
-            this.pumpkinToolStripMenuItem,
-            this.saveEffectToolStripMenuItem,
-            this.loadEffectToolStripMenuItem});
-            this.toolStripMenuItem1.MergeAction = System.Windows.Forms.MergeAction.Insert;
-            this.toolStripMenuItem1.MergeIndex = 4;
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(91, 20);
-            this.toolStripMenuItem1.Text = "&House Effects";
-            // 
-            // archesToolStripMenuItem
-            // 
-            this.archesToolStripMenuItem.Name = "archesToolStripMenuItem";
-            this.archesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.archesToolStripMenuItem.Text = "Arches";
+            this.customEffectStart,
+            this.customEffectEnd,
+            this.saveEffectToolStripMenuItem});
+            this.houseEffectstToolStrip.MergeAction = System.Windows.Forms.MergeAction.Insert;
+            this.houseEffectstToolStrip.MergeIndex = 4;
+            this.houseEffectstToolStrip.Name = "houseEffectstToolStrip";
+            this.houseEffectstToolStrip.Size = new System.Drawing.Size(91, 20);
+            this.houseEffectstToolStrip.Text = "&House Effects";
+            this.houseEffectstToolStrip.DropDownOpening += new System.EventHandler(this.houseEffectsToolStrip_DropDownOpening);
             // 
             // rGBLightsToolStripMenuItem
             // 
@@ -1333,39 +1323,12 @@ namespace VixenEditor{
             this.randomColorToolStripMenuItem.Text = "Random Color";
             this.randomColorToolStripMenuItem.Click += new System.EventHandler(this.randomColorToolStripMenuItem_Click);
             // 
-            // pollsToolStripMenuItem
-            // 
-            this.pollsToolStripMenuItem.Name = "pollsToolStripMenuItem";
-            this.pollsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.pollsToolStripMenuItem.Text = "Polls";
-            // 
-            // pumpkinToolStripMenuItem
-            // 
-            this.pumpkinToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.blinkToolStripMenuItem});
-            this.pumpkinToolStripMenuItem.Name = "pumpkinToolStripMenuItem";
-            this.pumpkinToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.pumpkinToolStripMenuItem.Text = "Pumpkin";
-            // 
-            // blinkToolStripMenuItem
-            // 
-            this.blinkToolStripMenuItem.Name = "blinkToolStripMenuItem";
-            this.blinkToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.blinkToolStripMenuItem.Text = "Blink";
-            // 
             // saveEffectToolStripMenuItem
             // 
             this.saveEffectToolStripMenuItem.Name = "saveEffectToolStripMenuItem";
             this.saveEffectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveEffectToolStripMenuItem.Text = "Save Effect";
             this.saveEffectToolStripMenuItem.Click += new System.EventHandler(this.saveEffectToolStripMenuItem_Click);
-            // 
-            // loadEffectToolStripMenuItem
-            // 
-            this.loadEffectToolStripMenuItem.Name = "loadEffectToolStripMenuItem";
-            this.loadEffectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.loadEffectToolStripMenuItem.Text = "Load Effect...";
-            this.loadEffectToolStripMenuItem.Click += new System.EventHandler(this.loadEffectToolStripMenuItem_Click);
             // 
             // toolStripContainer1
             // 
@@ -3090,6 +3053,16 @@ namespace VixenEditor{
             this.positionTimer.Interval = 1;
             this.positionTimer.Tick += new System.EventHandler(this.positionTimer_Tick);
             // 
+            // customEffectStart
+            // 
+            this.customEffectStart.Name = "customEffectStart";
+            this.customEffectStart.Size = new System.Drawing.Size(149, 6);
+            // 
+            // customEffectEnd
+            // 
+            this.customEffectEnd.Name = "customEffectEnd";
+            this.customEffectEnd.Size = new System.Drawing.Size(149, 6);
+            // 
             // StandardSequence
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3165,15 +3138,12 @@ namespace VixenEditor{
         private ToolStripMenuItem selectAllChannelsForPeriod;
         private ToolStripSeparator toolStripSeparator4;
         private ToolStripMenuItem selectAlltoolStripMenuItem;
-        private ToolStripMenuItem toolStripMenuItem1;
-        private ToolStripMenuItem archesToolStripMenuItem;
+        private ToolStripMenuItem houseEffectstToolStrip;
         private ToolStripMenuItem rGBLightsToolStripMenuItem;
         private ToolStripMenuItem rainbowFadeToolStripMenuItem;
         private ToolStripMenuItem randomColorToolStripMenuItem;
-        private ToolStripMenuItem pollsToolStripMenuItem;
-        private ToolStripMenuItem pumpkinToolStripMenuItem;
-        private ToolStripMenuItem blinkToolStripMenuItem;
         private ToolStripMenuItem saveEffectToolStripMenuItem;
-        private ToolStripMenuItem loadEffectToolStripMenuItem;
+        private ToolStripSeparator customEffectStart;
+        private ToolStripSeparator customEffectEnd;
     }
 }

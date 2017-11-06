@@ -3707,6 +3707,8 @@ namespace VixenEditor
             _sequence.CurrentGroup = Group.AllChannels;
             UpdateGroups();
             SetEditingState(true);
+
+            menuStrip.Visible = false; //Remove the menu strip because it gets shown peridically, and not in the normal way
         }
 
 
@@ -4639,8 +4641,16 @@ namespace VixenEditor
         private void UpdateFollowMouse()
         {
             var rowCount = _lineRect.Left == -1 ? _selectedCells.Height : Math.Abs(_lineRect.Height) + 1;
+            var colCount = _selectedCells.Width;
             lblFollowMouse.Text = labelPosition.Text + Environment.NewLine + rowCount + @" " +
                                   (rowCount == 1 ? Resources.Channel : Resources.Channels);
+            /*
+            if (rowCount == 1 && colCount == 1) {
+                byte value = _sequence.EventValues[GetEventFromChannelNumber(rowCount), colCount];
+                int intensity = _actualLevels ? value : value.ToPercentage();
+                lblFollowMouse.Text += Environment.NewLine + "Intensity: " + intensity;
+            }
+            */
 
             var position = pictureBoxGrid.PointToClient(Cursor.Position);
             position.X = (int)(Math.Floor((double)position.X / _gridColWidth)) * _gridColWidth;
@@ -4661,7 +4671,6 @@ namespace VixenEditor
             if (position.X < tl.X) {
                 position.X = 0;
             }
-
             lblFollowMouse.Location = position;
         }
 
@@ -5251,7 +5260,24 @@ namespace VixenEditor
             pictureBoxGrid.Invalidate();
         }
 
-        private void rainbowFadeToolStripMenuItem_Click(object sender, EventArgs e)
+        //Eric House Events
+
+        private void redToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            rainbowFade(0);
+        }
+
+        private void greenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            rainbowFade(1);
+        }
+
+        private void blueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            rainbowFade(2);
+        }
+
+        private void rainbowFade(int start)
         {
             AddUndoItem(_selectedCells, UndoOriginalBehavior.Overwrite, "RGB Rainbow Fade");
 
@@ -5269,22 +5295,49 @@ namespace VixenEditor
             int blueChannel = GetEventFromChannelNumber(top + 2);
             int width = right - left;
 
+            /*
+             * 0 = RED
+             * 1 = GREEN
+             * 2 = BLUE
+             */
+            float offset = 0;
+
+            if(start == 1) {
+                offset = 1.0f/3.0f;
+            }
+            else if(start == 2) {
+                offset = 2.0f / 3.0f;
+            }
+
             for (var column = left; column < right; column++) {
-                float hue = (float)(column - left) / (float)width;
+                float hue = offset + (float)(column - left) / (float)width;
                 HsvColor color = new HsvColor(hue, 1, 1);
 
-                _sequence.EventValues[redChannel, column] = (byte) color.red;
+                _sequence.EventValues[redChannel, column] = (byte)color.red;
                 _sequence.EventValues[greenChannel, column] = (byte)color.green;
                 _sequence.EventValues[blueChannel, column] = (byte)color.blue;
             }
 
             _selectionRectangle.Width = 0;
             pictureBoxGrid.Invalidate(SelectionToRectangle());
-            
         }
 
         Random random = new Random();
         private void randomColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            byte r = (byte)random.Next(0, 256);
+            byte g = (byte)random.Next(0, 256);
+            byte b = (byte)random.Next(0, 256);
+            colorSelection(r, g, b);
+        }
+
+        private void selectColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (colorDialog.ShowDialog() != DialogResult.OK) { return; }
+            colorSelection(colorDialog.Color.R, colorDialog.Color.G, colorDialog.Color.B);
+        }
+
+        private void colorSelection(byte r, byte g, byte b)
         {
             AddUndoItem(_selectedCells, UndoOriginalBehavior.Overwrite, "Random RGB Color");
 
@@ -5301,15 +5354,11 @@ namespace VixenEditor
             int greenChannel = GetEventFromChannelNumber(top + 1);
             int blueChannel = GetEventFromChannelNumber(top + 2);
             int width = right - left;
-
-            byte randomRed = (byte)random.Next(0, 256);
-            byte randomGreen = (byte)random.Next(0, 256);
-            byte randomBlue = (byte)random.Next(0, 256);
-
+            
             for (var column = left; column < right; column++) {
-                _sequence.EventValues[redChannel, column] = randomRed;
-                _sequence.EventValues[greenChannel, column] = randomGreen;
-                _sequence.EventValues[blueChannel, column] = randomBlue;
+                _sequence.EventValues[redChannel, column] = r;
+                _sequence.EventValues[greenChannel, column] = g;
+                _sequence.EventValues[blueChannel, column] = b;
             }
 
             _selectionRectangle.Width = 0;
@@ -5519,7 +5568,6 @@ namespace VixenEditor
             }
 
         }
-
     }
 
 

@@ -5329,10 +5329,8 @@ namespace VixenEditor
         Random random = new Random();
         private void randomColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            byte r = (byte)random.Next(0, 256);
-            byte g = (byte)random.Next(0, 256);
-            byte b = (byte)random.Next(0, 256);
-            colorSelection(r, g, b);
+            HsvColor hsv = new HsvColor((float)random.NextDouble(), 1, 1);
+            colorSelection((byte)hsv.red, (byte)hsv.green, (byte)hsv.blue);
         }
 
         private void selectColorToolStripMenuItem_Click(object sender, EventArgs e)

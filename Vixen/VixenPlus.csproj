@@ -295,6 +295,7 @@
     <Compile Include="GroupTagData.cs" />
     <Compile Include="HardwarePlugins.cs" />
     <Compile Include="Host.cs" />
+    <Compile Include="HouseEffect.cs" />
     <Compile Include="IEventDrivenOutputPlugIn.cs" />
     <Compile Include="IExecutable.cs" />
     <Compile Include="IExecution.cs" />
@@ -662,7 +663,6 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>del "$(TargetDir)*.txt</PreBuildEvent>
-    <PostBuildEvent>copy $(SolutionDir)..\externalLibs\*.* $(SolutionDir)..\build\Libraries\3rdParty
-copy "$(SolutionDir)..\ForReleases\*.*" "$(TargetDir)"</PostBuildEvent>
+    <PostBuildEvent>copy /y "$(SolutionDir)..\externalLibs\*.*" "$(SolutionDir)..\build\Libraries\3rdParty"</PostBuildEvent>
   </PropertyGroup>
 </Project>

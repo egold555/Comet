@@ -1030,6 +1030,9 @@ namespace VixenEditor
 
         private int GetEventFromChannelNumber(int index)
         {
+            if (index < 0 || index > _sequence.Channels.Count)
+                return -1;
+
             return GetEventFromChannel(_sequence.Channels[index]);
         }
 
@@ -5391,6 +5394,8 @@ namespace VixenEditor
 
             // Get directory to save effect in.
             string houseEffectsPath = HouseEffectsPath;
+            if (!Directory.Exists(houseEffectsPath))
+                Directory.CreateDirectory(houseEffectsPath);
 
             // Ask user for file name.
             SaveFileDialog dialog = new SaveFileDialog();
@@ -5403,7 +5408,7 @@ namespace VixenEditor
             string path = dialog.FileName;
 
             // Create the effect from the selection.
-            HouseEffect newEffect = HouseEffect.FromSelection(this, path);
+            HouseEffect newEffect = HouseEffect.FromSelection(_sequence.EventValues, _selectedCells, GetEventFromChannelNumber, path);
 
             // Save the effect.
             newEffect.Save();
@@ -5468,106 +5473,11 @@ namespace VixenEditor
         {
             string path = (string) ((ToolStripMenuItem)sender).Tag;
             HouseEffect effect = HouseEffect.Load(path);
-            effect.PlaceAt(this, _selectedCells.Top, _selectedCells.Left);
-        }
 
-#pragma warning disable 1690
-        class HouseEffect
-        {
-            private int rows, columns;
-            private byte[,] data;
-            private string name;
-            private string path;
-
-            public static HouseEffect FromSelection(StandardSequence currentSequence, string path)
-            {
-                int top = currentSequence._selectedCells.Top;
-                int bottom = currentSequence._selectedCells.Bottom;
-                int right = currentSequence._selectedCells.Right;
-                int left = currentSequence._selectedCells.Left;
-
-                int rows = bottom - top;
-                int columns = right - left;
-
-                HouseEffect effect = new HouseEffect();
-                effect.path = path;
-                effect.name = Path.GetFileNameWithoutExtension(path);
-                effect.rows = rows;
-                effect.columns = columns;
-                effect.data = new byte[rows, columns];
-
-
-                for (int row = top; row < bottom; ++row) {
-                    int channel = currentSequence.GetEventFromChannelNumber(row);
-
-                    for (int col = left; col < right; ++col) {
-                        byte val = currentSequence._sequence.EventValues[channel, col];
-                        effect.data[row - top, col - left] = val;
-                    }
-                }
-
-                return effect;
-            }
-
-
-            public static HouseEffect Load(string path)
-            {
-                HouseEffect effect = new HouseEffect();
-
-                using (TextReader reader = new StreamReader(path)) {
-                    int rows = int.Parse(reader.ReadLine());
-                    int columns = int.Parse(reader.ReadLine());
-
-                    effect.path = path;
-                    effect.name = Path.GetFileNameWithoutExtension(path);
-                    effect.rows = rows;
-                    effect.columns = columns;
-                    effect.data = new byte[rows, columns];
-
-                    for (int row = 0; row < rows; ++row) {
-                        for (int col = 0; col < columns; ++col) {
-                            byte val = (byte)int.Parse(reader.ReadLine());
-                            effect.data[row, col] = val;
-                        }
-                    }
-                }
-
-                return effect;
-            }
-
-            public void Save()
-            {
-                using (TextWriter writer = new StreamWriter(path)) {
-
-                    writer.WriteLine("{0}", rows);
-                    writer.WriteLine("{0}", columns);
-
-                    for (int row = 0; row < rows; ++row) {
-                        for (int col = 0; col < columns; ++col) {
-                            int val = data[row, col];
-                            writer.WriteLine("{0}", val);
-                        }
-                    }
-                }
-
-            }
-
-            public void PlaceAt(StandardSequence currentSequence, int top, int left)
-            {
-                Rectangle affectedCells = new Rectangle(left, top, columns, rows);
-                currentSequence.AddUndoItem(affectedCells, UndoOriginalBehavior.Overwrite, "Place House Effect");
-
-                for (int row = 0; row < rows; ++row) {
-                    int channel = currentSequence.GetEventFromChannelNumber(row + top);
-
-                    for (int col = 0; col < columns; ++col) {
-                        currentSequence._sequence.EventValues[channel, col + left] = data[row, col];
-                    }
-                }
-
-                currentSequence.InvalidateRect(affectedCells);
-            }
-
+            Rectangle affectedCells = new Rectangle(_selectedCells.Left, _selectedCells.Top, effect.Width, effect.Height);
+            AddUndoItem(affectedCells, UndoOriginalBehavior.Overwrite, "Place House Effect");
+            effect.PlaceAt(_sequence.EventValues, _selectedCells.Top, _selectedCells.Left, GetEventFromChannelNumber);
+            InvalidateRect(affectedCells);
         }
     }
 

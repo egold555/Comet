@@ -4556,7 +4556,8 @@ namespace VixenEditor
             var fontSize = (_gridColWidth <= GridSmall)
                 ? GridFontSmall : ((_gridColWidth <= GridMedium) ? GridFontMedium : ((_gridColWidth < GridLarge) ? GridFontLarge : GridFontDefault));
 
-            using (var font = new Font(Font.FontFamily, fontSize))
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
+            using (var font = new Font("Small Fonts", fontSize))
             using (var brush = new SolidBrush(Color.White)) {
                 var initialX = (clipRect.X / _gridColWidth * _gridColWidth) + 1;
                 var startEvent = (clipRect.X / _gridColWidth) + hScrollBar1.Value;

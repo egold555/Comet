@@ -662,7 +662,6 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>del "$(TargetDir)*.txt</PreBuildEvent>
-    <PostBuildEvent>copy $(SolutionDir)..\externalLibs\*.* $(SolutionDir)..\build\Libraries\3rdParty
-copy "$(SolutionDir)..\ForReleases\*.*" "$(TargetDir)"</PostBuildEvent>
+    <PostBuildEvent>copy /y "$(SolutionDir)..\externalLibs\*.*" "$(SolutionDir)..\build\Libraries\3rdParty"</PostBuildEvent>
   </PropertyGroup>
 </Project>

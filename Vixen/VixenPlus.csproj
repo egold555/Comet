@@ -295,6 +295,7 @@
     <Compile Include="GroupTagData.cs" />
     <Compile Include="HardwarePlugins.cs" />
     <Compile Include="Host.cs" />
+    <Compile Include="HouseEffect.cs" />
     <Compile Include="IEventDrivenOutputPlugIn.cs" />
     <Compile Include="IExecutable.cs" />
     <Compile Include="IExecution.cs" />

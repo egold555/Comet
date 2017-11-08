@@ -21,6 +21,7 @@ namespace VixenPlus.Dialogs {
         private readonly fmod _fmod;
         private readonly int[] _keyMap = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         private readonly bool[] _keyStates;
+        private HouseEffect _houseEffect;
         private readonly Audio _originalAudio;
         private readonly Stopwatch _stopwatch;
         private readonly Timer _timer;
@@ -95,6 +96,22 @@ namespace VixenPlus.Dialogs {
             populateHouseEffects("", HouseEffectsPath);
         }
 
+        private class HouseEffectComboItem
+        {
+            public readonly string path;
+            public readonly string text;
+            public HouseEffectComboItem(string path, string text)
+            {
+                this.path = path;
+                this.text = text;
+            }
+
+            public override string ToString()
+            {
+                return text;
+            }
+        }
+
         private void populateHouseEffects(string prefix, string dir)
         {
             
@@ -106,8 +123,8 @@ namespace VixenPlus.Dialogs {
             {
                 string name = Path.GetFileNameWithoutExtension(file);
                 Console.WriteLine(prefix + " > " + "Item: " + name);
-                comboBoxHouseEffects.Items.Add(prefix + " > " + name); //Add each house effects file
-                comboBoxHouseEffects.Update();
+                string text = prefix + " > " + name;
+                comboBoxHouseEffects.Items.Add(new HouseEffectComboItem(file, text)); //Add each house effects file
                 Console.WriteLine("Box: max=" + comboBoxHouseEffects.MaxDropDownItems + " amount=" + comboBoxHouseEffects.Items.Count);
             }
 
@@ -118,6 +135,8 @@ namespace VixenPlus.Dialogs {
                 Console.WriteLine("Dir: " + name);
                 populateHouseEffects(name, subDir);
             }
+
+            comboBoxHouseEffects.Update();
         }
 
         private string HouseEffectsPath
@@ -226,6 +245,12 @@ namespace VixenPlus.Dialogs {
                 trackBarPosition.Enabled = false;
                 _timer.Start();
                 buttonPlayPause.Image = pictureBoxPause.Image;
+
+                if (radioButtonHouseEffect.Checked) {
+                    if (comboBoxHouseEffects.SelectedItem != null) {
+                        _houseEffect = HouseEffect.Load(((HouseEffectComboItem)comboBoxHouseEffects.SelectedItem).path);
+                    }
+                }
             }
         }
 
@@ -351,9 +376,16 @@ namespace VixenPlus.Dialogs {
                             if (!_keyStates[i]) {
                                 continue;
                             }
-                            _newEventValues[i, num2] = _eventSequence.MaximumLevel;
-                            if (radioButtonSingleEvent.Checked) {
-                                _keyStates[i] = false;
+                            if (radioButtonHouseEffect.Checked) {
+                                if (_houseEffect != null) {
+                                    _houseEffect.PlaceAt(_newEventValues, i, num2, x => x);
+                                }
+                            }
+                            else {
+                                _newEventValues[i, num2] = _eventSequence.MaximumLevel;
+                                if (radioButtonSingleEvent.Checked) {
+                                    _keyStates[i] = false;
+                                }
                             }
                         }
                     }

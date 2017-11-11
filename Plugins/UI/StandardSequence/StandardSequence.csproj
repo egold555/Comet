@@ -94,6 +94,7 @@
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing">
       <Name>System.Drawing</Name>
     </Reference>
@@ -107,6 +108,12 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Plugins\PluginWaveform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plugins\PluginWaveform.Designer.cs">
+      <DependentUpon>PluginWaveform.cs</DependentUpon>
     </Compile>
     <Compile Include="VixenEditor\ChannelMapperSequence.cs" />
     <Compile Include="VixenEditor\ChannelMapperChannel.cs" />
@@ -230,6 +237,9 @@
     </Compile>
     <Compile Include="VixenPlus\UndoItem.cs" />
     <Compile Include="VixenPlus\UndoOriginalBehavior.cs" />
+    <EmbeddedResource Include="Plugins\PluginWaveform.resx">
+      <DependentUpon>PluginWaveform.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VixenEditor.Properties.Resources.resources" />
     <EmbeddedResource Include="VixenEditor\AudioSpeedDialog.resx">
       <DependentUpon>AudioSpeedDialog.cs</DependentUpon>

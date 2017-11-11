@@ -23,6 +23,7 @@ using VixenPlus.Properties;
 using VixenPlusCommon;
 
 using Channel = VixenPlus.Channel;
+using VixenEditor.Plugins;
 
 namespace VixenEditor
 {
@@ -5264,7 +5265,13 @@ namespace VixenEditor
             pictureBoxGrid.Invalidate();
         }
 
-        //Eric House Events
+        //Eric House Events ========================================================================================================
+
+        private void waveformToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PluginWaveform waveformDialog = new PluginWaveform(_sequence);
+            waveformDialog.Show();
+        }
 
         private void redToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -5477,6 +5484,8 @@ namespace VixenEditor
             effect.PlaceAt(_sequence.EventValues, _selectedCells.Top, _selectedCells.Left, GetEventFromChannelNumber);
             InvalidateRect(affectedCells);
         }
+
+        
     }
 
 
@@ -5543,4 +5552,5 @@ namespace VixenEditor
             blue = (int)Math.Round(b * 255.0);
         }
     }
+    //========================================================================================================
 }

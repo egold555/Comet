@@ -380,6 +380,7 @@ namespace VixenPlus.Dialogs {
                                 if (_houseEffect != null) {
                                     _houseEffect.PlaceAt(_newEventValues, i, num2, x => x);
                                 }
+                                _keyStates[i] = false;
                             }
                             else {
                                 _newEventValues[i, num2] = _eventSequence.MaximumLevel;

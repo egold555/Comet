@@ -5479,9 +5479,18 @@ namespace VixenEditor
             string path = (string) ((ToolStripMenuItem)sender).Tag;
             HouseEffect effect = HouseEffect.Load(path);
 
-            Rectangle affectedCells = new Rectangle(_selectedCells.Left, _selectedCells.Top, effect.Width, effect.Height);
-            AddUndoItem(affectedCells, UndoOriginalBehavior.Overwrite, "Place House Effect");
-            effect.PlaceAt(_sequence.EventValues, _selectedCells.Top, _selectedCells.Left, GetEventFromChannelNumber);
+            Rectangle affectedCells;
+
+            if (ModifierKeys == Keys.Shift) {
+                affectedCells = new Rectangle(_selectedCells.Left, _selectedCells.Top, _selectedCells.Width, effect.Height);
+                AddUndoItem(affectedCells, UndoOriginalBehavior.Overwrite, "Place House Effect");
+                effect.PlaceAtStretch(_sequence.EventValues, _selectedCells.Top, _selectedCells.Left, _selectedCells.Width, GetEventFromChannelNumber);
+            }
+            else {
+                affectedCells = new Rectangle(_selectedCells.Left, _selectedCells.Top, effect.Width, effect.Height);
+                AddUndoItem(affectedCells, UndoOriginalBehavior.Overwrite, "Place House Effect");
+                effect.PlaceAt(_sequence.EventValues, _selectedCells.Top, _selectedCells.Left, GetEventFromChannelNumber);
+            }
             InvalidateRect(affectedCells);
         }
 

@@ -1315,7 +1315,7 @@ namespace VixenEditor{
             this.randomColorToolStripMenuItem,
             this.colorPickerToolStripMenuItem});
             this.rGBLightsToolStripMenuItem.Name = "rGBLightsToolStripMenuItem";
-            this.rGBLightsToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.rGBLightsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.rGBLightsToolStripMenuItem.Text = "RGB Strips";
             // 
             // rainbowFadeToolStripMenuItem
@@ -1366,17 +1366,17 @@ namespace VixenEditor{
             // customEffectStart
             // 
             this.customEffectStart.Name = "customEffectStart";
-            this.customEffectStart.Size = new System.Drawing.Size(128, 6);
+            this.customEffectStart.Size = new System.Drawing.Size(149, 6);
             // 
             // customEffectEnd
             // 
             this.customEffectEnd.Name = "customEffectEnd";
-            this.customEffectEnd.Size = new System.Drawing.Size(128, 6);
+            this.customEffectEnd.Size = new System.Drawing.Size(149, 6);
             // 
             // saveEffectToolStripMenuItem
             // 
             this.saveEffectToolStripMenuItem.Name = "saveEffectToolStripMenuItem";
-            this.saveEffectToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.saveEffectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveEffectToolStripMenuItem.Text = "Save Effect";
             this.saveEffectToolStripMenuItem.Click += new System.EventHandler(this.saveEffectToolStripMenuItem_Click);
             // 
@@ -1389,6 +1389,7 @@ namespace VixenEditor{
             this.pluginsToolStrip.Name = "pluginsToolStrip";
             this.pluginsToolStrip.Size = new System.Drawing.Size(58, 20);
             this.pluginsToolStrip.Text = "&Plugins";
+            this.pluginsToolStrip.Visible = false;
             // 
             // waveformToolStripMenuItem
             // 

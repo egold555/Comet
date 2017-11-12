@@ -110,7 +110,25 @@ namespace VixenPlus
             }
         }
 
+        public void PlaceAtStretch(byte[,] valueArray, int top, int left, int width, Func<int, int> rowMap)
+        {
+            int totalRows = valueArray.GetLength(0);
+            int totalCols = valueArray.GetLength(1);
 
+            for (int row = 0; row < rows; ++row) {
+                int destRow = rowMap(row + top);
+                if (destRow < 0)
+                    continue;
+
+                for (int col = 0; col < width; ++col) {
+                    int destcol = col + left;
+                    if (destRow >= 0 && destRow < totalRows && destcol >= 0 && destcol < totalCols) {
+                        int scaledCol = (int) (((double)col / (double)width) * columns);
+                        valueArray[destRow, destcol] = data[row, scaledCol];
+                    }
+                }
+            }
+        }
     }
 
 }

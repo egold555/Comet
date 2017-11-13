@@ -23,7 +23,6 @@ using VixenPlus.Properties;
 using VixenPlusCommon;
 
 using Channel = VixenPlus.Channel;
-using VixenEditor.Plugins;
 
 namespace VixenEditor
 {

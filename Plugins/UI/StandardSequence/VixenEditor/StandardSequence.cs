@@ -5269,8 +5269,7 @@ namespace VixenEditor
 
         private void waveformToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PluginWaveform waveformDialog = new PluginWaveform(_sequence);
-            waveformDialog.Show();
+           
         }
 
         private void redToolStripMenuItem_Click(object sender, EventArgs e)

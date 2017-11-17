@@ -100,6 +100,7 @@ namespace VixenPlus.Dialogs
             //todo make sure this +1 below is really necessary
             labelOutputChannel.Text = (_currentChannel.OutputChannel + 1).ToString(CultureInfo.InvariantCulture);
             checkBoxEnabled.Checked = _currentChannel.Enabled;
+            numericUpDownDelay.Value = _currentChannel.DelayMillis;
         }
 
         private void GotoChannel(Channel channel)
@@ -142,6 +143,7 @@ namespace VixenPlus.Dialogs
             }
             _currentChannel.Color = buttonColor.BackColor;
             _currentChannel.Enabled = checkBoxEnabled.Checked;
+            _currentChannel.DelayMillis = (int)numericUpDownDelay.Value;
         }
 
         private void comboBoxChannels_DrawItem(object sender, DrawItemEventArgs e) {

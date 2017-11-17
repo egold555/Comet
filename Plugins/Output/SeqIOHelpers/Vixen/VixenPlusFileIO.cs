@@ -78,6 +78,10 @@ namespace SeqIOHelpers {
             Xml.SetAttribute(node, "output", (ch.OutputChannel).ToString(CultureInfo.InvariantCulture));
             Xml.SetAttribute(node, "enabled", ch.Enabled.ToString());
 
+            if (ch.DelayMillis != 0) {
+                Xml.SetAttribute(node, "delay", XmlConvert.ToString(ch.DelayMillis));
+            }
+
             if (ch.DimmingCurve != null) {
                 Xml.SetValue(node, "Curve", string.Join(",", ch.DimmingCurve.Select(num => num.ToString(CultureInfo.InvariantCulture)).ToArray()));
             }

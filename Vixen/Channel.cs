@@ -36,6 +36,11 @@ namespace VixenPlus {
                 Id =  channelNode.Attributes[elementName] == null ? NextRandom() : ulong.Parse(channelNode.Attributes[elementName].Value);
                 elementName = "enabled";
                 Enabled = bool.Parse(channelNode.Attributes[elementName].Value);
+                elementName = "delay";
+                if (channelNode.Attributes[elementName] == null)
+                    DelayMillis = 0;
+                else
+                    DelayMillis = XmlConvert.ToInt32(channelNode.Attributes[elementName].Value);
             }
             catch (NullReferenceException) {
                 MessageBox.Show(String.Format("Embedded or attached profile is missing '{0}' elenment on channel node.\n\nExiting {1}", elementName, Vendor.ProductName), "Missing element");
@@ -108,6 +113,8 @@ namespace VixenPlus {
         public int OutputChannel { get; set; }
 
         public ulong Id { get; private set; }
+
+        public int DelayMillis { get; set; }
 
         public void Dispose() {
             GC.SuppressFinalize(this);

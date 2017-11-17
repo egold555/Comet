@@ -454,8 +454,17 @@ namespace VixenPlus {
             var list = sequence.FullChannels.Select(channel => channel.OutputChannel).ToList();
             for (var i = 0; i < sequence.FullChannelCount; i++) {
                 var row = list[i];
+                int delayMs = sequence.Channels[i].DelayMillis;
+                int delayEventPeriods = 0;
+                if (delayMs != 0) {
+                    delayEventPeriods = (int) Math.Round((double)delayMs / (double)sequence.EventPeriod);
+                }
                 for (var column = 0; column < sequence.TotalEventPeriods; column++) {
-                    buffer[row, column] = sequence.EventValues[i, column];
+                    int srcColumn = column + delayEventPeriods;
+                    if (srcColumn < 0 || srcColumn >= sequence.TotalEventPeriods)
+                        buffer[row, column] = 0;
+                    else
+                        buffer[row, column] = sequence.EventValues[i, srcColumn];
                 }
             }
             return buffer;

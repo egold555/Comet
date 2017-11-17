@@ -26,28 +26,35 @@ namespace VixenPlus.Dialogs {
 
 
         private void InitializeComponent() {
-            this.groupBox1 = new GroupBox();
-            this.buttonDimmingCurve = new Button();
-            this.checkBoxEnabled = new CheckBox();
-            this.labelOutputChannel = new Label();
-            this.label3 = new Label();
-            this.buttonColor = new Button();
-            this.label2 = new Label();
-            this.textBoxName = new TextBox();
-            this.label1 = new Label();
-            this.buttonClose = new Button();
-            this.buttonPrev = new Button();
-            this.buttonNext = new Button();
-            this.comboBoxChannels = new ComboBox();
-            this.colorDialog = new ColorDialog();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonDimmingCurve = new System.Windows.Forms.Button();
+            this.checkBoxEnabled = new System.Windows.Forms.CheckBox();
+            this.labelOutputChannel = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.buttonColor = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.buttonClose = new System.Windows.Forms.Button();
+            this.buttonPrev = new System.Windows.Forms.Button();
+            this.buttonNext = new System.Windows.Forms.Button();
+            this.comboBoxChannels = new System.Windows.Forms.ComboBox();
+            this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.label4 = new System.Windows.Forms.Label();
+            this.numericUpDownDelay = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDelay)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom)
-                        | AnchorStyles.Left)
-                        | AnchorStyles.Right)));
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.numericUpDownDelay);
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.buttonDimmingCurve);
             this.groupBox1.Controls.Add(this.checkBoxEnabled);
             this.groupBox1.Controls.Add(this.labelOutputChannel);
@@ -56,29 +63,29 @@ namespace VixenPlus.Dialogs {
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.textBoxName);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new Point(12, 41);
+            this.groupBox1.Location = new System.Drawing.Point(12, 41);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new Size(268, 192);
+            this.groupBox1.Size = new System.Drawing.Size(268, 221);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Channel";
             // 
             // buttonDimmingCurve
             // 
-            this.buttonDimmingCurve.Location = new Point(17, 149);
+            this.buttonDimmingCurve.Location = new System.Drawing.Point(17, 180);
             this.buttonDimmingCurve.Name = "buttonDimmingCurve";
-            this.buttonDimmingCurve.Size = new Size(106, 23);
+            this.buttonDimmingCurve.Size = new System.Drawing.Size(106, 23);
             this.buttonDimmingCurve.TabIndex = 7;
             this.buttonDimmingCurve.Text = "Dimming Curve";
             this.buttonDimmingCurve.UseVisualStyleBackColor = true;
-            this.buttonDimmingCurve.Click += new EventHandler(this.buttonDimmingCurve_Click);
+            this.buttonDimmingCurve.Click += new System.EventHandler(this.buttonDimmingCurve_Click);
             // 
             // checkBoxEnabled
             // 
             this.checkBoxEnabled.AutoSize = true;
-            this.checkBoxEnabled.Location = new Point(112, 105);
+            this.checkBoxEnabled.Location = new System.Drawing.Point(112, 105);
             this.checkBoxEnabled.Name = "checkBoxEnabled";
-            this.checkBoxEnabled.Size = new Size(65, 17);
+            this.checkBoxEnabled.Size = new System.Drawing.Size(65, 17);
             this.checkBoxEnabled.TabIndex = 6;
             this.checkBoxEnabled.Text = "Enabled";
             this.checkBoxEnabled.UseVisualStyleBackColor = true;
@@ -86,127 +93,168 @@ namespace VixenPlus.Dialogs {
             // labelOutputChannel
             // 
             this.labelOutputChannel.AutoSize = true;
-            this.labelOutputChannel.Location = new Point(109, 83);
+            this.labelOutputChannel.Location = new System.Drawing.Point(109, 83);
             this.labelOutputChannel.Name = "labelOutputChannel";
-            this.labelOutputChannel.Size = new Size(100, 13);
+            this.labelOutputChannel.Size = new System.Drawing.Size(100, 13);
             this.labelOutputChannel.TabIndex = 5;
             this.labelOutputChannel.Text = "labelOutputChannel";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new Point(14, 83);
+            this.label3.Location = new System.Drawing.Point(14, 83);
             this.label3.Name = "label3";
-            this.label3.Size = new Size(83, 13);
+            this.label3.Size = new System.Drawing.Size(83, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "Output channel:";
             // 
             // buttonColor
             // 
-            this.buttonColor.Location = new Point(112, 51);
+            this.buttonColor.Location = new System.Drawing.Point(112, 51);
             this.buttonColor.Name = "buttonColor";
-            this.buttonColor.Size = new Size(75, 23);
+            this.buttonColor.Size = new System.Drawing.Size(75, 23);
             this.buttonColor.TabIndex = 3;
             this.buttonColor.UseVisualStyleBackColor = true;
-            this.buttonColor.Click += new EventHandler(this.buttonColor_Click);
+            this.buttonColor.Click += new System.EventHandler(this.buttonColor_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new Point(14, 56);
+            this.label2.Location = new System.Drawing.Point(14, 56);
             this.label2.Name = "label2";
-            this.label2.Size = new Size(34, 13);
+            this.label2.Size = new System.Drawing.Size(34, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Color:";
             // 
             // textBoxName
             // 
-            this.textBoxName.Location = new Point(112, 25);
+            this.textBoxName.Location = new System.Drawing.Point(112, 25);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new Size(150, 20);
+            this.textBoxName.Size = new System.Drawing.Size(150, 20);
             this.textBoxName.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new Point(14, 28);
+            this.label1.Location = new System.Drawing.Point(14, 28);
             this.label1.Name = "label1";
-            this.label1.Size = new Size(38, 13);
+            this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Name:";
             // 
             // buttonClose
             // 
-            this.buttonClose.Anchor = ((AnchorStyles)((AnchorStyles.Bottom | AnchorStyles.Right)));
-            this.buttonClose.DialogResult = DialogResult.OK;
-            this.buttonClose.Location = new Point(205, 239);
+            this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.buttonClose.Location = new System.Drawing.Point(205, 268);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new Size(75, 23);
+            this.buttonClose.Size = new System.Drawing.Size(75, 23);
             this.buttonClose.TabIndex = 1;
             this.buttonClose.Text = "Close";
             this.buttonClose.UseVisualStyleBackColor = true;
-            this.buttonClose.Click += new EventHandler(this.buttonClose_Click);
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // buttonPrev
             // 
-            this.buttonPrev.Location = new Point(12, 12);
+            this.buttonPrev.Location = new System.Drawing.Point(12, 12);
             this.buttonPrev.Name = "buttonPrev";
-            this.buttonPrev.Size = new Size(23, 23);
+            this.buttonPrev.Size = new System.Drawing.Size(23, 23);
             this.buttonPrev.TabIndex = 0;
             this.buttonPrev.Text = "<";
             this.buttonPrev.UseVisualStyleBackColor = true;
-            this.buttonPrev.Click += new EventHandler(this.buttonPrev_Click);
+            this.buttonPrev.Click += new System.EventHandler(this.buttonPrev_Click);
             // 
             // buttonNext
             // 
-            this.buttonNext.Location = new Point(41, 12);
+            this.buttonNext.Location = new System.Drawing.Point(41, 12);
             this.buttonNext.Name = "buttonNext";
-            this.buttonNext.Size = new Size(23, 23);
+            this.buttonNext.Size = new System.Drawing.Size(23, 23);
             this.buttonNext.TabIndex = 1;
             this.buttonNext.Text = ">";
             this.buttonNext.UseVisualStyleBackColor = true;
-            this.buttonNext.Click += new EventHandler(this.buttonNext_Click);
+            this.buttonNext.Click += new System.EventHandler(this.buttonNext_Click);
             // 
             // comboBoxChannels
             // 
-            this.comboBoxChannels.DrawMode = DrawMode.OwnerDrawFixed;
-            this.comboBoxChannels.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.comboBoxChannels.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.comboBoxChannels.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxChannels.FormattingEnabled = true;
-            this.comboBoxChannels.Location = new Point(70, 14);
+            this.comboBoxChannels.Location = new System.Drawing.Point(70, 14);
             this.comboBoxChannels.Name = "comboBoxChannels";
-            this.comboBoxChannels.Size = new Size(198, 21);
+            this.comboBoxChannels.Size = new System.Drawing.Size(198, 21);
             this.comboBoxChannels.TabIndex = 2;
-            this.comboBoxChannels.DrawItem += new DrawItemEventHandler(this.comboBoxChannels_DrawItem);
-            this.comboBoxChannels.SelectedIndexChanged += new EventHandler(this.comboBoxChannels_SelectedIndexChanged);
+            this.comboBoxChannels.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxChannels_DrawItem);
+            this.comboBoxChannels.SelectedIndexChanged += new System.EventHandler(this.comboBoxChannels_SelectedIndexChanged);
             // 
             // colorDialog
             // 
             this.colorDialog.AnyColor = true;
             this.colorDialog.FullOpen = true;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(15, 136);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(69, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Delay comp.:";
+            // 
+            // numericUpDownDelay
+            // 
+            this.numericUpDownDelay.Increment = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+            this.numericUpDownDelay.Location = new System.Drawing.Point(112, 134);
+            this.numericUpDownDelay.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDownDelay.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDownDelay.Name = "numericUpDownDelay";
+            this.numericUpDownDelay.Size = new System.Drawing.Size(65, 20);
+            this.numericUpDownDelay.TabIndex = 9;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(183, 136);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(63, 13);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "milliseconds";
+            // 
             // ChannelPropertyDialog
             // 
-            this.AutoScaleDimensions = new SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonClose;
-            this.ClientSize = new Size(292, 274);
+            this.ClientSize = new System.Drawing.Size(292, 303);
             this.Controls.Add(this.comboBoxChannels);
             this.Controls.Add(this.buttonNext);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonPrev);
             this.Controls.Add(this.groupBox1);
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ChannelPropertyDialog";
             this.ShowInTaskbar = false;
-            this.StartPosition = FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Channel Properties";
-            this.Load += new EventHandler(this.ChannelPropertyDialog_Load);
-            this.KeyPress += new KeyPressEventHandler(this.ChannelPropertyDialog_KeyPress);
+            this.Load += new System.EventHandler(this.ChannelPropertyDialog_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ChannelPropertyDialog_KeyPress);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDelay)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -219,5 +267,9 @@ namespace VixenPlus.Dialogs {
             }
             base.Dispose(disposing);
         }
+
+        private Label label5;
+        private NumericUpDown numericUpDownDelay;
+        private Label label4;
     }
 }

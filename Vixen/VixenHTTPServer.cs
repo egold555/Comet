@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -14,7 +15,7 @@ namespace VixenPlus
 
         public VixenHTTPServer() : this(8080)
         {
-            
+
         }
 
         public VixenHTTPServer(int port)
@@ -37,29 +38,87 @@ namespace VixenPlus
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public class VixenHTTPServerHandler : HttpServer
     {
+        string[] sequences = Directory.GetFiles(VixenPlusCommon.Paths.SequencePath, "*.vix", SearchOption.AllDirectories);
         IExecution _executionInterface = null;
+        int _executionContextHandle = -1;
+        EventSequence sequence = null;
+        private readonly byte[] _channelLevels;
+
         public VixenHTTPServerHandler(int port) : base(port)
-        {
-            object obj2;
-            if (Interfaces.Available.TryGetValue("IExecution", out obj2)) {
-                _executionInterface = (IExecution)obj2;
-                Console.WriteLine("Got IExecution");
-            }
-        }
+        { }
 
         public override void handleGETRequest(HttpProcessor p)
         {
+
+            string[] args = p.http_url.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
             p.writeSuccess();
-            p.writeLine("Get!");
+
+            if (args == null || args.Length == 0) {
+                showHelp(p);
+                return;
+            }
+
+            if (args[0] == "sequence") {
+                string fullPath = Path.Combine(VixenPlusCommon.Paths.SequencePath, Uri.UnescapeDataString(args[1]));
+                object obj2;
+                if (sequences.Contains(fullPath)) {
+                    //Sequence exists
+                    if (Interfaces.Available.TryGetValue("IExecution", out obj2)) {
+                        var fileIOHandler = FileIOHelper.GetByExtension(fullPath);
+                        sequence = fileIOHandler.OpenSequence(fullPath);
+                        
+                        _executionInterface = (IExecution)obj2;
+                        _executionContextHandle = _executionInterface.RequestContext(false, true, null);
+                        _executionInterface.SetAsynchronousContext(_executionContextHandle, sequence);
+
+
+                        Console.WriteLine("Got IExecution");
+                        p.writeLine("Success!");
+                    }
+                }
+                else {
+                    //Error and say that their sequence they selected doesnt exist.
+                    p.writeLine(args[1] + " Does not exist.");
+                    p.writeLine("<br>");
+                    p.writeLine("Selectable sequences: ");
+                    p.writeLine("<br>");
+                    printoutVixenSequences(p);
+                }
+            }
+            else {
+                showHelp(p);
+            }
+
+
+
+        }
+
+        private void showHelp(HttpProcessor p)
+        {
+            p.writeLine("<h1>Info:</h1>");
+            p.writeLine("<br>");
+            p.writeLine("<h2>Selectable sequences:</h2>");
+            p.writeLine("<br>");
+            printoutVixenSequences(p);
+        }
+
+        private void printoutVixenSequences(HttpProcessor p)
+        {
+
+            foreach (String s in sequences) {
+                p.writeLine(s);
+                p.writeLine("<br>");
+            }
         }
 
         public override void handlePOSTRequest(HttpProcessor p, StreamReader inputData)
         {
-            string data = inputData.ReadToEnd();
-            p.writeSuccess();
-            p.writeLine("Post!");
-            
         }
+
+        /*
+         * /sequence/sequence_name/
+         * 
+         */
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -102,7 +161,7 @@ namespace VixenPlus
         }
         public void process()
         {
-           
+
             inputStream = new BufferedStream(socket.GetStream());
 
             outputStream = new StreamWriter(new BufferedStream(socket.GetStream()));
@@ -118,11 +177,11 @@ namespace VixenPlus
             }
             catch (Exception e) {
                 Console.WriteLine("Exception: " + e.ToString());
-                writeFailure();
+                writeFailure(e);
             }
             outputStream.Flush();
 
-            inputStream = null; outputStream = null;           
+            inputStream = null; outputStream = null;
             socket.Close();
         }
 
@@ -174,7 +233,7 @@ namespace VixenPlus
         private const int BUF_SIZE = 4096;
         public void handlePOSTRequest()
         {
-            
+
 
             Console.WriteLine("get post data start");
             int content_len = 0;
@@ -219,11 +278,11 @@ namespace VixenPlus
             outputStream.WriteLine("");
         }
 
-        public void writeFailure()
+        private void writeFailure(Exception e)
         {
-            outputStream.WriteLine("HTTP/1.0 404 File not found");
-            outputStream.WriteLine("Connection: close");
-            outputStream.WriteLine("");
+            outputStream.WriteLine("HTTP/1.0 500 Internal error");
+            outputStream.WriteLine("<br>");
+            outputStream.WriteLine(e.ToString());
         }
 
         public void writeLine(String line)

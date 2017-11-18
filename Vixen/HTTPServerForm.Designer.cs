@@ -67,9 +67,9 @@
             this.labelStatus.AutoSize = true;
             this.labelStatus.Location = new System.Drawing.Point(61, 38);
             this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(37, 13);
+            this.labelStatus.Size = new System.Drawing.Size(50, 13);
             this.labelStatus.TabIndex = 3;
-            this.labelStatus.Text = "Offline";
+            this.labelStatus.Text = "Stopped.";
             // 
             // HTTPServerForm
             // 

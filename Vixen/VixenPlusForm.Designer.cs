@@ -73,6 +73,7 @@ namespace VixenPlus {
             this.toolStripStatusLabelMusic = new System.Windows.Forms.ToolStripStatusLabel();
             this.shutdownTimer = new System.Windows.Forms.Timer(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.hTTPServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -188,7 +189,8 @@ namespace VixenPlus {
             this.utilityToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.setSoundDeviceToolStripMenuItem,
             this.toolStripMenuItem1,
-            this.preferencesToolStripMenuItem});
+            this.preferencesToolStripMenuItem,
+            this.hTTPServerToolStripMenuItem});
             this.utilityToolStripMenuItem.Name = "utilityToolStripMenuItem";
             this.utilityToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.utilityToolStripMenuItem.Text = "Tools";
@@ -226,14 +228,14 @@ namespace VixenPlus {
             // tileToolStripMenuItem
             // 
             this.tileToolStripMenuItem.Name = "tileToolStripMenuItem";
-            this.tileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.tileToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.tileToolStripMenuItem.Text = "Tile";
             this.tileToolStripMenuItem.Click += new System.EventHandler(this.tileToolStripMenuItem_Click);
             // 
             // cascadeToolStripMenuItem
             // 
             this.cascadeToolStripMenuItem.Name = "cascadeToolStripMenuItem";
-            this.cascadeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cascadeToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.cascadeToolStripMenuItem.Text = "Cascade";
             this.cascadeToolStripMenuItem.Click += new System.EventHandler(this.cascadeToolStripMenuItem_Click);
             // 
@@ -317,6 +319,13 @@ namespace VixenPlus {
             // 
             this.saveFileDialog1.SupportMultiDottedExtensions = true;
             // 
+            // hTTPServerToolStripMenuItem
+            // 
+            this.hTTPServerToolStripMenuItem.Name = "hTTPServerToolStripMenuItem";
+            this.hTTPServerToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
+            this.hTTPServerToolStripMenuItem.Text = "HTTPServer";
+            this.hTTPServerToolStripMenuItem.Click += new System.EventHandler(this.hTTPServerToolStripMenuItem_Click);
+            // 
             // VixenPlusForm
             // 
             this.AllowDrop = true;
@@ -357,7 +366,6 @@ namespace VixenPlus {
 
         private ToolStripMenuItem manageToolStripMenuItem;
         private ToolStripMenuItem tsmProfiles;
-
-
+        private ToolStripMenuItem hTTPServerToolStripMenuItem;
     }
 }

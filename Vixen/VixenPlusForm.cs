@@ -863,5 +863,10 @@ namespace VixenPlus {
                 OpenSequence(f);
             }
         }
+
+        private void hTTPServerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new HTTPServerForm().Show();
+        }
     }
 }

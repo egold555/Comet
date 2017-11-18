@@ -296,6 +296,13 @@
     <Compile Include="HardwarePlugins.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="HouseEffect.cs" />
+    <Compile Include="HTTPServerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HTTPServerForm.Designer.cs">
+      <DependentUpon>HTTPServerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VixenHTTPServer.cs" />
     <Compile Include="IEventDrivenOutputPlugIn.cs" />
     <Compile Include="IExecutable.cs" />
     <Compile Include="IExecution.cs" />
@@ -433,6 +440,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\UpdateDialog.resx">
       <DependentUpon>UpdateDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HTTPServerForm.resx">
+      <DependentUpon>HTTPServerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OutputPlugInUIBase.resx">
       <DependentUpon>OutputPlugInUIBase.cs</DependentUpon>

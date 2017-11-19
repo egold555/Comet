@@ -64,6 +64,7 @@ namespace VixenPlus
                 if (sequences.Contains(fullPath)) {
                     //Sequence exists
                     if (Interfaces.Available.TryGetValue("IExecution", out obj2)) {
+
                         var fileIOHandler = FileIOHelper.GetByExtension(fullPath);
                         sequence = fileIOHandler.OpenSequence(fullPath);
 
@@ -71,44 +72,49 @@ namespace VixenPlus
                         _executionContextHandle = _executionInterface.RequestContext(false, true, null);
                         _executionInterface.SetAsynchronousContext(_executionContextHandle, sequence);
 
-                        if(_channelLevels == null) { _channelLevels = new byte[sequence.FullChannelCount]; }
-                        
+                        try {
 
-                        if (args.Length == 2) {
-                            p.writeLine("Successfully selected sequence!");
-                            p.writeLine("<br>");
-                            p.writeLine("Commands: <br>");
-                            p.writeLine("   /play/ <br>");
-                            p.writeLine("   /play/ms/ <br>");
-                            p.writeLine("   /pause/ <br>");
-                            p.writeLine("   /stop/ <br>");
-                            p.writeLine("   /channels/ <br>");
-                            return;
-                        }
+                            if (_channelLevels == null) { _channelLevels = new byte[sequence.FullChannelCount]; }
 
-                        if (args[2] == "channels") {
-                            int maxChannels = sequence.FullChannelCount;
-                            if (args.Length == 3) {
-                                p.writeLine("/set/channelnum/0-255");
+
+                            if (args.Length == 2) {
+                                p.writeLine("Successfully selected sequence!");
                                 p.writeLine("<br>");
-                                p.writeLine("/get/channelnum/");
-                                p.writeLine("<br>");
-                                p.writeLine("Max channels: " + maxChannels);
+                                p.writeLine("Commands: <br>");
+                                p.writeLine("   /play/ <br>");
+                                p.writeLine("   /play/ms/ <br>");
+                                p.writeLine("   /pause/ <br>");
+                                p.writeLine("   /stop/ <br>");
+                                p.writeLine("   /channels/ <br>");
                                 return;
                             }
 
-                            if (args[3] == "set") {
-                                int channel = int.Parse(args[4]);
-                                byte value = byte.Parse(args[5]);
-                                _channelLevels[channel] = value;
-                                updateChannels();
-                                p.writeLine("Executed command: " + args[2]);
-                            }
+                            if (args[2] == "channels") {
+                                int maxChannels = sequence.FullChannelCount;
+                                if (args.Length == 3) {
+                                    p.writeLine("/set/channelnum/0-255");
+                                    p.writeLine("<br>");
+                                    p.writeLine("/get/channelnum/");
+                                    p.writeLine("<br>");
+                                    p.writeLine("Max channels: " + maxChannels);
+                                    return;
+                                }
 
-                            if(args[3] == "get") {
-                                int channel = int.Parse(args[4]);
-                                p.writeLine("" + _channelLevels[channel]);
+                                if (args[3] == "set") {
+                                    int channel = int.Parse(args[4]);
+                                    byte value = byte.Parse(args[5]);
+                                    _channelLevels[channel] = value;
+                                    updateChannels();
+                                    p.writeLine("Executed command: " + args[2]);
+                                }
+
+                                if (args[3] == "get") {
+                                    int channel = int.Parse(args[4]);
+                                    p.writeLine("" + _channelLevels[channel]);
+                                }
                             }
+                        } finally {
+                            _executionInterface.ReleaseContext(_executionContextHandle);
                         }
                        
                     }

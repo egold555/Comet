@@ -1,0 +1,269 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Channel Tester</title>
+    <link href="/files/bootstrap.css" rel="stylesheet" />
+    <link href="/files/Site.css" rel="stylesheet" />
+    <script src="/files/jquery-1.10.2.js"></script>
+
+</head>
+<body>
+    <div class="container body-content">
+        <h2>Channel Tester</h2>
+        <div>
+            <p>
+                <label>Sequence name: </label>
+                <input id="sequenceName" type="text" />
+            </p>
+
+            <table>
+
+                <tr>
+                    <td>Channel 1</td>
+                    <td class="buttoncell"><input class="offbutton" id="1" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="1" type="button" value="ON" /></td>
+                    <td style="">&nbsp;</td>
+                    <td>Channel 17</td>
+                    <td class="buttoncell"><input class="offbutton" id="17" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="17" type="button" value="ON" /></td>
+                    <td>&nbsp;</td>
+                    <td>Channel 33</td>
+                    <td class="buttoncell"><input class="offbutton" id="33" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="33" type="button" value="ON" /></td>
+                </tr>
+                <tr>
+                    <td>Channel 2</td>
+                    <td class="buttoncell"><input class="offbutton" id="2" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="2" type="button" value="ON" /></td>
+                    <td style="">&nbsp;</td>
+                    <td>Channel 18</td>
+                    <td class="buttoncell"><input class="offbutton" id="18" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="18" type="button" value="ON" /></td>
+                    <td>&nbsp;</td>
+                    <td>Channel 34</td>
+                    <td class="buttoncell"><input class="offbutton" id="34" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="34" type="button" value="ON" /></td>
+                </tr>
+                <tr>
+                    <td>Channel 3</td>
+                    <td class="buttoncell"><input class="offbutton" id="3" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="3" type="button" value="ON" /></td>
+                    <td style="">&nbsp;</td>
+                    <td>Channel 19</td>
+                    <td class="buttoncell"><input class="offbutton" id="19" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="19" type="button" value="ON" /></td>
+                    <td>&nbsp;</td>
+                    <td>Channel 35</td>
+                    <td class="buttoncell"><input class="offbutton" id="35" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="35" type="button" value="ON" /></td>
+                </tr>
+                <tr>
+                    <td>Channel 4</td>
+                    <td class="buttoncell"><input class="offbutton" id="4" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="4" type="button" value="ON" /></td>
+                    <td style="">&nbsp;</td>
+                    <td>Channel 20</td>
+                    <td class="buttoncell"><input class="offbutton" id="20" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="20" type="button" value="ON" /></td>
+                    <td>&nbsp;</td>
+                    <td>Channel 36</td>
+                    <td class="buttoncell"><input class="offbutton" id="36" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="36" type="button" value="ON" /></td>
+                </tr>
+                <tr>
+                    <td>Channel 5</td>
+                    <td class="buttoncell"><input class="offbutton" id="5" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="5" type="button" value="ON" /></td>
+                    <td style="">&nbsp;</td>
+                    <td>Channel 21</td>
+                    <td class="buttoncell"><input class="offbutton" id="21" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="21" type="button" value="ON" /></td>
+                    <td>&nbsp;</td>
+                    <td>Channel 37</td>
+                    <td class="buttoncell"><input class="offbutton" id="37" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="37" type="button" value="ON" /></td>
+                </tr>
+                <tr>
+                    <td>Channel 6</td>
+                    <td class="buttoncell"><input class="offbutton" id="6" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="6" type="button" value="ON" /></td>
+                    <td style="">&nbsp;</td>
+                    <td>Channel 22</td>
+                    <td class="buttoncell"><input class="offbutton" id="22" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="22" type="button" value="ON" /></td>
+                    <td>&nbsp;</td>
+                    <td>Channel 38</td>
+                    <td class="buttoncell"><input class="offbutton" id="38" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="38" type="button" value="ON" /></td>
+                </tr>
+                <tr>
+                    <td>Channel 7</td>
+                    <td class="buttoncell"><input class="offbutton" id="7" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="7" type="button" value="ON" /></td>
+                    <td style="">&nbsp;</td>
+                    <td>Channel 23</td>
+                    <td class="buttoncell"><input class="offbutton" id="23" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="23" type="button" value="ON" /></td>
+                    <td>&nbsp;</td>
+                    <td>Channel 39</td>
+                    <td class="buttoncell"><input class="offbutton" id="39" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="39" type="button" value="ON" /></td>
+                </tr>
+                <tr>
+                    <td>Channel 8</td>
+                    <td class="buttoncell"><input class="offbutton" id="8" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="8" type="button" value="ON" /></td>
+                    <td style="">&nbsp;</td>
+                    <td>Channel 24</td>
+                    <td class="buttoncell"><input class="offbutton" id="24" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="24" type="button" value="ON" /></td>
+                    <td>&nbsp;</td>
+                    <td>Channel 40</td>
+                    <td class="buttoncell"><input class="offbutton" id="40" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="40" type="button" value="ON" /></td>
+                </tr>
+                <tr>
+                    <td>Channel 9</td>
+                    <td class="buttoncell"><input class="offbutton" id="9" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="9" type="button" value="ON" /></td>
+                    <td style="">&nbsp;</td>
+                    <td>Channel 25</td>
+                    <td class="buttoncell"><input class="offbutton" id="25" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="25" type="button" value="ON" /></td>
+                    <td>&nbsp;</td>
+                    <td>Channel 41</td>
+                    <td class="buttoncell"><input class="offbutton" id="41" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="41" type="button" value="ON" /></td>
+                </tr>
+                <tr>
+                    <td>Channel 10</td>
+                    <td class="buttoncell"><input class="offbutton" id="10" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="10" type="button" value="ON" /></td>
+                    <td style="">&nbsp;</td>
+                    <td>Channel 26</td>
+                    <td class="buttoncell"><input class="offbutton" id="26" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="26" type="button" value="ON" /></td>
+                    <td>&nbsp;</td>
+                    <td>Channel 42</td>
+                    <td class="buttoncell"><input class="offbutton" id="42" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="42" type="button" value="ON" /></td>
+                </tr>
+                <tr>
+                    <td>Channel 11</td>
+                    <td class="buttoncell"><input class="offbutton" id="11" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="11" type="button" value="ON" /></td>
+                    <td style="">&nbsp;</td>
+                    <td>Channel 27</td>
+                    <td class="buttoncell"><input class="offbutton" id="27" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="27" type="button" value="ON" /></td>
+                    <td>&nbsp;</td>
+                    <td>Channel 43</td>
+                    <td class="buttoncell"><input class="offbutton" id="43" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="43" type="button" value="ON" /></td>
+                </tr>
+                <tr>
+                    <td>Channel 12</td>
+                    <td class="buttoncell"><input class="offbutton" id="12" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="12" type="button" value="ON" /></td>
+                    <td style="">&nbsp;</td>
+                    <td>Channel 28</td>
+                    <td class="buttoncell"><input class="offbutton" id="28" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="28" type="button" value="ON" /></td>
+                    <td>&nbsp;</td>
+                    <td>Channel 44</td>
+                    <td class="buttoncell"><input class="offbutton" id="44" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="44" type="button" value="ON" /></td>
+                </tr>
+                <tr>
+                    <td>Channel 13</td>
+                    <td class="buttoncell"><input class="offbutton" id="13" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="13" type="button" value="ON" /></td>
+                    <td style="">&nbsp;</td>
+                    <td>Channel 29</td>
+                    <td class="buttoncell"><input class="offbutton" id="29" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="29" type="button" value="ON" /></td>
+                    <td>&nbsp;</td>
+                    <td>Channel 45</td>
+                    <td class="buttoncell"><input class="offbutton" id="45" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="45" type="button" value="ON" /></td>
+                </tr>
+                <tr>
+                    <td>Channel 14</td>
+                    <td class="buttoncell"><input class="offbutton" id="14" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="14" type="button" value="ON" /></td>
+                    <td style="">&nbsp;</td>
+                    <td>Channel 30</td>
+                    <td class="buttoncell"><input class="offbutton" id="30" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="30" type="button" value="ON" /></td>
+                    <td>&nbsp;</td>
+                    <td>Channel 46</td>
+                    <td class="buttoncell"><input class="offbutton" id="46" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="46" type="button" value="ON" /></td>
+                </tr>
+                <tr>
+                    <td>Channel 15</td>
+                    <td class="buttoncell"><input class="offbutton" id="15" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="15" type="button" value="ON" /></td>
+                    <td style="">&nbsp;</td>
+                    <td>Channel 31</td>
+                    <td class="buttoncell"><input class="offbutton" id="31" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="31" type="button" value="ON" /></td>
+                    <td>&nbsp;</td>
+                    <td>Channel 47</td>
+                    <td class="buttoncell"><input class="offbutton" id="47" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="47" type="button" value="ON" /></td>
+                </tr>
+                <tr>
+                    <td>Channel 16</td>
+                    <td class="buttoncell"><input class="offbutton" id="16" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="16" type="button" value="ON" /></td>
+                    <td style="">&nbsp;</td>
+                    <td>Channel 32</td>
+                    <td class="buttoncell"><input class="offbutton" id="32" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="32" type="button" value="ON" /></td>
+                    <td>&nbsp;</td>
+                    <td>Channel 48</td>
+                    <td class="buttoncell"><input class="offbutton" id="48" type="button" value="OFF" /></td>
+                    <td class="buttoncell"><input class="onbutton" id="48" type="button" value="ON" /></td>
+                </tr>
+            </table>
+        </div>
+
+        <audio id="clickSound" src="/files/thozi_daClick.mp3"></audio>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                function playSound() {
+                    document.getElementById("clickSound").play();
+                }
+
+                function setChannel(chan, level)
+                {
+                    var sequenceName = $("#sequenceName").val();
+                    var url = "/sequence/" + encodeURIComponent(sequenceName) + "/channels/set/" + (chan-1) + "/" + level;
+                    console.log("URL: " + url);
+                    $.get(url);
+                }
+
+                $("input.onbutton").click(function (event) {
+                    var id = event.target.id;
+                    playSound();
+                    setChannel(id, 255);
+                });
+
+                $("input.offbutton").click(function (event) {
+                    var id = event.target.id;
+                    playSound();
+                    setChannel(id, 0);
+                });
+            });
+        </script>
+
+
+    </div>
+
+</body>
+</html>

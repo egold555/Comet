@@ -131,8 +131,11 @@ namespace VixenPlus
                     p.writeLine("<br>");
                     p.writeLine("Selectable sequences: ");
                     p.writeLine("<br>");
-                    printoutVixenSequences(p);
+                    printoutVixenSequences(p, "<br>");
                 }
+            }
+            else if (args[0] == "listseq") {
+                printoutVixenSequences(p, null);
             }
             else {
                 showHelp(p);
@@ -153,15 +156,16 @@ namespace VixenPlus
             p.writeLine("<br>");
             p.writeLine("<h2>Selectable sequences:</h2>");
             p.writeLine("<br>");
-            printoutVixenSequences(p);
+            printoutVixenSequences(p, "<br>");
         }
 
-        private void printoutVixenSequences(HttpProcessor p)
+        private void printoutVixenSequences(HttpProcessor p, string separator)
         {
 
             foreach (String s in sequences) {
                 p.writeLine(s);
-                p.writeLine("<br>");
+                if (! string.IsNullOrEmpty(separator))
+                    p.writeLine(separator);
             }
         }
 
@@ -208,7 +212,7 @@ namespace VixenPlus
                 next_char = inputStream.ReadByte();
                 if (next_char == '\n') { break; }
                 if (next_char == '\r') { continue; }
-                if (next_char == -1) { Thread.Sleep(1); continue; };
+                if (next_char == -1) { Thread.Sleep(1); continue; }
                 data += Convert.ToChar(next_char);
             }
             return data;

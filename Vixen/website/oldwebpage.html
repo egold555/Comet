@@ -16,7 +16,8 @@
         <div>
             <p>
                 <label>Sequence name: </label>
-                <input id="sequenceName" type="text" />
+                <select id="sequenceSelect"></select>            
+
             </p>
 
             <table>
@@ -242,7 +243,7 @@
 
                 function setChannel(chan, level)
                 {
-                    var sequenceName = $("#sequenceName").val();
+                    var sequenceName = $("#sequenceSelect").val();
                     var url = "/sequence/" + encodeURIComponent(sequenceName) + "/channels/set/" + (chan-1) + "/" + level;
                     console.log("URL: " + url);
                     $.get(url);
@@ -258,6 +259,16 @@
                     var id = event.target.id;
                     playSound();
                     setChannel(id, 0);
+                });
+
+                $.get("/listseq", function (data) {
+                    lines = data.split("\r\n");
+                    for (var i = 0; i < lines.length; ++i) {
+                        if (lines[i].length > 0) {
+                            var text = lines[i].substr(lines[i].lastIndexOf("\\") + 1);
+                            $('#sequenceSelect').append('<option value="' + lines[i] + '" selected="selected">' + text + '</option>');
+                        }
+                    }
                 });
             });
         </script>

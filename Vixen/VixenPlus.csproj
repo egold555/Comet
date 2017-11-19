@@ -652,6 +652,9 @@
     <None Include="Resources\wave.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="website\testpage.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\arrow-down.png" />
     <None Include="Resources\arrow-up.png" />
     <None Include="Resources\list-add.png" />

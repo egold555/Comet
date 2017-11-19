@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace VixenPlus
 {
@@ -58,7 +59,12 @@ namespace VixenPlus
                 return;
             }
 
-            if (args[0] == "sequence") {
+            if (args[0] == "files") {
+                string path = string.Join("\\", args.Skip(1).ToArray());
+                p.serveFile(path);
+                return;
+            }
+            else if (args[0] == "sequence") {
                 string fullPath = Path.Combine(VixenPlusCommon.Paths.SequencePath, Uri.UnescapeDataString(args[1]));
                 object obj2;
                 if (sequences.Contains(fullPath)) {
@@ -331,6 +337,19 @@ namespace VixenPlus
         {
             outputStream.WriteLine(line);
         }
+
+        public void serveFile(string path)
+        {
+            string wwwRoot = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "website");
+            string fileToServe = Path.Combine(wwwRoot, path);
+
+            byte[] bytes = File.ReadAllBytes(fileToServe);
+            outputStream.Flush();
+            outputStream.BaseStream.Write(bytes, 0, bytes.Length);
+            outputStream.BaseStream.Flush();
+        }
+
+
     }
 
     public abstract class HttpServer

@@ -147,6 +147,12 @@
     <Compile Include="Dialogs\AudioDialog.Designer.cs">
       <DependentUpon>AudioDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\AutoPlayStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\AutoPlayStatus.Designer.cs">
+      <DependentUpon>AutoPlayStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\ChannelOrderDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -379,6 +385,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AudioDialog.resx">
       <DependentUpon>AudioDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AutoPlayStatus.resx">
+      <DependentUpon>AutoPlayStatus.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ChannelOrderDialog.resx">
       <DependentUpon>ChannelOrderDialog.cs</DependentUpon>

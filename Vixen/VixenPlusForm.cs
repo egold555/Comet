@@ -90,7 +90,7 @@ namespace VixenPlus {
 
                 helpToolStripMenuItem.Visible = false; //No need for a help menu, miht add back if I publish to everyone
 
-                AutoPlay.Begin(options);
+                AutoPlay.Begin(options, this);
             }
         }
 

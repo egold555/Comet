@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CommandLine;
 using CommandLine.Text;
+using VixenPlus.Dialogs;
 using VixenPlusCommon;
 
 namespace VixenPlus
@@ -17,6 +18,7 @@ namespace VixenPlus
         static List<AutoPlaySequence> sequences = new List<AutoPlaySequence>();
         static int currentSequenceIndex;
         static DateTime endTime;
+        static AutoPlayStatus statusDialog;
 
         private static AutoPlaySequence CurrentSequence {
             get {
@@ -34,7 +36,7 @@ namespace VixenPlus
             return options;
         }
 
-        public static void Begin(CommandLineOptions options)
+        public static void Begin(CommandLineOptions options, Form parentForm)
         {
             if (!options.Play)
                 return;
@@ -49,13 +51,19 @@ namespace VixenPlus
             // subtract 15 seconds due to startup/shutdown time, etc.
             endTime = DateTime.Now.AddMinutes(options.Minutes).AddSeconds(-15);
 
-            if (CurrentSequence != null)
-                CurrentSequence.Play();
+            statusDialog = new AutoPlayStatus();
+            statusDialog.MdiParent = parentForm;
+            statusDialog.Show();
+
+            if (CurrentSequence != null) {
+                PlayCurrentSequence();
+            }
         }
 
         public static void End()
         {
             if (CurrentSequence != null && CurrentSequence.IsPlaying) {
+                CurrentSequence.TurnOffLights();
                 CurrentSequence.Stop();
             }
 
@@ -65,8 +73,13 @@ namespace VixenPlus
 
             sequences.Clear();
 
-            Console.WriteLine("Exiting");
             Application.Exit();
+        }
+
+        private static void PlayCurrentSequence()
+        {
+            statusDialog.UpdateCurrentSequence(CurrentSequence.Name);
+            CurrentSequence.Play();
         }
 
         private static void InitializeSequences(IList<string> sequenceFileNames)
@@ -80,19 +93,17 @@ namespace VixenPlus
 
         private static void Timer_Tick(object sender, EventArgs e)
         {
-            if (DateTime.Now >= endTime) {
-                Console.WriteLine("Time limit exceeded.");
+            if (DateTime.Now >= endTime || statusDialog.StopRequested) {
                 End();
             }
 
             if (CurrentSequence != null) {
                 if (!CurrentSequence.IsPlaying) {
-                    Console.WriteLine("Sequence {0} finished, moving to next", currentSequenceIndex);
                     // Move to the next sequence.
                     currentSequenceIndex += 1;
                     if (currentSequenceIndex >= sequences.Count)
                         currentSequenceIndex = 0;
-                    CurrentSequence.Play();
+                    PlayCurrentSequence();
                 }
             }
         }
@@ -103,6 +114,7 @@ namespace VixenPlus
             string error;
             IExecution executionInterface;
             int contextHandle;
+            int numberOfChannels;
 
             public AutoPlaySequence(string path)
             {
@@ -145,6 +157,7 @@ namespace VixenPlus
 
                     var fileIOHandler = FileIOHelper.GetByExtension(path);
                     EventSequence sequence = fileIOHandler.OpenSequence(path);
+                    numberOfChannels = sequence.OutputChannels.Count;
 
                     object executionIfaceObj;
                     if (!Interfaces.Available.TryGetValue("IExecution", out executionIfaceObj)) {
@@ -170,6 +183,13 @@ namespace VixenPlus
             {
                 if (executionInterface != null) {
                     executionInterface.ExecuteStop(contextHandle);
+                }
+            }
+
+            public void TurnOffLights()
+            {
+                if (executionInterface != null) {
+                    executionInterface.SetChannelStates(contextHandle, new byte[numberOfChannels]);
                 }
             }
 

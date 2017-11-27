@@ -124,6 +124,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Audio.cs" />
+    <Compile Include="AutoPlay.cs" />
     <Compile Include="Channel.cs" />
     <Compile Include="CurveLibrary.cs" />
     <Compile Include="CurveLibraryRecord.cs" />

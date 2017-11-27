@@ -32,8 +32,7 @@ namespace VixenPlus {
 
         private readonly Preference2 _preferences;
 
-        public VixenPlusForm(IEnumerable<string> args) {
-            var startupArgs = args as IList<string> ?? args.ToList();
+        public VixenPlusForm(string[] args) {
             SetDataPath();
             Ensure(Paths.DataPath);
             Ensure(Paths.SequencePath);
@@ -69,14 +68,20 @@ namespace VixenPlus {
                 loadableData.LoadFromXml(_preferences.XmlDoc.DocumentElement);
                 LoadUIPlugins();
                 Cursor = Cursors.WaitCursor;
+
+                CommandLineOptions options = AutoPlay.ParseCommandLine(args);
+
                 try {
-                    foreach (var sequence in startupArgs.Where(File.Exists)) {
-                        OpenSequence(sequence);
+                    if (!options.Play) {
+                        foreach (var sequence in options.Sequences.Where(File.Exists)) {
+                            OpenSequence(sequence);
+                        }
                     }
                 }
                 finally {
                     Cursor = Cursors.Default;
                 }
+
                 SetShutdownTime(_preferences.GetString("ShutdownTime"));
 
                 splash.FadeOut();
@@ -84,6 +89,8 @@ namespace VixenPlus {
                 Top = screen.Bounds.Top;
 
                 helpToolStripMenuItem.Visible = false; //No need for a help menu, miht add back if I publish to everyone
+
+                AutoPlay.Begin(options);
             }
         }
 

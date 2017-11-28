@@ -58,6 +58,7 @@ namespace VixenPlus {
             this.setSoundDeviceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hTTPServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cascadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,7 +74,7 @@ namespace VixenPlus {
             this.toolStripStatusLabelMusic = new System.Windows.Forms.ToolStripStatusLabel();
             this.shutdownTimer = new System.Windows.Forms.Timer(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.hTTPServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scheduleProgramsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -173,7 +174,7 @@ namespace VixenPlus {
             this.tsmProfiles.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.manageToolStripMenuItem});
             this.tsmProfiles.Name = "tsmProfiles";
-            this.tsmProfiles.Size = new System.Drawing.Size(152, 22);
+            this.tsmProfiles.Size = new System.Drawing.Size(113, 22);
             this.tsmProfiles.Text = "Profiles";
             // 
             // manageToolStripMenuItem
@@ -190,7 +191,8 @@ namespace VixenPlus {
             this.setSoundDeviceToolStripMenuItem,
             this.toolStripMenuItem1,
             this.preferencesToolStripMenuItem,
-            this.hTTPServerToolStripMenuItem});
+            this.hTTPServerToolStripMenuItem,
+            this.scheduleProgramsToolStripMenuItem});
             this.utilityToolStripMenuItem.Name = "utilityToolStripMenuItem";
             this.utilityToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.utilityToolStripMenuItem.Text = "Tools";
@@ -215,6 +217,13 @@ namespace VixenPlus {
             this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.preferencesToolStripMenuItem.Text = "Preferences";
             this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
+            // 
+            // hTTPServerToolStripMenuItem
+            // 
+            this.hTTPServerToolStripMenuItem.Name = "hTTPServerToolStripMenuItem";
+            this.hTTPServerToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
+            this.hTTPServerToolStripMenuItem.Text = "HTTPServer";
+            this.hTTPServerToolStripMenuItem.Click += new System.EventHandler(this.hTTPServerToolStripMenuItem_Click);
             // 
             // windowsToolStripMenuItem
             // 
@@ -319,12 +328,12 @@ namespace VixenPlus {
             // 
             this.saveFileDialog1.SupportMultiDottedExtensions = true;
             // 
-            // hTTPServerToolStripMenuItem
+            // scheduleProgramsToolStripMenuItem
             // 
-            this.hTTPServerToolStripMenuItem.Name = "hTTPServerToolStripMenuItem";
-            this.hTTPServerToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
-            this.hTTPServerToolStripMenuItem.Text = "HTTPServer";
-            this.hTTPServerToolStripMenuItem.Click += new System.EventHandler(this.hTTPServerToolStripMenuItem_Click);
+            this.scheduleProgramsToolStripMenuItem.Name = "scheduleProgramsToolStripMenuItem";
+            this.scheduleProgramsToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
+            this.scheduleProgramsToolStripMenuItem.Text = "Schedule Programs";
+            this.scheduleProgramsToolStripMenuItem.Click += new System.EventHandler(this.scheduleProgramsToolStripMenuItem_Click);
             // 
             // VixenPlusForm
             // 
@@ -367,5 +376,6 @@ namespace VixenPlus {
         private ToolStripMenuItem manageToolStripMenuItem;
         private ToolStripMenuItem tsmProfiles;
         private ToolStripMenuItem hTTPServerToolStripMenuItem;
+        private ToolStripMenuItem scheduleProgramsToolStripMenuItem;
     }
 }

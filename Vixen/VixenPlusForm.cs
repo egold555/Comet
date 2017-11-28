@@ -875,5 +875,12 @@ namespace VixenPlus {
         {
             new HTTPServerForm().Show();
         }
+
+        private void scheduleProgramsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var dialog = new SchedulerDialog();
+            dialog.ShowDialog();
+            dialog.Dispose();
+        }
     }
 }

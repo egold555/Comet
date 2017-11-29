@@ -356,7 +356,10 @@ namespace VixenPlus
 
             WeeklyTrigger trigger = new WeeklyTrigger(weekDays, 1);
             trigger.StartBoundary = firstDate.Date + startTime;
-            trigger.EndBoundary = lastDate.Date + endTime;
+            if (endTime > startTime)
+                trigger.EndBoundary = lastDate.Date + endTime;
+            else
+                trigger.EndBoundary = lastDate.Date.AddDays(1) + endTime;
 
             ExecAction action = new ExecAction(applicationExe, arguments, Path.GetDirectoryName(applicationExe));
 
@@ -370,7 +373,7 @@ namespace VixenPlus
             def.Settings.RunOnlyIfIdle = false;
             def.Settings.IdleSettings.StopOnIdleEnd = false;
             def.Settings.AllowHardTerminate = true;
-            def.Settings.ExecutionTimeLimit = TimeSpan.FromMinutes(minutes + 1);
+            def.Settings.ExecutionTimeLimit = TimeSpan.FromMinutes(minutes) - TimeSpan.FromSeconds(1);
             def.Settings.DeleteExpiredTaskAfter = TimeSpan.FromHours(12);
 
             taskService.RootFolder.RegisterTaskDefinition("Comet\\" + name, def);

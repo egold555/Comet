@@ -71,7 +71,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "AutoPlayStatus";
-            this.Text = "Playing Scheduled Sequences";
+            this.Text = "Playing Scheduled Program";
             this.ResumeLayout(false);
             this.PerformLayout();
 

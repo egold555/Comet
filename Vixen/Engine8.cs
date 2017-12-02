@@ -144,9 +144,9 @@ namespace VixenPlus {
         }
 
 
-        private void ExecutionStopThread() {
+        private void ExecutionStopThread(bool turnOffAllChannels) {
             if ((IsRunning || IsPaused) && _plugInRouter != null) {
-                StopExecution();
+                StopExecution(turnOffAllChannels);
                 _engineContext.CurrentSequence = null;
                 OnProgramEnd();
             }
@@ -195,12 +195,12 @@ namespace VixenPlus {
 
 
         public void HardwareUpdate(byte[] values) {
-            if (!IsRunning || _isStopping) {
+            if (!IsRunning) {
                 return;
             }
 
             lock (_runLock) {
-                if (!IsRunning || _isStopping) {
+                if (!IsRunning) {
                     return;
                 }
 
@@ -235,7 +235,7 @@ namespace VixenPlus {
                         _plugInRouter.EndUpdate();
                     }
                     catch (Exception) {
-                        StopExecution();
+                        StopExecution(false);
                     }
                 }
             }
@@ -511,13 +511,13 @@ namespace VixenPlus {
         }
 
 
-        public void Stop() {
+        public void Stop(bool turnOffAllChannels) {
             if (_isStopping) {
                 return;
             }
             _isStopping = true;
             if (Mode != EngineMode.Asynchronous) {
-                new Thread(ExecutionStopThread).Start();
+                new Thread(() => ExecutionStopThread(turnOffAllChannels)).Start();
             }
             else {
                 FinalizeEngineContext(_engineContext);
@@ -529,8 +529,11 @@ namespace VixenPlus {
         }
 
 
-        private void StopExecution(bool shutdownPlugins = true) {
+        private void StopExecution(bool turnOffAllChannels, bool shutdownPlugins = true) {
             lock (_runLock) {
+                if (turnOffAllChannels) {
+                    HardwareUpdate(new byte[_engineContext.CurrentSequence.FullChannelCount]);
+                }
                 IsRunning = false;
             }
             if (_eventTimer != null) {
@@ -563,7 +566,7 @@ namespace VixenPlus {
                         OnSequenceChange();
                     }
                     else {
-                        Host.Invoke(new MethodInvoker(Stop));
+                        Host.Invoke(new MethodInvoker(() => Stop(false)));
                     }
                 }
             }

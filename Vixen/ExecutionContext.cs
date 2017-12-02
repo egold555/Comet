@@ -79,7 +79,7 @@ namespace VixenPlus {
             if (AsynchronousEngineInstance == null) {
                 return;
             }
-            AsynchronousEngineInstance.Stop();
+            AsynchronousEngineInstance.Stop(false);
             AsynchronousEngineInstance.Dispose();
             AsynchronousEngineInstance = null;
         }
@@ -89,7 +89,7 @@ namespace VixenPlus {
             if (SynchronousEngineInstance == null) {
                 return;
             }
-            SynchronousEngineInstance.Stop();
+            SynchronousEngineInstance.Stop(false);
             SynchronousEngineInstance.Dispose();
             SynchronousEngineInstance = null;
         }

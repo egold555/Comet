@@ -4056,7 +4056,7 @@ namespace VixenEditor
             UpdatePlayButtons(PlayControl.Nothing);
             positionTimer.Stop();
             ProgramEnded();
-            _executionInterface.ExecuteStop(_executionContextHandle);
+            _executionInterface.ExecuteStop(_executionContextHandle, true);
             SetEditingState(true);
             pictureBoxChannels.Invalidate();
         }

@@ -130,7 +130,7 @@ namespace VixenPlus {
         }
 
 
-        public void ExecuteStop(int contextHandle) {
+        public void ExecuteStop(int contextHandle, bool turnOffAllChannels) {
             ExecutionContext context;
             if (!_registeredContexts.TryGetValue(contextHandle, out context)) {
                 return;
@@ -139,7 +139,7 @@ namespace VixenPlus {
                 return;
             }
             try {
-                context.SynchronousEngineInstance.Stop();
+                context.SynchronousEngineInstance.Stop(turnOffAllChannels);
                 if (_preferences.GetBoolean("SavePlugInDialogPositions")) {
                     var saveSettings = false;
                     foreach (var form in context.OutputPlugInForms) {
@@ -253,7 +253,7 @@ namespace VixenPlus {
                 return;
             }
             if (context.Object != null) {
-                context.AsynchronousEngineInstance.Stop();
+                context.AsynchronousEngineInstance.Stop(false);
             }
             try {
                 context.Object = executableObject;

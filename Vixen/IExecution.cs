@@ -7,7 +7,7 @@ namespace VixenPlus {
         int EngineStatus(int contextHandle, out int sequencePosition);
         void ExecutePause(int contextHandle);
         bool ExecutePlay(int contextHandle, int millisecondStart, int millisecondCount);
-        void ExecuteStop(int contextHandle);
+        void ExecuteStop(int contextHandle, bool turnOffAllChannels);
         float GetAudioSpeed(int contextHandle);
         void ReleaseContext(int contextHandle);
         int RequestContext(bool suppressAsynchronousContext, bool suppressSynchronousContext, Form keyInterceptor);

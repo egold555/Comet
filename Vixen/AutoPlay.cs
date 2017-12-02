@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CommandLine;
@@ -10,6 +11,7 @@ using CommandLine.Text;
 using Microsoft.Win32.TaskScheduler;
 using VixenPlus.Dialogs;
 using VixenPlusCommon;
+using Timer = System.Windows.Forms.Timer;
 
 namespace VixenPlus
 {
@@ -20,6 +22,7 @@ namespace VixenPlus
         static int currentSequenceIndex;
         static DateTime endTime;
         static AutoPlayStatus statusDialog;
+        static bool exitProgramNow = false;
 
         private static AutoPlaySequence CurrentSequence {
             get {
@@ -146,8 +149,7 @@ namespace VixenPlus
         public static void End()
         {
             if (CurrentSequence != null && CurrentSequence.IsPlaying) {
-                CurrentSequence.TurnOffLights();
-                CurrentSequence.Stop();
+                CurrentSequence.Stop(true);
             }
 
             foreach (AutoPlaySequence seq in sequences) {
@@ -156,7 +158,7 @@ namespace VixenPlus
 
             sequences.Clear();
 
-            Application.Exit();
+            exitProgramNow = true;
         }
 
         private static void PlayCurrentSequence()
@@ -176,6 +178,10 @@ namespace VixenPlus
 
         private static void Timer_Tick(object sender, EventArgs e)
         {
+            if (exitProgramNow) {
+                Application.Exit();
+            }
+
             if (DateTime.Now >= endTime || statusDialog.StopRequested) {
                 End();
             }
@@ -240,7 +246,7 @@ namespace VixenPlus
 
                     var fileIOHandler = FileIOHelper.GetByExtension(path);
                     EventSequence sequence = fileIOHandler.OpenSequence(path);
-                    numberOfChannels = sequence.OutputChannels.Count;
+                    numberOfChannels = sequence.FullChannelCount;
 
                     object executionIfaceObj;
                     if (!Interfaces.Available.TryGetValue("IExecution", out executionIfaceObj)) {
@@ -262,20 +268,12 @@ namespace VixenPlus
                 }
             }
 
-            public void Stop()
+            public void Stop(bool turnOffAllChannels)
             {
                 if (executionInterface != null) {
-                    executionInterface.ExecuteStop(contextHandle);
+                    executionInterface.ExecuteStop(contextHandle, turnOffAllChannels);
                 }
             }
-
-            public void TurnOffLights()
-            {
-                if (executionInterface != null) {
-                    executionInterface.SetChannelStates(contextHandle, new byte[numberOfChannels]);
-                }
-            }
-
         }
     }
 

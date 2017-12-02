@@ -516,6 +516,7 @@ namespace VixenPlus {
                 return;
             }
             _isStopping = true;
+
             if (Mode != EngineMode.Asynchronous) {
                 new Thread(() => ExecutionStopThread(turnOffAllChannels)).Start();
             }
@@ -530,10 +531,12 @@ namespace VixenPlus {
 
 
         private void StopExecution(bool turnOffAllChannels, bool shutdownPlugins = true) {
+            if (turnOffAllChannels)
+            {
+                HardwareUpdate(new byte[_engineContext.CurrentSequence.FullChannelCount]);
+            }
+
             lock (_runLock) {
-                if (turnOffAllChannels) {
-                    HardwareUpdate(new byte[_engineContext.CurrentSequence.FullChannelCount]);
-                }
                 IsRunning = false;
             }
             if (_eventTimer != null) {

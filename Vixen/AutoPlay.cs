@@ -152,10 +152,6 @@ namespace VixenPlus
                 CurrentSequence.Stop(true);
             }
 
-            foreach (AutoPlaySequence seq in sequences) {
-                seq.Dispose();
-            }
-
             sequences.Clear();
 
             exitProgramNow = true;
@@ -371,7 +367,7 @@ namespace VixenPlus
             def.Settings.RunOnlyIfIdle = false;
             def.Settings.IdleSettings.StopOnIdleEnd = false;
             def.Settings.AllowHardTerminate = true;
-            def.Settings.ExecutionTimeLimit = TimeSpan.FromMinutes(minutes) - TimeSpan.FromSeconds(1);
+            def.Settings.ExecutionTimeLimit = TimeSpan.FromMinutes(minutes) - TimeSpan.FromSeconds(3);
             def.Settings.DeleteExpiredTaskAfter = TimeSpan.FromHours(12);
 
             taskService.RootFolder.RegisterTaskDefinition("Comet\\" + name, def);

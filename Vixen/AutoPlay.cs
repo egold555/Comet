@@ -22,7 +22,7 @@ namespace VixenPlus
         static int currentSequenceIndex;
         static DateTime endTime;
         static AutoPlayStatus statusDialog;
-        static bool exitProgramNow = false;
+        static int exitProgramCountdown = -1;
 
         private static AutoPlaySequence CurrentSequence {
             get {
@@ -129,14 +129,14 @@ namespace VixenPlus
 
             InitializeSequences(options.Sequences);
 
+            // subtract 15 seconds due to startup/shutdown time, etc.
+            endTime = DateTime.Now.AddMinutes(options.Minutes).AddSeconds(-15);
+
             timer = new Timer();
             timer.Interval = 100;
             timer.Tick += Timer_Tick;
             timer.Start();
-
-            // subtract 15 seconds due to startup/shutdown time, etc.
-            endTime = DateTime.Now.AddMinutes(options.Minutes).AddSeconds(-15);
-
+            
             statusDialog = new AutoPlayStatus();
             statusDialog.MdiParent = parentForm;
             statusDialog.Show();
@@ -154,7 +154,7 @@ namespace VixenPlus
 
             sequences.Clear();
 
-            exitProgramNow = true;
+            exitProgramCountdown = 10;
         }
 
         private static void PlayCurrentSequence()
@@ -174,11 +174,15 @@ namespace VixenPlus
 
         private static void Timer_Tick(object sender, EventArgs e)
         {
-            if (exitProgramNow) {
-                Application.Exit();
+            if (exitProgramCountdown > 0) {
+                --exitProgramCountdown;
+                if (exitProgramCountdown == 0)
+                {
+                    Application.Exit();
+                }
             }
 
-            if (DateTime.Now >= endTime || statusDialog.StopRequested) {
+            if (exitProgramCountdown < 0 && (DateTime.Now >= endTime || statusDialog.StopRequested)) {
                 End();
             }
 
@@ -366,8 +370,6 @@ namespace VixenPlus
             def.Settings.StopIfGoingOnBatteries = false;
             def.Settings.RunOnlyIfIdle = false;
             def.Settings.IdleSettings.StopOnIdleEnd = false;
-            def.Settings.AllowHardTerminate = true;
-            def.Settings.ExecutionTimeLimit = TimeSpan.FromMinutes(minutes) - TimeSpan.FromSeconds(3);
             def.Settings.DeleteExpiredTaskAfter = TimeSpan.FromHours(12);
 
             taskService.RootFolder.RegisterTaskDefinition("Comet\\" + name, def);

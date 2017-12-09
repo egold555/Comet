@@ -12,12 +12,13 @@ namespace VixenEditor {
         private readonly bool _isGradient;
         private const int CellSize = 27;
         private const int CellWidthAndHeight = 10;
-
+        private int _maxLevel;
 
         public RandomParametersDialog(int minLevel, int maxLevel, bool actualLevels, bool isGradient) {
             InitializeComponent();
             _actualLevels = actualLevels;
             _isGradient = isGradient;
+            _maxLevel = maxLevel;
             lblPctMin.Visible = lblPctMax.Visible = !actualLevels;
             udMin.Minimum = udMax.Minimum = actualLevels ? minLevel : minLevel.ToPercentage();
             udMin.Maximum = udMax.Maximum = actualLevels ? maxLevel : maxLevel.ToPercentage();
@@ -56,6 +57,10 @@ namespace VixenEditor {
             get { return checkBoxIntensityLevel.Checked; }
         }
 
+        private bool OneRowAtATime {
+            get { return checkBoxExactlyOneRow.Checked; }
+        }
+
 
         private void checkBoxUseSaturation_CheckedChanged(object sender, EventArgs e) {
             udSaturation.Enabled = checkBoxUseSaturation.Checked;
@@ -79,6 +84,11 @@ namespace VixenEditor {
             pbExample.Refresh();
         }
 
+
+        private void checkBoxExactlyOneRow_CheckedChanged(object sender, EventArgs e)
+        {
+            pbExample.Refresh();
+        }
 
         private void pbExample_Paint(object sender, PaintEventArgs e) {
             var g = e.Graphics;
@@ -110,18 +120,35 @@ namespace VixenEditor {
             var satTarget = (int) (UseSaturation ? SaturationLevel * (rows * columns) : random.Next(1, rows * columns));
             var computedSaturation = 0;
 
-            while (computedSaturation < satTarget) {
-                var row = random.Next(rows);
-                var column = random.Next(columns);
-                if (eventValues[row, column] != 0) {
-                    continue;
-                }
+            if (OneRowAtATime) {
+                int lastRow = -1;
+                for (int column = 0; column < columns; column += PeriodLength) {
+                    int r;
+                    do {
+                        r = random.Next(rows);
+                    } while (r == lastRow && rows > 1);
 
-                var drawingLevel = (byte) (VaryIntensity ? random.Next(IntensityMin, IntensityMax + 1) : udMax.Maximum);
-                for (var i = 0; (i < PeriodLength && column + i < columns); i++) {
-                    if (eventValues[row, column + i] != 0) computedSaturation--;
-                    eventValues[row, column + i] = drawingLevel;
-                    computedSaturation++;
+                    var drawingLevel = (byte)(VaryIntensity ? random.Next(IntensityMin, IntensityMax + 1) : _maxLevel);
+                    for (int c = column; c < Math.Min(columns, column + PeriodLength); ++c) {
+                        eventValues[r, c] = drawingLevel;
+                    }
+                    lastRow = r;
+                }
+            }
+            else {
+                while (computedSaturation < satTarget) {
+                    var row = random.Next(rows);
+                    var column = random.Next(columns);
+                    if (eventValues[row, column] != 0) {
+                        continue;
+                    }
+
+                    var drawingLevel = (byte)(VaryIntensity ? random.Next(IntensityMin, IntensityMax + 1) : _maxLevel);
+                    for (var i = 0; (i < PeriodLength && column + i < columns); i++) {
+                        if (eventValues[row, column + i] != 0) computedSaturation--;
+                        eventValues[row, column + i] = drawingLevel;
+                        computedSaturation++;
+                    }
                 }
             }
             return eventValues;

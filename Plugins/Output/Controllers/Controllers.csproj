@@ -146,6 +146,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Renard\RenardBase.cs" />
     <Compile Include="Renard\RenardNetwork.cs" />
     <Compile Include="Renard\Renard.cs" />
   </ItemGroup>

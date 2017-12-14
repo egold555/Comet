@@ -19,9 +19,7 @@ using VixenPlusCommon;
 
 namespace Controllers.Renard {
     [UsedImplicitly]
-    public class RenardNetwork : IEventDrivenOutputPlugIn {
-        private byte[] _channelValues;
-        private AutoResetEvent _eventTrigger;
+    public class RenardNetwork : RenardBase, IEventDrivenOutputPlugIn {
         private TcpClient _client;
         private Stream _portStream;
         private NetworkPortSetup _dialog;
@@ -29,52 +27,58 @@ namespace Controllers.Renard {
         private int _portNumber;
         private SetupData _setupData;
         private XmlNode _setupNode;
-        private RunState _state = RunState.Stopped;
-
-        private const byte ReplacementValue = 0x7c;
-        private const byte PacketIgnoreValue = 0x7d;
-        private const byte StreamStartValue = 0x7e;
-        private const byte PacketEndValue = 0x7f;
-        private const byte PacketStartValue = 0x80;
 
         private const string PortNode = "port";
         private const string HostNode = "host";
 
-        public void Event(byte[] channelValues) {
-            _channelValues = channelValues;
-            _eventTrigger.Set();
+        protected override bool Open()
+        {
+            return Open(true);
         }
 
-
-        private void EventThread() {
-            State = RunState.Running;
-            _eventTrigger = new AutoResetEvent(false);
+        private bool Open(bool showErrorDialog)
+        {
+            _client = new TcpClient();
+            _portStream = null;
+            _client.NoDelay = true;
             try {
-                while (State == RunState.Running) {
-                    _eventTrigger.WaitOne();
-                    try {
-                        FireEvent();
-                    }
-                    catch (TimeoutException) {}
-                }
+                _client.Connect(_hostName, _portNumber);
+                _portStream = _client.GetStream();
             }
-            catch {
-                if (State == RunState.Running) {
-                    State = RunState.Stopping;
+            catch (Exception e) {
+                if (showErrorDialog) {
+                    MessageBox.Show(String.Format("Could not open network port at '{0}:{1}'; {2}", _hostName, _portNumber, e.Message));
                 }
+                return false;
             }
-            finally {
-                State = RunState.Stopped;
+
+            return true;
+        }
+
+        protected override void Close()
+        {
+            if (_portStream != null) {
+                _portStream.Close();
+                _portStream = null;
+            }
+            if (_client != null) {
+                _client.Dispose();
+                _client = null;
             }
         }
 
-
-        private void FireEvent() {
-            if (State != RunState.Running) {
-                return;
+        protected override void SendPacket(List<byte> bytes)
+        {
+            try {
+                _portStream.WriteAsync(bytes.ToArray(), 0, bytes.Count);
             }
+            catch (Exception e) {
+                ("IO Exception: " + e.Message).CrashLog();
 
-            DoEvent(_channelValues);
+                // Try to reconnect.
+                Close();
+                Open(false);
+            }
         }
 
 
@@ -90,42 +94,6 @@ namespace Controllers.Renard {
             _portNumber = _setupData.GetInteger(_setupNode, PortNode, 23);
         }
 
-
-        private readonly List<byte> _packet = new List<byte>();
-
-
-        private void DoEvent(IEnumerable<byte> channelValues) {
-            if (_portStream == null) return;
-
-            _packet.Clear();
-            _packet.Add(StreamStartValue);
-            _packet.Add(PacketStartValue);
-            foreach (var c in channelValues) {
-                switch (c) {
-                    case PacketIgnoreValue:
-                    case StreamStartValue:
-                        _packet.Add(ReplacementValue);
-                        break;
-                    case PacketEndValue:
-                        _packet.Add(PacketStartValue);
-                        break;
-                    default:
-                        _packet.Add(c);
-                        break;
-                }
-                if ((_packet.Count % 100) == 0) {
-                    _packet.Add(PacketIgnoreValue);
-                }
-            }
-
-
-            try {
-                _portStream.WriteAsync(_packet.ToArray(), 0, _packet.Count);
-            }
-            catch (IOException ioe) {
-                ("IO Exception: " + ioe.Message).CrashLog();
-            }
-        }
 
 
         public Control Setup() {
@@ -169,62 +137,6 @@ namespace Controllers.Renard {
         }
 
 
-        public void Shutdown() {
-            if (State != RunState.Running) {
-                if (_portStream != null) {
-                    _portStream.Close();
-                    _portStream = null;
-                }
-                if (_client != null) {
-                    _client.Dispose();
-                    _client = null;
-                }
-                return;
-            }
-
-            State = RunState.Stopping;
-            while (State != RunState.Stopped) {
-                Thread.Sleep(5);//todo replace with Task.Delay() when using 4.5
-            }
-
-            if (_portStream != null) {
-                _portStream.Close();
-                _portStream = null;
-            }
-            if (_client != null) {
-                _client.Dispose();
-                _client = null;
-            }
-        }
-
-
-        public void Startup() {
-            OpenNetworkPort();
-
-            if (_portStream == null) {
-                return;
-            }
-
-            new Thread(EventThread).Start();
-            while (State != RunState.Running) {
-                Thread.Sleep(1); //todo replace with Task.Delay() when using 4.5
-            }
-        }
-
-        private void OpenNetworkPort()
-        {
-            _client = new TcpClient();
-            _portStream = null;
-            _client.NoDelay = true;
-            try {
-                _client.Connect(_hostName, _portNumber);
-                _portStream = _client.GetStream();
-            }
-            catch (Exception e) {
-                MessageBox.Show(String.Format("Could not open network port at '{0}:{1}'; {2}", _hostName, _portNumber, e.Message));
-                return;
-            }
-        }
 
         public override string ToString() {
             return Name;
@@ -247,23 +159,6 @@ namespace Controllers.Renard {
             get { return "Renard Network"; }
         }
 
-        private RunState State {
-            get { return _state; }
-            set {
-                _state = value;
-                if (value != RunState.Stopping) {
-                    return;
-                }
-                _eventTrigger.Set();
-                _eventTrigger.Close();
-                _eventTrigger = null;
-            }
-        }
 
-        private enum RunState {
-            Running,
-            Stopping,
-            Stopped
-        }
     }
 }

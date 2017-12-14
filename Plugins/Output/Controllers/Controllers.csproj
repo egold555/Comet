@@ -79,6 +79,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\NetworkPortSetup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Common\NetworkPortSetup.Designer.cs">
+      <DependentUpon>NetworkPortSetup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Common\SerialSetup.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -140,6 +146,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Renard\RenardNetwork.cs" />
     <Compile Include="Renard\Renard.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +162,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Common\NetworkPortSetup.resx">
+      <DependentUpon>NetworkPortSetup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Common\SerialSetup.resx">
       <DependentUpon>SerialSetup.cs</DependentUpon>
     </EmbeddedResource>

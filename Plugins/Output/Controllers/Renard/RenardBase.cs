@@ -132,8 +132,6 @@ namespace Controllers.Renard
                     return;
                 }
                 _eventTrigger.Set();
-                _eventTrigger.Close();
-                _eventTrigger = null;
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Xml;
 
@@ -27,22 +28,22 @@ namespace VixenPlus {
         }
 
 
-        public XmlNodeList GetAllPluginData(PluginType type) {
-            var node = RootNode.SelectNodes(string.Format("PlugIn[@type='{0}']", type));
-            if (node != null && node.Count == 0 && type == PluginType.Output) {
-                node = GetAllPluginData();
+        public List<XmlNode> GetAllPluginData(PluginType type) {
+            IEnumerable<XmlNode> nodes = RootNode.SelectNodes(string.Format("PlugIn[@type='{0}']", type)).Cast<XmlNode>();
+            if (type == PluginType.Output) {
+                nodes = nodes.Concat(RootNode.SelectNodes("PlugIn[not(@type)]").Cast<XmlNode>());
             }
-            return node;
+            return nodes.ToList();
         }
 
 
-        public XmlNodeList GetAllPluginData(PluginType type, bool enabledOnly) {
-            var node = RootNode.SelectNodes(string.Format("PlugIn[@enabled='{0}' and @type='{1}']", enabledOnly, type));
-            if (node != null && node.Count == 0 && type == PluginType.Output) {
-                node = RootNode.SelectNodes(string.Format("PlugIn[@enabled='{0}']", enabledOnly));
+        public List<XmlNode> GetAllPluginData(PluginType type, bool enabledOnly) {
+            IEnumerable<XmlNode> nodes = RootNode.SelectNodes(string.Format("PlugIn[@enabled='{0}' and @type='{1}']", enabledOnly, type)).Cast<XmlNode>();
+            if (type == PluginType.Output) {
+                nodes = nodes.Concat(RootNode.SelectNodes(string.Format("PlugIn[not(@type) and enabled='{0}']", enabledOnly)).Cast<XmlNode>());
             }
 
-            return node;
+            return nodes.ToList();
         }
 
 

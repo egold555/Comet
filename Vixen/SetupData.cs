@@ -40,7 +40,7 @@ namespace VixenPlus {
         public List<XmlNode> GetAllPluginData(PluginType type, bool enabledOnly) {
             IEnumerable<XmlNode> nodes = RootNode.SelectNodes(string.Format("PlugIn[@enabled='{0}' and @type='{1}']", enabledOnly, type)).Cast<XmlNode>();
             if (type == PluginType.Output) {
-                nodes = nodes.Concat(RootNode.SelectNodes(string.Format("PlugIn[not(@type) and enabled='{0}']", enabledOnly)).Cast<XmlNode>());
+                nodes = nodes.Concat(RootNode.SelectNodes(string.Format("PlugIn[not(@type) and @enabled='{0}']", enabledOnly)).Cast<XmlNode>());
             }
 
             return nodes.ToList();

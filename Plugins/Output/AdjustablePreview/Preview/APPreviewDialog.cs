@@ -194,23 +194,27 @@ namespace Preview {
                             continue;
                         }
 
-                        var a = alpha;
                         var r = channelColor.R;
                         var g = channelColor.G;
                         var b = channelColor.B;
+                        if (alpha != 255) {
+                            // Adjust R, G, B by how much the channel is on.
+                            double alphaFraction = alpha / 255.0F;
+                            r = (byte) Math.Round(r * alphaFraction);
+                            g = (byte)Math.Round(g * alphaFraction);
+                            b = (byte)Math.Round(b * alphaFraction);
+                        }
+
                         var pointEventValue = _backBuffer[row, column];
                         if (pointEventValue != 0) {
+                            // Merge the existing color with the current color by maximum.
                             var eventColor = Color.FromArgb((int) pointEventValue);
 
-                            a = Math.Max(alpha, eventColor.A);
-                            var channelAlpha = alpha / ((float) a);
-                            var existingAlpha = eventColor.A / ((float) a);
-
-                            r = (byte) (((int) ((eventColor.R * existingAlpha) + (channelColor.R * channelAlpha))) >> 1);
-                            g = (byte) (((int) ((eventColor.G * existingAlpha) + (channelColor.G * channelAlpha))) >> 1);
-                            b = (byte) (((int) ((eventColor.B * existingAlpha) + (channelColor.B * channelAlpha))) >> 1);
+                            r = (byte)Math.Max(eventColor.R, r);
+                            g = (byte)Math.Max(eventColor.G, g);
+                            b = (byte)Math.Max(eventColor.B, b);
                         }
-                        pointEventValue = (uint) ((((a << 24) | (r << 16)) | (g << 8)) | b);
+                        pointEventValue = (uint) ((((0xFF << 24) | (r << 16)) | (g << 8)) | b);
                         _backBuffer[row, column] = pointEventValue;
                     }
                 }

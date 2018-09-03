@@ -30,7 +30,6 @@ namespace VixenPlus {
         private Timer shutdownTimer;
         private StatusStrip statusStrip;
         private ToolStripMenuItem tileToolStripMenuItem;
-        private ToolStripSeparator toolStripMenuItem1;
         private ToolStripSeparator toolStripMenuItem2;
         private ToolStripSeparator toolStripMenuItem3;
         private ToolStripSeparator toolStripMenuItem6;
@@ -56,9 +55,10 @@ namespace VixenPlus {
             this.manageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.utilityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setSoundDeviceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hTTPServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scheduleProgramsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cascadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,7 +74,6 @@ namespace VixenPlus {
             this.toolStripStatusLabelMusic = new System.Windows.Forms.ToolStripStatusLabel();
             this.shutdownTimer = new System.Windows.Forms.Timer(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.scheduleProgramsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -189,7 +188,7 @@ namespace VixenPlus {
             // 
             this.utilityToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.setSoundDeviceToolStripMenuItem,
-            this.toolStripMenuItem1,
+            this.toolStripSeparator1,
             this.preferencesToolStripMenuItem,
             this.hTTPServerToolStripMenuItem,
             this.scheduleProgramsToolStripMenuItem});
@@ -204,10 +203,10 @@ namespace VixenPlus {
             this.setSoundDeviceToolStripMenuItem.Text = "Set application default audio device";
             this.setSoundDeviceToolStripMenuItem.Click += new System.EventHandler(this.setSoundDeviceToolStripMenuItem_Click);
             // 
-            // toolStripMenuItem1
+            // toolStripSeparator1
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(259, 6);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(259, 6);
             // 
             // preferencesToolStripMenuItem
             // 
@@ -224,6 +223,13 @@ namespace VixenPlus {
             this.hTTPServerToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.hTTPServerToolStripMenuItem.Text = "HTTPServer";
             this.hTTPServerToolStripMenuItem.Click += new System.EventHandler(this.hTTPServerToolStripMenuItem_Click);
+            // 
+            // scheduleProgramsToolStripMenuItem
+            // 
+            this.scheduleProgramsToolStripMenuItem.Name = "scheduleProgramsToolStripMenuItem";
+            this.scheduleProgramsToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
+            this.scheduleProgramsToolStripMenuItem.Text = "Schedule Programs";
+            this.scheduleProgramsToolStripMenuItem.Click += new System.EventHandler(this.scheduleProgramsToolStripMenuItem_Click);
             // 
             // windowsToolStripMenuItem
             // 
@@ -328,13 +334,6 @@ namespace VixenPlus {
             // 
             this.saveFileDialog1.SupportMultiDottedExtensions = true;
             // 
-            // scheduleProgramsToolStripMenuItem
-            // 
-            this.scheduleProgramsToolStripMenuItem.Name = "scheduleProgramsToolStripMenuItem";
-            this.scheduleProgramsToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
-            this.scheduleProgramsToolStripMenuItem.Text = "Schedule Programs";
-            this.scheduleProgramsToolStripMenuItem.Click += new System.EventHandler(this.scheduleProgramsToolStripMenuItem_Click);
-            // 
             // VixenPlusForm
             // 
             this.AllowDrop = true;
@@ -377,5 +376,6 @@ namespace VixenPlus {
         private ToolStripMenuItem tsmProfiles;
         private ToolStripMenuItem hTTPServerToolStripMenuItem;
         private ToolStripMenuItem scheduleProgramsToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator1;
     }
 }

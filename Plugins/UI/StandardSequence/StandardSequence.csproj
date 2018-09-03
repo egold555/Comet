@@ -113,6 +113,12 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="VixenEditor\PopupCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VixenEditor\PopupCode.Designer.cs">
+      <DependentUpon>PopupCode.cs</DependentUpon>
+    </Compile>
     <Compile Include="VixenEditor\ChannelMapperSequence.cs" />
     <Compile Include="VixenEditor\ChannelMapperChannel.cs" />
     <Compile Include="VixenEditor\ChannelMapperProfile.cs" />
@@ -235,6 +241,9 @@
     </Compile>
     <Compile Include="VixenPlus\UndoItem.cs" />
     <Compile Include="VixenPlus\UndoOriginalBehavior.cs" />
+    <EmbeddedResource Include="VixenEditor\PopupCode.resx">
+      <DependentUpon>PopupCode.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VixenEditor.Properties.Resources.resources" />
     <EmbeddedResource Include="VixenEditor\AudioSpeedDialog.resx">
       <DependentUpon>AudioSpeedDialog.cs</DependentUpon>

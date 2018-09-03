@@ -882,5 +882,6 @@ namespace VixenPlus {
             dialog.ShowDialog();
             dialog.Dispose();
         }
+
     }
 }

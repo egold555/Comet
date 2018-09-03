@@ -5492,7 +5492,73 @@ namespace VixenEditor
             InvalidateRect(affectedCells);
         }
 
-        
+        const String NL = "\r\n";
+        private void exportArduinoCodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            String code = "void run()" + NL;
+            code += "{" + NL;
+
+            code += generateArduinoCode();
+
+            code += "}" + NL;
+
+            new PopupCode(code).ShowDialog();
+        }
+
+        private String generateArduinoCode()
+        {
+            String code = "";
+            int top = _selectedCells.Top;
+            int bottom = _selectedCells.Bottom;
+            int right = _selectedCells.Right;
+            int left = _selectedCells.Left;
+            int delayMs = _sequence.EventPeriod;
+            int accumulatedDelay = 0;
+
+            for (int col = left; col < right; ++col) {
+                for (int row = top; row < bottom; ++row) {
+                    int channel = GetEventFromChannelNumber(row);
+                    bool on = _sequence.EventValues[channel, col] > 0;
+                    bool wasPrevious, prevOn;
+                    if (col == left) {
+                        wasPrevious = false;
+                        prevOn = false;
+                    }
+                    else {
+                        wasPrevious = true;
+                        prevOn = _sequence.EventValues[channel, col - 1] > 0;
+                    }
+
+                    if (!wasPrevious || on != prevOn) {
+                        if (accumulatedDelay > 0) {
+                            code += "  delay(" + accumulatedDelay.ToString() + ");" + NL;
+                            accumulatedDelay = 0;
+                        }
+                        code += "  digitalWrite(" + channel.ToString() + ", " + (on ? "LOW" : "HIGH") + ");" + NL;
+                    }
+                }
+
+                accumulatedDelay += delayMs;
+            }
+
+            if (accumulatedDelay > 0) {
+                code += "  delay(" + accumulatedDelay.ToString() + ");" + NL;
+                accumulatedDelay = 0;
+            }
+
+            // Turn all things that were on to be off again.
+            for (int row = top; row <= bottom; ++row) {
+                int channel = GetEventFromChannelNumber(row);
+                bool on = _sequence.EventValues[channel, right - 1] > 0;
+                if (on) {
+                    code += "  digitalWrite(" + channel.ToString() + ", " + "HIGH" + ");" + NL;
+                }
+            }
+
+            return code;
+        }
+
     }
 
 

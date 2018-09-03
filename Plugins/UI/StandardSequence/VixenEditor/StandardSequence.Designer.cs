@@ -586,15 +586,19 @@ namespace VixenEditor{
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.positionTimer = new System.Windows.Forms.Timer(this.components);
             this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.otherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportArduinoCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxChannels)).BeginInit();
             this.contextMenuChannels.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
@@ -618,7 +622,8 @@ namespace VixenEditor{
             this.viewToolStripMenuItem,
             this.effectsToolStripMenuItem,
             this.houseEffectstToolStrip,
-            this.pluginsToolStrip});
+            this.pluginsToolStrip,
+            this.otherToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(976, 24);
@@ -3126,6 +3131,21 @@ namespace VixenEditor{
             this.colorDialog.AnyColor = true;
             this.colorDialog.FullOpen = true;
             // 
+            // otherToolStripMenuItem
+            // 
+            this.otherToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportArduinoCodeToolStripMenuItem});
+            this.otherToolStripMenuItem.Name = "otherToolStripMenuItem";
+            this.otherToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.otherToolStripMenuItem.Text = "Other";
+            // 
+            // exportArduinoCodeToolStripMenuItem
+            // 
+            this.exportArduinoCodeToolStripMenuItem.Name = "exportArduinoCodeToolStripMenuItem";
+            this.exportArduinoCodeToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.exportArduinoCodeToolStripMenuItem.Text = "Export Arduino Code";
+            this.exportArduinoCodeToolStripMenuItem.Click += new System.EventHandler(this.exportArduinoCodeToolStripMenuItem_Click);
+            // 
             // StandardSequence
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3150,12 +3170,14 @@ namespace VixenEditor{
             this.toolStripContainer1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxChannels)).EndInit();
             this.contextMenuChannels.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             this.splitContainer2.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTime)).EndInit();
             this.contextMenuTime.ResumeLayout(false);
@@ -3215,5 +3237,7 @@ namespace VixenEditor{
         private ToolStripMenuItem colorPickerToolStripMenuItem;
         private ToolStripMenuItem pluginsToolStrip;
         private ToolStripMenuItem waveformToolStripMenuItem;
+        private ToolStripMenuItem otherToolStripMenuItem;
+        private ToolStripMenuItem exportArduinoCodeToolStripMenuItem;
     }
 }

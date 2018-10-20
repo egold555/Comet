@@ -339,18 +339,23 @@ namespace VixenPlus
             return result;
         }
 
-        public void RegisterTask(TaskService taskService)
+        public string GetCommandLine()
         {
-            TaskDefinition def = taskService.NewTask();
-            string applicationExe = Application.ExecutablePath;
-
             int minutes;
 
             if (endTime > startTime)
                 minutes = (int)Math.Round((endTime - startTime).TotalMinutes);
             else
                 minutes = (int)Math.Round((endTime - startTime + TimeSpan.FromDays(1)).TotalMinutes);
-            string arguments = "-p --minutes " + minutes.ToString() + " " + string.Join(" ", sequences.Select(s => "\"" + s + "\""));
+            return "-p --minutes " + minutes.ToString() + " " + string.Join(" ", sequences.Select(s => "\"" + s + "\""));
+        }
+
+        public void RegisterTask(TaskService taskService)
+        {
+            TaskDefinition def = taskService.NewTask();
+            string applicationExe = Application.ExecutablePath;
+
+            string arguments = GetCommandLine();
 
             WeeklyTrigger trigger = new WeeklyTrigger(weekDays, 1);
             trigger.StartBoundary = firstDate.Date + startTime;

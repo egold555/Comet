@@ -28,9 +28,8 @@
         private void InitializeComponent()
         {
             this.buttonStart = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.buttonStop = new System.Windows.Forms.Button();
-            this.labelStatus = new System.Windows.Forms.Label();
+            this.textBoxStatus = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // buttonStart
@@ -43,15 +42,6 @@
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 38);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Status: ";
-            // 
             // buttonStop
             // 
             this.buttonStop.Location = new System.Drawing.Point(93, 12);
@@ -62,23 +52,22 @@
             this.buttonStop.UseVisualStyleBackColor = true;
             this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
             // 
-            // labelStatus
+            // textBoxStatus
             // 
-            this.labelStatus.AutoSize = true;
-            this.labelStatus.Location = new System.Drawing.Point(61, 38);
-            this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(50, 13);
-            this.labelStatus.TabIndex = 3;
-            this.labelStatus.Text = "Stopped.";
+            this.textBoxStatus.Location = new System.Drawing.Point(12, 41);
+            this.textBoxStatus.Multiline = true;
+            this.textBoxStatus.Name = "textBoxStatus";
+            this.textBoxStatus.ReadOnly = true;
+            this.textBoxStatus.Size = new System.Drawing.Size(260, 208);
+            this.textBoxStatus.TabIndex = 4;
             // 
             // HTTPServerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.labelStatus);
+            this.Controls.Add(this.textBoxStatus);
             this.Controls.Add(this.buttonStop);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonStart);
             this.Name = "HTTPServerForm";
             this.Text = "HTTPServerConfig";
@@ -90,8 +79,7 @@
         #endregion
 
         private System.Windows.Forms.Button buttonStart;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonStop;
-        private System.Windows.Forms.Label labelStatus;
+        private System.Windows.Forms.TextBox textBoxStatus;
     }
 }

@@ -34,6 +34,7 @@ namespace VixenPlus
         {
             httpServer.stop();
         }
+
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -386,12 +387,14 @@ namespace VixenPlus
                 Thread.Sleep(1);
             }
             Console.WriteLine("Server stopped.");
+           
         }
 
         public void stop()
         {
             Console.WriteLine("Killing server...");
             is_active = false;
+            //listener.Stop();
         }
 
         public abstract void handleGETRequest(HttpProcessor p);

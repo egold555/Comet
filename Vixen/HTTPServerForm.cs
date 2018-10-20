@@ -24,7 +24,7 @@ namespace VixenPlus
             buttonStop.Enabled = true;
             server = new VixenHTTPServer();
             server.start();
-            labelStatus.Text = "Running.";
+            updateStatus("Server Started");
         }
 
         private void buttonStop_Click(object sender, EventArgs e)
@@ -33,7 +33,12 @@ namespace VixenPlus
             buttonStop.Enabled = false;
             server.stop();
             server = null;
-            labelStatus.Text = "Stopped.";
+            updateStatus("Server Stopped.");
+        }
+
+        public void updateStatus(String msg)
+        {
+            textBoxStatus.Text += msg + Environment.NewLine;
         }
     }
 }

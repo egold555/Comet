@@ -55,6 +55,7 @@
             this.buttonAddSequence = new System.Windows.Forms.Button();
             this.buttonUpdateProgram = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.buttonExecute = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBoxPrograms
@@ -325,11 +326,23 @@
             this.openFileDialog1.Filter = "Vixen event sequence | *.vix";
             this.openFileDialog1.InitialDirectory = "Sequences";
             // 
+            // buttonExecute
+            // 
+            this.buttonExecute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonExecute.Location = new System.Drawing.Point(274, 353);
+            this.buttonExecute.Name = "buttonExecute";
+            this.buttonExecute.Size = new System.Drawing.Size(110, 25);
+            this.buttonExecute.TabIndex = 26;
+            this.buttonExecute.Text = "Execute Now";
+            this.buttonExecute.UseVisualStyleBackColor = true;
+            this.buttonExecute.Click += new System.EventHandler(this.buttonExecute_Click);
+            // 
             // SchedulerDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(970, 388);
+            this.Controls.Add(this.buttonExecute);
             this.Controls.Add(this.buttonUpdateProgram);
             this.Controls.Add(this.buttonRemoveSequence);
             this.Controls.Add(this.buttonAddSequence);
@@ -397,5 +410,6 @@
         private System.Windows.Forms.Button buttonAddSequence;
         private System.Windows.Forms.Button buttonUpdateProgram;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button buttonExecute;
     }
 }

@@ -1,0 +1,9 @@
+.quarter{
+  width:50%;
+  height:100%;
+  float:left;
+}
+.contents{
+  height:50%;
+  width:100%;
+}

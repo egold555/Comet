@@ -224,5 +224,12 @@ namespace VixenPlus.Dialogs
             DefaultProgramSettings();
             UpdateButtons();
         }
+
+        private void buttonExecute_Click(object sender, EventArgs e)
+        {
+            string commandLine = ScheduledProgramFromDialog().GetCommandLine();
+            System.Diagnostics.Process.Start(Application.ExecutablePath, commandLine);
+
+        }
     }
 }

@@ -49,6 +49,7 @@
     <DebugType>full</DebugType>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>..\Release\</OutputPath>
@@ -205,6 +206,12 @@
     </Compile>
     <Compile Include="Dialogs\FirstRunPathDialog.Designer.cs">
       <DependentUpon>FirstRunPathDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\FortuneTellerDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FortuneTellerDialog.Designer.cs">
+      <DependentUpon>FortuneTellerDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\HelpDialog.cs">
       <SubType>Form</SubType>
@@ -423,6 +430,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\FirstRunPathDialog.resx">
       <DependentUpon>FirstRunPathDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\FortuneTellerDialog.resx">
+      <DependentUpon>FortuneTellerDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\HelpDialog.resx">
       <DependentUpon>HelpDialog.cs</DependentUpon>

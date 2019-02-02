@@ -74,6 +74,7 @@ namespace VixenPlus {
             this.toolStripStatusLabelMusic = new System.Windows.Forms.ToolStripStatusLabel();
             this.shutdownTimer = new System.Windows.Forms.Timer(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.fortuneTellerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -191,7 +192,8 @@ namespace VixenPlus {
             this.toolStripSeparator1,
             this.preferencesToolStripMenuItem,
             this.hTTPServerToolStripMenuItem,
-            this.scheduleProgramsToolStripMenuItem});
+            this.scheduleProgramsToolStripMenuItem,
+            this.fortuneTellerToolStripMenuItem});
             this.utilityToolStripMenuItem.Name = "utilityToolStripMenuItem";
             this.utilityToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.utilityToolStripMenuItem.Text = "Tools";
@@ -334,6 +336,13 @@ namespace VixenPlus {
             // 
             this.saveFileDialog1.SupportMultiDottedExtensions = true;
             // 
+            // fortuneTellerToolStripMenuItem
+            // 
+            this.fortuneTellerToolStripMenuItem.Name = "fortuneTellerToolStripMenuItem";
+            this.fortuneTellerToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
+            this.fortuneTellerToolStripMenuItem.Text = "Fortune Teller";
+            this.fortuneTellerToolStripMenuItem.Click += new System.EventHandler(this.fortuneTellerToolStripMenuItem_Click);
+            // 
             // VixenPlusForm
             // 
             this.AllowDrop = true;
@@ -377,5 +386,6 @@ namespace VixenPlus {
         private ToolStripMenuItem hTTPServerToolStripMenuItem;
         private ToolStripMenuItem scheduleProgramsToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator1;
+        private ToolStripMenuItem fortuneTellerToolStripMenuItem;
     }
 }

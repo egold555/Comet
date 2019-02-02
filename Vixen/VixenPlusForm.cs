@@ -883,5 +883,11 @@ namespace VixenPlus {
             dialog.Dispose();
         }
 
+        private void fortuneTellerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var dialog = new FortuneTellerDialog();
+            dialog.ShowDialog();
+            dialog.Dispose();
+        }
     }
 }

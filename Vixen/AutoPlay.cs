@@ -197,7 +197,7 @@ namespace VixenPlus
             }
         }
 
-        class AutoPlaySequence : IDisposable
+       public class AutoPlaySequence : IDisposable
         {
             string path;
             string error;

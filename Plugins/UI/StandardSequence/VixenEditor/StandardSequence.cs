@@ -220,7 +220,7 @@ namespace VixenEditor
             _toolStripCheckStateChangeHandler = toolStripItem_CheckStateChanged;
             _inPlayback = false;
 
-
+            initScriptFileWatcher();
         }
 
 
@@ -5547,8 +5547,49 @@ namespace VixenEditor
             }
         }
 
+        FileSystemWatcher watcher;
+        //TODO: Figure out why this just doesn't work. Does it need to be in another thread??
+        private void initScriptFileWatcher()
+        {
+            // Create a new FileSystemWatcher and set its properties.
 
-        const String NL = "\r\n";
+            watcher = new FileSystemWatcher();
+
+            watcher.Path = ScriptsPath;
+
+            // Watch for changes in LastAccess and LastWrite times, and
+            // the renaming of files or directories.
+            watcher.NotifyFilter = NotifyFilters.Attributes |
+    NotifyFilters.CreationTime |
+    NotifyFilters.FileName |
+    NotifyFilters.LastAccess |
+    NotifyFilters.LastWrite |
+    NotifyFilters.Size |
+    NotifyFilters.Security;
+
+            // Only watch text files.
+            watcher.Filter = "*";
+
+            // Add event handlers.
+            watcher.Changed += OnScriptChanged;
+            watcher.Created += OnScriptChanged;
+            watcher.Deleted += OnScriptChanged;
+            watcher.Renamed += OnScriptChanged;
+
+            // Begin watching.
+            watcher.EnableRaisingEvents = true;
+            
+            //MessageBox.Show("Init'd file watcher");
+        }
+
+        private void OnScriptChanged(object source, FileSystemEventArgs e)
+        {
+            MessageBox.Show($"File: {e.FullPath} {e.ChangeType}", "File Changed!");
+        }
+
+        //end scripts
+
+            const String NL = "\r\n";
         private void exportArduinoCodeToolStripMenuItem_Click(object sender, EventArgs e)
         {
 

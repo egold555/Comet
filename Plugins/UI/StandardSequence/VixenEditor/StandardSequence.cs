@@ -219,6 +219,8 @@ namespace VixenEditor
             _toolStrips = new Dictionary<string, ToolStrip>();
             _toolStripCheckStateChangeHandler = toolStripItem_CheckStateChanged;
             _inPlayback = false;
+
+
         }
 
 
@@ -5444,10 +5446,10 @@ namespace VixenEditor
                 subItems.Remove(item);
             }
 
-            InsertIntoToolStrip(subItems, insertAfter + 1, HouseEffectsPath);
+            InsertIntoToolStripHouseEffects(subItems, insertAfter + 1, HouseEffectsPath);
         }
 
-        private void InsertIntoToolStrip(ToolStripItemCollection items, int startIndex, string directory)
+        private void InsertIntoToolStripHouseEffects(ToolStripItemCollection items, int startIndex, string directory)
         {
             if (!Directory.Exists(directory))
                 return;
@@ -5466,7 +5468,7 @@ namespace VixenEditor
                 ToolStripMenuItem menuItem = new ToolStripMenuItem();
                 string name = Path.GetFileName(subDir);
                 menuItem.Text = name;
-                InsertIntoToolStrip(menuItem.DropDownItems, 0, subDir);
+                InsertIntoToolStripHouseEffects(menuItem.DropDownItems, 0, subDir);
                 items.Insert(startIndex, menuItem);
                 startIndex += 1;
             }
@@ -5491,6 +5493,60 @@ namespace VixenEditor
             }
             InvalidateRect(affectedCells);
         }
+
+
+        //Eric Scripts Idea
+        private string ScriptsPath
+        {
+            get
+            {
+                return Path.Combine(VixenPlusCommon.Paths.DataPath, "Scripts");
+            }
+        }
+
+        private void scriptsToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+
+            ToolStripItemCollection items = scriptsToolStripMenuItem.DropDownItems;
+
+            if (!Directory.Exists(ScriptsPath))
+            {
+                Directory.CreateDirectory(ScriptsPath);
+            }
+
+            items.Clear(); //remove duplication every time you click it
+
+            InsertIntoToolStripScript(items, 0, ScriptsPath);
+        }
+
+        private void InsertIntoToolStripScript(ToolStripItemCollection items, int startIndex, string directory)
+        {
+            if (!Directory.Exists(directory))
+                return;
+
+            foreach (string file in Directory.GetFiles(directory, "*.js"))
+            {
+                string name = Path.GetFileNameWithoutExtension(file);
+                //name = name.Replace(".script", "");
+                ToolStripMenuItem menuItem = new ToolStripMenuItem();
+                menuItem.Text = name;
+                menuItem.Tag = file;
+                menuItem.Click += customEffectFromFile_Click;
+                items.Insert(startIndex, menuItem);
+                startIndex += 1;
+            }
+
+            foreach (string subDir in Directory.GetDirectories(directory))
+            {
+                ToolStripMenuItem menuItem = new ToolStripMenuItem();
+                string name = Path.GetFileName(subDir);
+                menuItem.Text = name;
+                InsertIntoToolStripScript(menuItem.DropDownItems, 0, subDir);
+                items.Insert(startIndex, menuItem);
+                startIndex += 1;
+            }
+        }
+
 
         const String NL = "\r\n";
         private void exportArduinoCodeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -5559,6 +5615,7 @@ namespace VixenEditor
             return code;
         }
 
+        
     }
 
 

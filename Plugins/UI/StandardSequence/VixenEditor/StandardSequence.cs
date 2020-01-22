@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -5531,7 +5532,7 @@ namespace VixenEditor
                 ToolStripMenuItem menuItem = new ToolStripMenuItem();
                 menuItem.Text = name;
                 menuItem.Tag = file;
-                menuItem.Click += customEffectFromFile_Click;
+                //menuItem.Click += customEffectFromFile_Click;
                 items.Insert(startIndex, menuItem);
                 startIndex += 1;
             }
@@ -5547,12 +5548,19 @@ namespace VixenEditor
             }
         }
 
-        FileSystemWatcher watcher;
+        static FileSystemWatcher watcher;
         //TODO: Figure out why this just doesn't work. Does it need to be in another thread??
         private void initScriptFileWatcher()
         {
+           
             // Create a new FileSystemWatcher and set its properties.
 
+            if(watcher != null)
+            {
+                return;
+            }
+
+            Debug.WriteLine("I am initalized========================================");
             watcher = new FileSystemWatcher();
 
             watcher.Path = ScriptsPath;
@@ -5584,7 +5592,7 @@ namespace VixenEditor
 
         private void OnScriptChanged(object source, FileSystemEventArgs e)
         {
-            MessageBox.Show($"File: {e.FullPath} {e.ChangeType}", "File Changed!");
+            Debug.WriteLine($"File: {e.FullPath} {e.ChangeType}");
         }
 
         //end scripts

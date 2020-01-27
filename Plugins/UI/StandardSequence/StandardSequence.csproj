@@ -113,6 +113,10 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="VixenEditor\javascript\JSChannel.cs" />
+    <Compile Include="VixenEditor\javascript\JSEvent.cs" />
+    <Compile Include="VixenEditor\javascript\JSSelectedArea.cs" />
+    <Compile Include="VixenEditor\javascript\JSSequence.cs" />
     <Compile Include="VixenEditor\PopupCode.cs">
       <SubType>Form</SubType>
     </Compile>

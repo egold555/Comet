@@ -13,6 +13,7 @@ using System.Windows.Forms;
 
 using FMOD;
 using Jint;
+using Jint.Native;
 using Jint.Runtime.Interop;
 using Nutcracker;
 using VixenEditor.javascript;
@@ -4782,8 +4783,7 @@ namespace VixenEditor
             }
         }
 
-        private Channel SelectedChannel
-        {
+        private Channel SelectedChannel {
             get { return _selectedChannel; }
             set {
                 if (_selectedChannel == value) {
@@ -4801,8 +4801,7 @@ namespace VixenEditor
             }
         }
 
-        public override EventSequence Sequence
-        {
+        public override EventSequence Sequence {
             get { return _sequence; }
             set {
                 _sequence = value;
@@ -5272,7 +5271,7 @@ namespace VixenEditor
 
         private void waveformToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void redToolStripMenuItem_Click(object sender, EventArgs e)
@@ -5315,10 +5314,10 @@ namespace VixenEditor
              */
             float offset = 0;
 
-            if(start == 1) {
-                offset = 1.0f/3.0f;
+            if (start == 1) {
+                offset = 1.0f / 3.0f;
             }
-            else if(start == 2) {
+            else if (start == 2) {
                 offset = 2.0f / 3.0f;
             }
 
@@ -5365,7 +5364,7 @@ namespace VixenEditor
             int greenChannel = GetEventFromChannelNumber(top + 1);
             int blueChannel = GetEventFromChannelNumber(top + 2);
             int width = right - left;
-            
+
             for (var column = left; column < right; column++) {
                 _sequence.EventValues[redChannel, column] = r;
                 _sequence.EventValues[greenChannel, column] = g;
@@ -5376,8 +5375,7 @@ namespace VixenEditor
             pictureBoxGrid.Invalidate(SelectionToRectangle());
         }
 
-        private string HouseEffectsPath
-        {
+        private string HouseEffectsPath {
             get {
                 return Path.Combine(VixenPlusCommon.Paths.DataPath, "HouseEffects");
             }
@@ -5444,7 +5442,7 @@ namespace VixenEditor
                     itemsToDelete.Add(item);
                 }
             }
-            foreach(ToolStripMenuItem item in itemsToDelete) {
+            foreach (ToolStripMenuItem item in itemsToDelete) {
                 subItems.Remove(item);
             }
 
@@ -5478,7 +5476,7 @@ namespace VixenEditor
 
         private void customEffectFromFile_Click(object sender, EventArgs e)
         {
-            string path = (string) ((ToolStripMenuItem)sender).Tag;
+            string path = (string)((ToolStripMenuItem)sender).Tag;
             HouseEffect effect = HouseEffect.Load(path);
 
             Rectangle affectedCells;
@@ -5498,10 +5496,8 @@ namespace VixenEditor
 
 
         //Eric Scripts Idea
-        private string ScriptsPath
-        {
-            get
-            {
+        private string ScriptsPath {
+            get {
                 return Path.Combine(VixenPlusCommon.Paths.DataPath, "Scripts");
             }
         }
@@ -5511,8 +5507,7 @@ namespace VixenEditor
 
             ToolStripItemCollection items = scriptsToolStripMenuItem.DropDownItems;
 
-            if (!Directory.Exists(ScriptsPath))
-            {
+            if (!Directory.Exists(ScriptsPath)) {
                 Directory.CreateDirectory(ScriptsPath);
             }
 
@@ -5526,8 +5521,7 @@ namespace VixenEditor
             if (!Directory.Exists(directory))
                 return;
 
-            foreach (string file in Directory.GetFiles(directory, "*.js"))
-            {
+            foreach (string file in Directory.GetFiles(directory, "*.js")) {
                 string name = Path.GetFileNameWithoutExtension(file);
                 //name = name.Replace(".script", "");
                 ToolStripMenuItem menuItem = new ToolStripMenuItem();
@@ -5538,8 +5532,7 @@ namespace VixenEditor
                 startIndex += 1;
             }
 
-            foreach (string subDir in Directory.GetDirectories(directory))
-            {
+            foreach (string subDir in Directory.GetDirectories(directory)) {
                 ToolStripMenuItem menuItem = new ToolStripMenuItem();
                 string name = Path.GetFileName(subDir);
                 menuItem.Text = name;
@@ -5565,6 +5558,14 @@ namespace VixenEditor
             engine.SetValue("log", new Action<object>(Console.WriteLine));
             engine.SetValue("HsvColor", TypeReference.CreateTypeReference(engine, typeof(HsvColor)));
 
+            // Allow one script to "require" another script, relative to the ScriptsPath.
+            engine.SetValue("require", (Func<string, JsValue>)(fileName => {
+                    string jsSource = System.IO.File.ReadAllText(Path.Combine(ScriptsPath, fileName));
+                    JsValue res = engine.Execute(jsSource).GetCompletionValue();
+                    return res;
+                }
+            ));
+
             try {
                 engine.Execute(scriptContents);
             }
@@ -5581,11 +5582,10 @@ namespace VixenEditor
         //TODO: Figure out why this just doesn't work. Does it need to be in another thread??
         private void initScriptFileWatcher()
         {
-           
+
             // Create a new FileSystemWatcher and set its properties.
 
-            if(watcher != null)
-            {
+            if (watcher != null) {
                 return;
             }
 
@@ -5601,12 +5601,12 @@ namespace VixenEditor
             // Watch for changes in LastAccess and LastWrite times, and
             // the renaming of files or directories.
             watcher.NotifyFilter = NotifyFilters.Attributes |
-    NotifyFilters.CreationTime |
-    NotifyFilters.FileName |
-    NotifyFilters.LastAccess |
-    NotifyFilters.LastWrite |
-    NotifyFilters.Size |
-    NotifyFilters.Security;
+        NotifyFilters.CreationTime |
+        NotifyFilters.FileName |
+        NotifyFilters.LastAccess |
+        NotifyFilters.LastWrite |
+        NotifyFilters.Size |
+        NotifyFilters.Security;
 
             // Only watch text files.
             watcher.Filter = "*";
@@ -5619,7 +5619,7 @@ namespace VixenEditor
 
             // Begin watching.
             watcher.EnableRaisingEvents = true;
-            
+
             //MessageBox.Show("Init'd file watcher");
         }
 
@@ -5630,7 +5630,7 @@ namespace VixenEditor
 
         //end scripts
 
-            const String NL = "\r\n";
+        const String NL = "\r\n";
         private void exportArduinoCodeToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -5697,7 +5697,7 @@ namespace VixenEditor
             return code;
         }
 
-        
+
     }
 
 

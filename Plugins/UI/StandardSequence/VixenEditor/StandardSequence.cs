@@ -12,9 +12,9 @@ using System.Threading;
 using System.Windows.Forms;
 
 using FMOD;
-
+using Jint;
 using Nutcracker;
-
+using VixenEditor.javascript;
 using VixenEditor.VixenPlus;
 
 using VixenPlus;
@@ -5532,7 +5532,7 @@ namespace VixenEditor
                 ToolStripMenuItem menuItem = new ToolStripMenuItem();
                 menuItem.Text = name;
                 menuItem.Tag = file;
-                //menuItem.Click += customEffectFromFile_Click;
+                menuItem.Click += runCustomScript_Click;
                 items.Insert(startIndex, menuItem);
                 startIndex += 1;
             }
@@ -5548,6 +5548,23 @@ namespace VixenEditor
             }
         }
 
+        private void runCustomScript_Click(object sender, EventArgs e)
+        {
+            AddUndoItem(new Rectangle(0, 0, _sequence.TotalEventPeriods, _sequence.ChannelCount), UndoOriginalBehavior.Overwrite, "Run Script");
+
+            string path = (string)((ToolStripMenuItem)sender).Tag;
+            string scriptContents = File.ReadAllText(path);
+
+            JSSequence jsSequence = new JSSequence(_sequence);
+            Engine engine = new Engine(cfg => cfg.AllowClr());
+            engine.SetValue("sequence", jsSequence);
+            engine.SetValue("log", new Action<object>(Console.WriteLine));
+
+            engine.Execute(scriptContents);
+            jsSequence.CopyToSequence(_sequence);
+            Invalidate(true);
+        }
+
         static FileSystemWatcher watcher;
         //TODO: Figure out why this just doesn't work. Does it need to be in another thread??
         private void initScriptFileWatcher()
@@ -5558,6 +5575,10 @@ namespace VixenEditor
             if(watcher != null)
             {
                 return;
+            }
+
+            if (!Directory.Exists(ScriptsPath)) {
+                Directory.CreateDirectory(ScriptsPath);
             }
 
             Debug.WriteLine("I am initalized========================================");

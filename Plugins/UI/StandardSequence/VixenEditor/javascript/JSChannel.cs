@@ -5,18 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VixenEditor.VixenEditor.javascript
+namespace VixenEditor.javascript
 {
-    class JSChannel
+    public class JSChannel
     {
         private readonly int id;
         private readonly String name;
-        private readonly ReadOnlyCollection<JSEvent> events;
+        private readonly List<JSEvent> events;
         public JSChannel(int id, String name, List<JSEvent> events)
         {
             this.id = id;
             this.name = name;
-            this.events = new ReadOnlyCollection<JSEvent>(events);
+            this.events = events;
         }
 
         public int getId()
@@ -31,25 +31,22 @@ namespace VixenEditor.VixenEditor.javascript
 
         public ReadOnlyCollection<JSEvent> getEvents()
         {
-            return this.events;
+            return this.events.AsReadOnly();
         }
 
-        public ReadOnlyCollection<JSEvent> getEventsBetween(JSEvent one, JSEvent two)
+        public ReadOnlyCollection<JSEvent> getEventsBetween(int index1, int index2)
         {
-            throw new NotImplementedException();
+            return events.GetRange(index1, index2 - index1).AsReadOnly();
         }
 
-        public JSEvent getEventAt(long time)
+        public JSEvent getEventAt(int index)
         {
-            foreach (JSEvent e in events)
-            {
-                if (e.getLocationInSequence() == time)
-                {
-                    return e;
-                }
-            }
+            return events[index];
+        }
 
-            return null;
+        public int getEventCount()
+        {
+            return events.Count;
         }
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VixenEditor.VixenEditor.javascript
+namespace VixenEditor.javascript
 {
-    class JSSelectedArea
+    public class JSSelectedArea
     {
         //its a rectangle and you can get events at a certian point somehow
     }

@@ -13,6 +13,7 @@ using System.Windows.Forms;
 
 using FMOD;
 using Jint;
+using Jint.Runtime.Interop;
 using Nutcracker;
 using VixenEditor.javascript;
 using VixenEditor.VixenPlus;
@@ -5562,6 +5563,7 @@ namespace VixenEditor
             engine.SetValue("sequence", jsSequence);
             engine.SetValue("selection", jsSelection);
             engine.SetValue("log", new Action<object>(Console.WriteLine));
+            engine.SetValue("HsvColor", TypeReference.CreateTypeReference(engine, typeof(HsvColor)));
 
             try {
                 engine.Execute(scriptContents);

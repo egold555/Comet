@@ -48,5 +48,12 @@ namespace VixenEditor.javascript
         {
             return events.Count;
         }
+
+        public void fillMany(int start, int end, byte value)
+        {
+            for (int i = start; i < end; ++i) {
+                events[i].setValue(value);
+            }
+        }
     }
 }

@@ -37,9 +37,15 @@ namespace VixenEditor.javascript
                 }
             }
         }
-        public ReadOnlyCollection<JSChannel> getChannels()
+
+        public int getEventCount()
         {
-            return channels.AsReadOnly();
+            return channels[0].getEventCount();
+        }
+
+        public JSChannel[] getChannels()
+        {
+            return channels.ToArray();
         }
 
         public JSChannel getChannelById(int id)
@@ -62,9 +68,37 @@ namespace VixenEditor.javascript
             return null;
         }
 
-        public JSSelectedArea getSelectedArea()
+        public JSChannel[] getChannelsByName(String[] names)
         {
-            throw new NotImplementedException();
+            List<JSChannel> result = new List<JSChannel>();
+            foreach (string name in names) {
+                result.Add(getChannelByName(name));
+            }
+            return result.ToArray(); ;
+        }
+
+        public JSArea[] getBeatMarkerAreas(JSChannel markerChannel, JSChannel[] channels)
+        {
+            int lastCol = getEventCount();
+            List<JSArea> areas = new List<JSArea>();
+            for (int col = 0; col < lastCol; ++col) { 
+                if (markerChannel.getEventAt(col).isOn()) {
+                    int next;
+                    for (next = col + 1; next < lastCol; ++next) {
+                        if (markerChannel.getEventAt(next).isOn())
+                            break;
+                    }
+                    areas.Add(new JSArea(channels.ToList(), col, next));
+                    col = next - 1;
+                }
+            }
+
+            return areas.ToArray();
+        }
+
+        internal List<JSChannel> getChannelSubset(int first, int last)
+        {
+            return channels.GetRange(first, last - first);
         }
     }
 }

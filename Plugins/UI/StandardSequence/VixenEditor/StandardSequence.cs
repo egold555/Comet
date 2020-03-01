@@ -5556,8 +5556,11 @@ namespace VixenEditor
             string scriptContents = File.ReadAllText(path);
 
             JSSequence jsSequence = new JSSequence(_sequence);
+            JSArea jsSelection = new JSArea(jsSequence.getChannelSubset(_selectedCells.Top, _selectedCells.Bottom), _selectedCells.Left, _selectedCells.Right);
+
             Engine engine = new Engine(cfg => cfg.AllowClr());
             engine.SetValue("sequence", jsSequence);
+            engine.SetValue("selection", jsSelection);
             engine.SetValue("log", new Action<object>(Console.WriteLine));
 
             try {

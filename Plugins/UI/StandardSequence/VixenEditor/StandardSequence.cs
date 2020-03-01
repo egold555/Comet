@@ -5560,7 +5560,14 @@ namespace VixenEditor
             engine.SetValue("sequence", jsSequence);
             engine.SetValue("log", new Action<object>(Console.WriteLine));
 
-            engine.Execute(scriptContents);
+            try {
+                engine.Execute(scriptContents);
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message, "Javascript Execution Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             jsSequence.CopyToSequence(_sequence);
             Invalidate(true);
         }

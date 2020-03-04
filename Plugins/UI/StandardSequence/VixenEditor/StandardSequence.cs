@@ -5523,24 +5523,42 @@ namespace VixenEditor
 
             foreach (string file in Directory.GetFiles(directory, "*.js")) {
                 string name = Path.GetFileNameWithoutExtension(file);
-                //name = name.Replace(".script", "");
-                ToolStripMenuItem menuItem = new ToolStripMenuItem();
-                menuItem.Text = name;
-                menuItem.Tag = file;
-                menuItem.Click += runCustomScript_Click;
-                items.Insert(startIndex, menuItem);
-                startIndex += 1;
+                if (!name.StartsWith("."))
+                {
+                    //name = name.Replace(".script", "");
+                    ToolStripMenuItem menuItem = new ToolStripMenuItem();
+                    menuItem.Text = name;
+                    menuItem.Tag = file;
+                    menuItem.Click += runCustomScript_Click;
+                    items.Insert(startIndex, menuItem);
+                    startIndex += 1;
+                }
+                
             }
 
             foreach (string subDir in Directory.GetDirectories(directory)) {
                 ToolStripMenuItem menuItem = new ToolStripMenuItem();
                 string name = Path.GetFileName(subDir);
-                menuItem.Text = name;
-                InsertIntoToolStripScript(menuItem.DropDownItems, 0, subDir);
-                items.Insert(startIndex, menuItem);
-                startIndex += 1;
+                if (!name.StartsWith("."))
+                {
+                    menuItem.Text = name;
+                    InsertIntoToolStripScript(menuItem.DropDownItems, 0, subDir);
+                    items.Insert(startIndex, menuItem);
+                    startIndex += 1;
+                }
             }
         }
+
+        private void JSAlert(string title, string msg)
+        {
+            MessageBox.Show(msg, "[JavaScript] " + title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        /*private int MyMsgBoxReturns(string title, string msg)
+        {
+            MessageBox.Show(.....);
+            return 0;
+        }*/
 
         private void runCustomScript_Click(object sender, EventArgs e)
         {
@@ -5556,6 +5574,8 @@ namespace VixenEditor
             engine.SetValue("sequence", jsSequence);
             engine.SetValue("selection", jsSelection);
             engine.SetValue("log", new Action<object>(Console.WriteLine));
+            engine.SetValue("alert", new Action<string, string>(JSAlert));
+            //engine.SetValue("alert2", new Func<string, string, int>(MyMsgBoxReturns));
             engine.SetValue("HsvColor", TypeReference.CreateTypeReference(engine, typeof(HsvColor)));
 
             // Allow one script to "require" another script, relative to the ScriptsPath.

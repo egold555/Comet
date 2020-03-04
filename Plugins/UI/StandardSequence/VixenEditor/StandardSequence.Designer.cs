@@ -1399,8 +1399,8 @@ namespace VixenEditor{
             this.scriptsToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.scriptsToolStripMenuItem.MergeIndex = 5;
             this.scriptsToolStripMenuItem.Name = "scriptsToolStripMenuItem";
-            this.scriptsToolStripMenuItem.Size = new System.Drawing.Size(79, 26);
-            this.scriptsToolStripMenuItem.Text = "Scripts 3";
+            this.scriptsToolStripMenuItem.Size = new System.Drawing.Size(67, 26);
+            this.scriptsToolStripMenuItem.Text = "Scripts";
             this.scriptsToolStripMenuItem.DropDownOpening += new System.EventHandler(this.scriptsToolStripMenuItem_DropDownOpening);
             // 
             // pluginsToolStrip
@@ -1410,7 +1410,7 @@ namespace VixenEditor{
             this.pluginsToolStrip.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.pluginsToolStrip.MergeIndex = 6;
             this.pluginsToolStrip.Name = "pluginsToolStrip";
-            this.pluginsToolStrip.Size = new System.Drawing.Size(70, 24);
+            this.pluginsToolStrip.Size = new System.Drawing.Size(70, 26);
             this.pluginsToolStrip.Text = "&Plugins";
             this.pluginsToolStrip.Visible = false;
             // 
@@ -1443,7 +1443,7 @@ namespace VixenEditor{
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.splitContainer1);
             this.toolStripContainer1.ContentPanel.Margin = new System.Windows.Forms.Padding(4);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1301, 331);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1301, 335);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 30);
             this.toolStripContainer1.Margin = new System.Windows.Forms.Padding(4);
@@ -1478,7 +1478,7 @@ namespace VixenEditor{
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1301, 331);
+            this.splitContainer1.Size = new System.Drawing.Size(1301, 335);
             this.splitContainer1.SplitterDistance = 233;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 20;
@@ -1517,7 +1517,7 @@ namespace VixenEditor{
             this.pictureBoxChannels.Location = new System.Drawing.Point(0, 0);
             this.pictureBoxChannels.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBoxChannels.Name = "pictureBoxChannels";
-            this.pictureBoxChannels.Size = new System.Drawing.Size(233, 331);
+            this.pictureBoxChannels.Size = new System.Drawing.Size(233, 335);
             this.pictureBoxChannels.TabIndex = 11;
             this.pictureBoxChannels.TabStop = false;
             this.pictureBoxChannels.DragDrop += new System.Windows.Forms.DragEventHandler(this.pictureBoxChannels_DragDrop);
@@ -1655,7 +1655,7 @@ namespace VixenEditor{
             this.splitContainer2.Panel2.Controls.Add(this.pictureBoxGrid);
             this.splitContainer2.Panel2.Controls.Add(this.vScrollBar1);
             this.splitContainer2.Panel2.Controls.Add(this.hScrollBar1);
-            this.splitContainer2.Size = new System.Drawing.Size(1063, 331);
+            this.splitContainer2.Size = new System.Drawing.Size(1063, 335);
             this.splitContainer2.SplitterDistance = 60;
             this.splitContainer2.SplitterWidth = 5;
             this.splitContainer2.TabIndex = 5;
@@ -1730,7 +1730,7 @@ namespace VixenEditor{
             this.pictureBoxGrid.Location = new System.Drawing.Point(0, 0);
             this.pictureBoxGrid.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBoxGrid.Name = "pictureBoxGrid";
-            this.pictureBoxGrid.Size = new System.Drawing.Size(1046, 249);
+            this.pictureBoxGrid.Size = new System.Drawing.Size(1046, 253);
             this.pictureBoxGrid.TabIndex = 5;
             this.pictureBoxGrid.TabStop = false;
             this.pictureBoxGrid.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxGrid_Paint);
@@ -2093,14 +2093,14 @@ namespace VixenEditor{
             this.vScrollBar1.Dock = System.Windows.Forms.DockStyle.Right;
             this.vScrollBar1.Location = new System.Drawing.Point(1046, 0);
             this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(17, 249);
+            this.vScrollBar1.Size = new System.Drawing.Size(17, 253);
             this.vScrollBar1.TabIndex = 4;
             this.vScrollBar1.ValueChanged += new System.EventHandler(this.vScrollBar1_ValueChanged);
             // 
             // hScrollBar1
             // 
             this.hScrollBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.hScrollBar1.Location = new System.Drawing.Point(0, 249);
+            this.hScrollBar1.Location = new System.Drawing.Point(0, 253);
             this.hScrollBar1.Name = "hScrollBar1";
             this.hScrollBar1.Size = new System.Drawing.Size(1063, 17);
             this.hScrollBar1.TabIndex = 3;
@@ -3060,14 +3060,14 @@ namespace VixenEditor{
             this.textBoxProgramLength});
             this.toolStripText.Location = new System.Drawing.Point(4, 271);
             this.toolStripText.Name = "toolStripText";
-            this.toolStripText.Size = new System.Drawing.Size(1041, 31);
+            this.toolStripText.Size = new System.Drawing.Size(1041, 27);
             this.toolStripText.TabIndex = 7;
             this.toolStripText.Text = "Text";
             // 
             // toolStripLabel6
             // 
             this.toolStripLabel6.Name = "toolStripLabel6";
-            this.toolStripLabel6.Size = new System.Drawing.Size(95, 28);
+            this.toolStripLabel6.Size = new System.Drawing.Size(95, 24);
             this.toolStripLabel6.Text = "Executing At:";
             // 
             // toolStripLabelExecutionPoint
@@ -3081,12 +3081,12 @@ namespace VixenEditor{
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(6, 31);
+            this.toolStripSeparator11.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripLabel10
             // 
             this.toolStripLabel10.Name = "toolStripLabel10";
-            this.toolStripLabel10.Size = new System.Drawing.Size(82, 28);
+            this.toolStripLabel10.Size = new System.Drawing.Size(82, 24);
             this.toolStripLabel10.Text = "Drawing at";
             // 
             // toolStripLabelCurrentDrawingIntensity
@@ -3100,12 +3100,12 @@ namespace VixenEditor{
             // toolStripSeparator18
             // 
             this.toolStripSeparator18.Name = "toolStripSeparator18";
-            this.toolStripSeparator18.Size = new System.Drawing.Size(6, 31);
+            this.toolStripSeparator18.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripLabel8
             // 
             this.toolStripLabel8.Name = "toolStripLabel8";
-            this.toolStripLabel8.Size = new System.Drawing.Size(96, 28);
+            this.toolStripLabel8.Size = new System.Drawing.Size(96, 24);
             this.toolStripLabel8.Text = "Cell intensity:";
             // 
             // toolStripLabelCellIntensity
@@ -3118,7 +3118,7 @@ namespace VixenEditor{
             // toolStripSeparator17
             // 
             this.toolStripSeparator17.Name = "toolStripSeparator17";
-            this.toolStripSeparator17.Size = new System.Drawing.Size(6, 31);
+            this.toolStripSeparator17.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripLabelCurrentCell
             // 
@@ -3130,12 +3130,12 @@ namespace VixenEditor{
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 31);
+            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(68, 28);
+            this.toolStripLabel1.Size = new System.Drawing.Size(68, 24);
             this.toolStripLabel1.Text = "Channels";
             // 
             // textBoxChannelCount
@@ -3143,26 +3143,26 @@ namespace VixenEditor{
             this.textBoxChannelCount.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.textBoxChannelCount.MaxLength = 5;
             this.textBoxChannelCount.Name = "textBoxChannelCount";
-            this.textBoxChannelCount.Size = new System.Drawing.Size(40, 31);
+            this.textBoxChannelCount.Size = new System.Drawing.Size(40, 27);
             this.textBoxChannelCount.Text = "0";
             this.textBoxChannelCount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxChannelCount_KeyPress);
             // 
             // toolStripSeparator12
             // 
             this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 31);
+            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripLabel2
             // 
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(162, 28);
+            this.toolStripLabel2.Size = new System.Drawing.Size(162, 24);
             this.toolStripLabel2.Text = "Sequence time (mm:ss)";
             // 
             // textBoxProgramLength
             // 
             this.textBoxProgramLength.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.textBoxProgramLength.Name = "textBoxProgramLength";
-            this.textBoxProgramLength.Size = new System.Drawing.Size(75, 31);
+            this.textBoxProgramLength.Size = new System.Drawing.Size(75, 27);
             this.textBoxProgramLength.Text = "00:00";
             this.textBoxProgramLength.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxProgramLength_KeyPress);
             // 

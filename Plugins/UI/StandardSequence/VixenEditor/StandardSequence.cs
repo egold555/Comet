@@ -11,6 +11,8 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 
+using Microsoft.VisualBasic;
+
 using FMOD;
 using Jint;
 using Jint.Native;
@@ -5554,11 +5556,15 @@ namespace VixenEditor
             MessageBox.Show(msg, "[JavaScript] " + title, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        /*private int MyMsgBoxReturns(string title, string msg)
+        private string JSAlertQuestion(string title, string msg, string defaultText)
         {
-            MessageBox.Show(.....);
-            return 0;
-        }*/
+            //not sure what this library does
+            if(defaultText == "undefined" || defaultText == null || defaultText.Length == 0)
+            {
+                defaultText = "";
+            }
+            return Interaction.InputBox(msg, "[JavaScript] " + title, defaultText);
+        }
 
         private void runCustomScript_Click(object sender, EventArgs e)
         {
@@ -5575,7 +5581,7 @@ namespace VixenEditor
             engine.SetValue("selection", jsSelection);
             engine.SetValue("log", new Action<object>(Console.WriteLine));
             engine.SetValue("alert", new Action<string, string>(JSAlert));
-            //engine.SetValue("alert2", new Func<string, string, int>(MyMsgBoxReturns));
+            engine.SetValue("prompt", new Func<string, string, string, string>(JSAlertQuestion));
             engine.SetValue("HsvColor", TypeReference.CreateTypeReference(engine, typeof(HsvColor)));
 
             // Allow one script to "require" another script, relative to the ScriptsPath.

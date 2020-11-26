@@ -6105,13 +6105,29 @@ namespace VixenEditor
             if (!Directory.Exists(directory))
                 return;
 
+
             foreach (string file in Directory.GetFiles(directory, "*.js"))
             {
                 string name = Path.GetFileNameWithoutExtension(file);
                 if (!name.StartsWith("."))
                 {
-                    //name = name.Replace(".script", "");
                     ToolStripMenuItem menuItem = new ToolStripMenuItem();
+                    /*string[] lines = File.ReadAllLines(file);
+                    if(lines.Length > 0)
+                    {
+                        if(lines[0].StartsWith("//Tooltip: "))
+                        {
+                            string tooltip = lines[0].Replace("//Tooltip: ", "");
+                            Console.WriteLine("3: " + tooltip);
+
+                            menuItem.ToolTipText = tooltip;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("5");
+                    }*/
+                    
                     menuItem.Text = name;
                     menuItem.Tag = file;
                     menuItem.Click += runCustomScript_Click;
@@ -6123,8 +6139,17 @@ namespace VixenEditor
 
             foreach (string subDir in Directory.GetDirectories(directory))
             {
+
+                //We can now ignore a whole directory, for example, Utilities
+
+                if(Directory.GetFiles(subDir, ".ignore").Length > 0)
+                {
+                    return;
+                }
+
                 ToolStripMenuItem menuItem = new ToolStripMenuItem();
                 string name = Path.GetFileName(subDir);
+                
                 if (!name.StartsWith("."))
                 {
                     menuItem.Text = name;

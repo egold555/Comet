@@ -6139,15 +6139,21 @@ namespace VixenEditor
 
             foreach (string subDir in Directory.GetDirectories(directory))
             {
+  
+                ToolStripMenuItem menuItem = new ToolStripMenuItem();
 
-                //We can now ignore a whole directory, for example, Utilities
-
-                if(Directory.GetFiles(subDir, ".ignore").Length > 0)
+                //If the directory is empty, don't show it
+                if (!Directory.EnumerateFileSystemEntries(subDir).Any())
                 {
-                    return;
+                    menuItem.Enabled = false;
                 }
 
-                ToolStripMenuItem menuItem = new ToolStripMenuItem();
+                //We can now ignore a whole directory, for example, Utilities
+                if (Directory.GetFiles(subDir, ".ignore").Length > 0)
+                {
+                    continue;
+                }
+
                 string name = Path.GetFileName(subDir);
                 
                 if (!name.StartsWith("."))

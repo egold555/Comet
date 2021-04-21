@@ -28,6 +28,7 @@ using VixenPlus.Properties;
 using VixenPlusCommon;
 
 using Channel = VixenPlus.Channel;
+using System.Xml;
 
 namespace VixenEditor
 {
@@ -554,12 +555,6 @@ namespace VixenEditor
         }
 
 
-        private void channelOutputMaskToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            EditSequenceChannelMask();
-        }
-
-
         private void channelPropertiesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowChannelProperties();
@@ -987,31 +982,6 @@ namespace VixenEditor
             pictureBoxGrid.Invalidate(_selectionRectangle);
             pictureBoxGrid.Update();
         }
-
-
-        private void EditSequenceChannelMask()
-        {
-            using (var dialog = new ChannelOutputMaskDialog(_sequence.FullChannels))
-            {
-                if (dialog.ShowDialog() != DialogResult.OK)
-                {
-                    return;
-                }
-
-                foreach (var channel in _sequence.FullChannels)
-                {
-                    channel.Enabled = true;
-                }
-
-                foreach (var num in dialog.DisabledChannels)
-                {
-                    _sequence.FullChannels[num].Enabled = false;
-                }
-            }
-            IsDirty = true;
-            pictureBoxChannels.Invalidate();
-        }
-
 
         private void EnableWaveformButton()
         {
@@ -2768,7 +2738,6 @@ namespace VixenEditor
         {
             var flag = _sequence.Profile != null;
             textBoxChannelCount.ReadOnly = flag;
-            toolStripButtonChannelOutputMask.Enabled = !flag;
         }
 
 
@@ -2782,7 +2751,7 @@ namespace VixenEditor
             profileToolStripLabel.Visible = true;
             flattenProfileIntoSequenceToolStripMenuItem.Enabled = isProfile;
             detachSequenceFromItsProfileToolStripMenuItem.Enabled = isProfile;
-            channelOutputMaskToolStripMenuItem.Enabled = !isProfile;
+            
             ReactEditingStateToProfileAssignment();
             SetOrderArraySize(_sequence.ChannelCount);
             textBoxChannelCount.Text = _sequence.ChannelCount.ToString(CultureInfo.InvariantCulture);
@@ -2793,6 +2762,8 @@ namespace VixenEditor
             {
                 _sequence.Groups = _sequence.Profile.Groups;
             }
+
+            toolStripButtonEnableDisableSerialOutputs.Image = isOutputPluginsEnabled() ? Properties.Resources.output_enabled : Properties.Resources.output_disabled; //resource fix
         }
 
 
@@ -4199,13 +4170,6 @@ namespace VixenEditor
                 }
             }
         }
-
-
-        private void toolStripButtonChannelOutputMask_Click(object sender, EventArgs e)
-        {
-            EditSequenceChannelMask();
-        }
-
 
         private void toolStripButtonCopy_Click(object sender, EventArgs e)
         {
@@ -6352,7 +6316,50 @@ namespace VixenEditor
             return code;
         }
 
+        private void toolStripButtonEnableDisableSerialOutputs_Click(object sender, EventArgs e)
+        {
+           
+            if(isOutputPluginsEnabled())
+            {
+                toolStripButtonEnableDisableSerialOutputs.Image = Properties.Resources.output_disabled;
+                setAllOutputPluginsEnabled(false);
+            }
+            else
+            {
+                toolStripButtonEnableDisableSerialOutputs.Image = Properties.Resources.output_enabled;
+                setAllOutputPluginsEnabled(true);
+            }
+            
+        }
 
+        private bool isOutputPluginsEnabled()
+        {
+            bool result = false;
+            foreach(XmlNode plugin in _sequence.PlugInData.GetAllPluginData())
+            {
+                string name = plugin.Attributes["name"].Value;
+                bool enabled = bool.Parse(plugin.Attributes["enabled"].Value);
+                if(name != "Adjustable preview" && !result && enabled)
+                {
+                    result = true;
+                }
+            }
+
+            return result;
+        }
+
+        private void setAllOutputPluginsEnabled(bool enabled)
+        {
+            foreach (XmlNode plugin in _sequence.PlugInData.GetAllPluginData())
+            {
+                string name = plugin.Attributes["name"].Value;
+                if (name != "Adjustable preview")
+                {
+                    Xml.SetAttribute(plugin, "enabled", enabled.ToString());
+                }
+            }
+            _sequence.Profile.FileIOHandler.SaveProfile(_sequence.Profile);
+        }
     }
 
 

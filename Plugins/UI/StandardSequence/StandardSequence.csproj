@@ -119,6 +119,11 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="VixenEditor\javascript\JSChannel.cs" />
     <Compile Include="VixenEditor\javascript\JSEvent.cs" />
     <Compile Include="VixenEditor\javascript\JSArea.cs" />
@@ -251,6 +256,10 @@
     </Compile>
     <Compile Include="VixenPlus\UndoItem.cs" />
     <Compile Include="VixenPlus\UndoOriginalBehavior.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="VixenEditor\PopupCode.resx">
       <DependentUpon>PopupCode.cs</DependentUpon>
     </EmbeddedResource>
@@ -347,13 +356,18 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Properties\" />
     <Folder Include="VixenEditor\Properties\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.manifest" />
     <None Include="packages.config" />
     <None Include="Resources\map.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\output_disabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\output_enabled.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

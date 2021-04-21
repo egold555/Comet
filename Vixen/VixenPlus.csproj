@@ -694,6 +694,8 @@
     <None Include="Resources\wave.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\output_enabled.png" />
+    <None Include="Resources\output_disabled.png" />
     <Content Include="website\bootstrap.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

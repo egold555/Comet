@@ -118,7 +118,7 @@ namespace VixenEditor{
         private ToolStrip toolStripText;
         private ToolStripButton tsbAudio;
         private ToolStripButton toolStripButtonChangeIntensity;
-        private ToolStripButton toolStripButtonChannelOutputMask;
+        private ToolStripButton toolStripButtonEnableDisableSerialOutputs;
         private ToolStripButton toolStripButtonCopy;
         private ToolStripButton toolStripButtonCut;
         private ToolStripButton toolStripButtonFindAndReplace;
@@ -181,7 +181,6 @@ namespace VixenEditor{
         private ToolStripMenuItem audioToolStripMenuItem1;
         private ToolStripMenuItem booleanPasteToolStripMenuItem1;
         private ToolStripMenuItem booleanPasteToolStripMenuItem;
-        private ToolStripMenuItem channelOutputMaskToolStripMenuItem;
         private ToolStripMenuItem channelPropertiesToolStripMenuItem;
         private ToolStripMenuItem chaseLinesToolStripMenuItem;
         private ToolStripMenuItem clearAllChannelsForThisEventToolStripMenuItem;
@@ -315,7 +314,6 @@ namespace VixenEditor{
             this.programToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.audioToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.channelOutputMaskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.currentProgramsSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem19 = new System.Windows.Forms.ToolStripSeparator();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -497,7 +495,7 @@ namespace VixenEditor{
             this.tsbAudio = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonWaveform = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonChannelOutputMask = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonEnableDisableSerialOutputs = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
             this.profileToolStripLabel = new System.Windows.Forms.ToolStripLabel();
             this.toolStripExecutionControl = new System.Windows.Forms.ToolStrip();
@@ -635,7 +633,7 @@ namespace VixenEditor{
             this.otherToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1301, 30);
+            this.menuStrip.Size = new System.Drawing.Size(1301, 28);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -644,13 +642,12 @@ namespace VixenEditor{
             this.programToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSeparator4,
             this.audioToolStripMenuItem1,
-            this.channelOutputMaskToolStripMenuItem,
             this.currentProgramsSettingsToolStripMenuItem,
             this.toolStripMenuItem19});
             this.programToolStripMenuItem.Enabled = false;
             this.programToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.MatchOnly;
             this.programToolStripMenuItem.Name = "programToolStripMenuItem";
-            this.programToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
+            this.programToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.programToolStripMenuItem.Text = "File";
             // 
             // toolStripSeparator4
@@ -658,32 +655,23 @@ namespace VixenEditor{
             this.toolStripSeparator4.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.toolStripSeparator4.MergeIndex = 5;
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(228, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(142, 6);
             // 
             // audioToolStripMenuItem1
             // 
             this.audioToolStripMenuItem1.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.audioToolStripMenuItem1.MergeIndex = 6;
             this.audioToolStripMenuItem1.Name = "audioToolStripMenuItem1";
-            this.audioToolStripMenuItem1.Size = new System.Drawing.Size(231, 26);
+            this.audioToolStripMenuItem1.Size = new System.Drawing.Size(145, 26);
             this.audioToolStripMenuItem1.Text = "Audio";
             this.audioToolStripMenuItem1.Click += new System.EventHandler(this.toolStripButtonAudio_Click);
-            // 
-            // channelOutputMaskToolStripMenuItem
-            // 
-            this.channelOutputMaskToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert;
-            this.channelOutputMaskToolStripMenuItem.MergeIndex = 7;
-            this.channelOutputMaskToolStripMenuItem.Name = "channelOutputMaskToolStripMenuItem";
-            this.channelOutputMaskToolStripMenuItem.Size = new System.Drawing.Size(231, 26);
-            this.channelOutputMaskToolStripMenuItem.Text = "Channel output mask";
-            this.channelOutputMaskToolStripMenuItem.Click += new System.EventHandler(this.channelOutputMaskToolStripMenuItem_Click);
             // 
             // currentProgramsSettingsToolStripMenuItem
             // 
             this.currentProgramsSettingsToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.currentProgramsSettingsToolStripMenuItem.MergeIndex = 8;
             this.currentProgramsSettingsToolStripMenuItem.Name = "currentProgramsSettingsToolStripMenuItem";
-            this.currentProgramsSettingsToolStripMenuItem.Size = new System.Drawing.Size(231, 26);
+            this.currentProgramsSettingsToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
             this.currentProgramsSettingsToolStripMenuItem.Text = "Settings";
             this.currentProgramsSettingsToolStripMenuItem.Click += new System.EventHandler(this.currentProgramsSettingsToolStripMenuItem_Click);
             // 
@@ -692,7 +680,7 @@ namespace VixenEditor{
             this.toolStripMenuItem19.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.toolStripMenuItem19.MergeIndex = 9;
             this.toolStripMenuItem19.Name = "toolStripMenuItem19";
-            this.toolStripMenuItem19.Size = new System.Drawing.Size(228, 6);
+            this.toolStripMenuItem19.Size = new System.Drawing.Size(142, 6);
             // 
             // editToolStripMenuItem
             // 
@@ -713,7 +701,7 @@ namespace VixenEditor{
             this.editToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.editToolStripMenuItem.MergeIndex = 1;
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 26);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // undoToolStripMenuItem
@@ -1024,7 +1012,7 @@ namespace VixenEditor{
             this.viewToolStripMenuItem.Enabled = false;
             this.viewToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.MatchOnly;
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(55, 26);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.viewToolStripMenuItem.Text = "View";
             // 
             // tsmProfiles
@@ -1168,7 +1156,7 @@ namespace VixenEditor{
             this.effectsToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.effectsToolStripMenuItem.MergeIndex = 3;
             this.effectsToolStripMenuItem.Name = "effectsToolStripMenuItem";
-            this.effectsToolStripMenuItem.Size = new System.Drawing.Size(67, 26);
+            this.effectsToolStripMenuItem.Size = new System.Drawing.Size(67, 24);
             this.effectsToolStripMenuItem.Text = "Effects";
             // 
             // onToolStripMenuItem1
@@ -1318,7 +1306,7 @@ namespace VixenEditor{
             this.houseEffectstToolStrip.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.houseEffectstToolStrip.MergeIndex = 4;
             this.houseEffectstToolStrip.Name = "houseEffectstToolStrip";
-            this.houseEffectstToolStrip.Size = new System.Drawing.Size(113, 26);
+            this.houseEffectstToolStrip.Size = new System.Drawing.Size(113, 24);
             this.houseEffectstToolStrip.Text = "House Effects";
             this.houseEffectstToolStrip.DropDownOpening += new System.EventHandler(this.houseEffectsToolStrip_DropDownOpening);
             // 
@@ -1399,7 +1387,7 @@ namespace VixenEditor{
             this.scriptsToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.scriptsToolStripMenuItem.MergeIndex = 5;
             this.scriptsToolStripMenuItem.Name = "scriptsToolStripMenuItem";
-            this.scriptsToolStripMenuItem.Size = new System.Drawing.Size(67, 26);
+            this.scriptsToolStripMenuItem.Size = new System.Drawing.Size(67, 24);
             this.scriptsToolStripMenuItem.Text = "Scripts";
             this.scriptsToolStripMenuItem.DropDownOpening += new System.EventHandler(this.scriptsToolStripMenuItem_DropDownOpening);
             // 
@@ -1410,7 +1398,7 @@ namespace VixenEditor{
             this.pluginsToolStrip.MergeAction = System.Windows.Forms.MergeAction.Insert;
             this.pluginsToolStrip.MergeIndex = 6;
             this.pluginsToolStrip.Name = "pluginsToolStrip";
-            this.pluginsToolStrip.Size = new System.Drawing.Size(70, 26);
+            this.pluginsToolStrip.Size = new System.Drawing.Size(70, 24);
             this.pluginsToolStrip.Text = "&Plugins";
             this.pluginsToolStrip.Visible = false;
             // 
@@ -1426,7 +1414,7 @@ namespace VixenEditor{
             this.otherToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exportArduinoCodeToolStripMenuItem});
             this.otherToolStripMenuItem.Name = "otherToolStripMenuItem";
-            this.otherToolStripMenuItem.Size = new System.Drawing.Size(60, 26);
+            this.otherToolStripMenuItem.Size = new System.Drawing.Size(60, 24);
             this.otherToolStripMenuItem.Text = "Other";
             // 
             // exportArduinoCodeToolStripMenuItem
@@ -1443,12 +1431,12 @@ namespace VixenEditor{
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.splitContainer1);
             this.toolStripContainer1.ContentPanel.Margin = new System.Windows.Forms.Padding(4);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1301, 335);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1301, 337);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.toolStripContainer1.Location = new System.Drawing.Point(0, 30);
+            this.toolStripContainer1.Location = new System.Drawing.Point(0, 28);
             this.toolStripContainer1.Margin = new System.Windows.Forms.Padding(4);
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(1301, 633);
+            this.toolStripContainer1.Size = new System.Drawing.Size(1301, 635);
             this.toolStripContainer1.TabIndex = 1;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
@@ -1478,7 +1466,7 @@ namespace VixenEditor{
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1301, 335);
+            this.splitContainer1.Size = new System.Drawing.Size(1301, 337);
             this.splitContainer1.SplitterDistance = 233;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 20;
@@ -1517,7 +1505,7 @@ namespace VixenEditor{
             this.pictureBoxChannels.Location = new System.Drawing.Point(0, 0);
             this.pictureBoxChannels.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBoxChannels.Name = "pictureBoxChannels";
-            this.pictureBoxChannels.Size = new System.Drawing.Size(233, 335);
+            this.pictureBoxChannels.Size = new System.Drawing.Size(233, 337);
             this.pictureBoxChannels.TabIndex = 11;
             this.pictureBoxChannels.TabStop = false;
             this.pictureBoxChannels.DragDrop += new System.Windows.Forms.DragEventHandler(this.pictureBoxChannels_DragDrop);
@@ -1655,7 +1643,7 @@ namespace VixenEditor{
             this.splitContainer2.Panel2.Controls.Add(this.pictureBoxGrid);
             this.splitContainer2.Panel2.Controls.Add(this.vScrollBar1);
             this.splitContainer2.Panel2.Controls.Add(this.hScrollBar1);
-            this.splitContainer2.Size = new System.Drawing.Size(1063, 335);
+            this.splitContainer2.Size = new System.Drawing.Size(1063, 337);
             this.splitContainer2.SplitterDistance = 60;
             this.splitContainer2.SplitterWidth = 5;
             this.splitContainer2.TabIndex = 5;
@@ -1730,7 +1718,7 @@ namespace VixenEditor{
             this.pictureBoxGrid.Location = new System.Drawing.Point(0, 0);
             this.pictureBoxGrid.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBoxGrid.Name = "pictureBoxGrid";
-            this.pictureBoxGrid.Size = new System.Drawing.Size(1046, 253);
+            this.pictureBoxGrid.Size = new System.Drawing.Size(1046, 255);
             this.pictureBoxGrid.TabIndex = 5;
             this.pictureBoxGrid.TabStop = false;
             this.pictureBoxGrid.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxGrid_Paint);
@@ -2093,14 +2081,14 @@ namespace VixenEditor{
             this.vScrollBar1.Dock = System.Windows.Forms.DockStyle.Right;
             this.vScrollBar1.Location = new System.Drawing.Point(1046, 0);
             this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(17, 253);
+            this.vScrollBar1.Size = new System.Drawing.Size(17, 255);
             this.vScrollBar1.TabIndex = 4;
             this.vScrollBar1.ValueChanged += new System.EventHandler(this.vScrollBar1_ValueChanged);
             // 
             // hScrollBar1
             // 
             this.hScrollBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.hScrollBar1.Location = new System.Drawing.Point(0, 253);
+            this.hScrollBar1.Location = new System.Drawing.Point(0, 255);
             this.hScrollBar1.Name = "hScrollBar1";
             this.hScrollBar1.Size = new System.Drawing.Size(1063, 17);
             this.hScrollBar1.TabIndex = 3;
@@ -2124,12 +2112,12 @@ namespace VixenEditor{
             this.tsbAudio,
             this.toolStripButtonWaveform,
             this.toolStripSeparator13,
-            this.toolStripButtonChannelOutputMask,
+            this.toolStripButtonEnableDisableSerialOutputs,
             this.toolStripSeparator19,
             this.profileToolStripLabel});
             this.toolStripSequenceSettings.Location = new System.Drawing.Point(4, 0);
             this.toolStripSequenceSettings.Name = "toolStripSequenceSettings";
-            this.toolStripSequenceSettings.Size = new System.Drawing.Size(673, 55);
+            this.toolStripSequenceSettings.Size = new System.Drawing.Size(712, 55);
             this.toolStripSequenceSettings.TabIndex = 1;
             this.toolStripSequenceSettings.Text = "Sequence settings";
             // 
@@ -2247,15 +2235,15 @@ namespace VixenEditor{
             this.toolStripSeparator13.Name = "toolStripSeparator13";
             this.toolStripSeparator13.Size = new System.Drawing.Size(6, 55);
             // 
-            // toolStripButtonChannelOutputMask
+            // toolStripButtonEnableDisableSerialOutputs
             // 
-            this.toolStripButtonChannelOutputMask.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonChannelOutputMask.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonChannelOutputMask.Image")));
-            this.toolStripButtonChannelOutputMask.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonChannelOutputMask.Name = "toolStripButtonChannelOutputMask";
-            this.toolStripButtonChannelOutputMask.Size = new System.Drawing.Size(52, 52);
-            this.toolStripButtonChannelOutputMask.ToolTipText = "Enable/disable channels for this sequence";
-            this.toolStripButtonChannelOutputMask.Click += new System.EventHandler(this.toolStripButtonChannelOutputMask_Click);
+            this.toolStripButtonEnableDisableSerialOutputs.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonEnableDisableSerialOutputs.Image = global::VixenEditor.Properties.Resources.output_enabled;
+            this.toolStripButtonEnableDisableSerialOutputs.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonEnableDisableSerialOutputs.Name = "toolStripButtonEnableDisableSerialOutputs";
+            this.toolStripButtonEnableDisableSerialOutputs.Size = new System.Drawing.Size(52, 52);
+            this.toolStripButtonEnableDisableSerialOutputs.ToolTipText = "Enable / Disable serial outputs";
+            this.toolStripButtonEnableDisableSerialOutputs.Click += new System.EventHandler(this.toolStripButtonEnableDisableSerialOutputs_Click);
             // 
             // toolStripSeparator19
             // 

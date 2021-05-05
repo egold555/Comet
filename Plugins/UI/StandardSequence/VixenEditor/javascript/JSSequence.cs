@@ -11,9 +11,11 @@ namespace VixenEditor.javascript
     public class JSSequence
     {
         private List<JSChannel> channels;
+        private EventSequence sequence;
 
         public JSSequence(EventSequence sequence)
         {
+            this.sequence = sequence;
             channels = new List<JSChannel>();
             for (int id = 0; id < sequence.Channels.Count; ++id) {
                 Channel channel = sequence.Channels[id];
@@ -99,6 +101,33 @@ namespace VixenEditor.javascript
         internal List<JSChannel> getChannelSubset(int first, int last)
         {
             return channels.GetRange(first, last - first);
+        }
+
+        //New functions for helping with headers
+
+        public string getFilePath()
+        {
+            return sequence.FileName;
+        }
+
+        public int getEventPeriod()
+        {
+            return sequence.EventPeriod;
+        }
+
+        public int getRowCount()
+        {
+            return channels.Count;
+        }
+
+        public int getColumnCount()
+        {
+            return channels[0].getEventCount();
+        }
+
+        public JSEvent getEventAt(int row, int col)
+        {
+            return getChannelById(row).getEventAt(col);
         }
     }
 }

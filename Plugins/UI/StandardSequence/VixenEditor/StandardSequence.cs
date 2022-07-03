@@ -29,6 +29,7 @@ using VixenPlusCommon;
 
 using Channel = VixenPlus.Channel;
 using System.Xml;
+using System.Text;
 
 namespace VixenEditor
 {
@@ -6240,12 +6241,73 @@ namespace VixenEditor
 
         //end scripts
 
+        private void exportPropBoardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.DefaultExt = ".bin";
+            saveFileDialog.Filter = "Binary file (*.bin)|*.bin|All file (*.*)|*.*";
+            DialogResult result = saveFileDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                exportPropBoardFile(saveFileDialog.FileName);
+            }
+        }
+
+        private void exportPropBoardFile(string fileName)
+        {
+            using (Stream outputStream = new FileStream(fileName, FileMode.Create))
+            {
+                // Use the entire sequence.
+                int top = 0;
+                int bottom = _sequence.ChannelCount < 8 ? _sequence.ChannelCount - 1 : 7;
+                int left = 0;
+                int right = _sequence.Cols - 1;
+
+                int delayMs = _sequence.EventPeriod;
+
+                // version number
+                outputStream.WriteByte(2);
+
+                // File name
+                string baseFileName = Path.GetFileName(fileName);
+                byte[] fileNameBytes = Encoding.ASCII.GetBytes(baseFileName);
+                outputStream.WriteByte((byte) fileNameBytes.Length);
+                outputStream.Write(fileNameBytes, 0, fileNameBytes.Length);
+
+                // Event MS.
+                outputStream.WriteByte((byte) delayMs);
+
+                // columns.
+                int columns = right - left + 1;
+                outputStream.WriteByte((byte)(0xff & (columns >> 8)));
+                outputStream.WriteByte((byte)(0xff & columns));
+
+                // bytes of data. Each byte has bits on or off for up to 8 channels of data.
+                for (int col = left; col <= right; ++col)
+                {
+                    byte b = 0;
+
+                    for (int row = top; row <= bottom; ++row)
+                    {
+                        int channel = GetEventFromChannelNumber(row);
+                        byte value = _sequence.EventValues[channel, col];
+                        if (value >= 128)
+                        {
+                            b |= (byte) (1 << (row - top));
+                        }
+                    }
+
+                    outputStream.WriteByte(b);
+                }
+            }
+        }
+
         const String NL = "\r\n";
         private void exportArduinoCodeToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
             String code = "void run()" + NL;
-            code += "{" + NL;
+         
 
             code += generateArduinoCode();
 
